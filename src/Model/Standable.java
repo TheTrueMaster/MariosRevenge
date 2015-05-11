@@ -1,5 +1,5 @@
 package Model;
 
-public interface Standable {
+public interface Standable{
 
 }
