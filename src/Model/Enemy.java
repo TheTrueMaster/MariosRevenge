@@ -1,9 +1,13 @@
 package Model;
 
-public abstract class Enemy  extends Entity{
+import java.awt.Image;
 
-	public Enemy() {
-		// TODO Auto-generated constructor stub
+public abstract class Enemy extends Entity{
+
+	public Enemy(int x, int y, Image icon) {
+		super(y, y, icon);
 	}
-
+	
+	
+	
 }
