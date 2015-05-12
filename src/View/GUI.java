@@ -13,10 +13,14 @@ import javax.swing.ImageIcon;
 import java.awt.Font;
 
 import javax.swing.SwingConstants;
+import javax.swing.AbstractAction;
+import java.awt.event.ActionEvent;
+import javax.swing.Action;
 
 public class GUI {
 
 	private JFrame frame;
+	private final Action action = new SwingAction();
 
 	/**
 	 * Launch the application.
@@ -59,9 +63,19 @@ public class GUI {
 		label.setBounds(57, 42, 779, 239);
 		frame.getContentPane().add(label);
 		
-		JButton btnNewButton = new JButton("New button");
-		btnNewButton.setIcon(new ImageIcon("C:\\Users\\Ronak Shah\\Documents\\School\\AP Computer Science\\MariosRevenge\\res\\start.png"));
-		btnNewButton.setBounds(312, 292, 270, 57);
-		frame.getContentPane().add(btnNewButton);
+		JButton button = new JButton("");
+		button.setIcon(new ImageIcon("C:\\Users\\Ronak Shah\\Documents\\School\\AP Computer Science\\MariosRevenge\\res\\start.png"));
+		button.setBounds(310, 291, 312, 89);
+		frame.getContentPane().add(button);
+		
+		//button.
+	}
+	private class SwingAction extends AbstractAction {
+		public SwingAction() {
+			putValue(NAME, "SwingAction");
+			putValue(SHORT_DESCRIPTION, "Some short description");
+		}
+		public void actionPerformed(ActionEvent e) {
+		}
 	}
 }
