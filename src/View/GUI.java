@@ -64,9 +64,14 @@ public class GUI {
 		frame.getContentPane().add(label);
 		
 		JButton button = new JButton("");
+		button.setAction(action);
 		button.setIcon(new ImageIcon("C:\\Users\\Ronak Shah\\Documents\\School\\AP Computer Science\\MariosRevenge\\res\\start.png"));
 		button.setBounds(310, 291, 312, 89);
 		frame.getContentPane().add(button);
+		
+		JButton btnInstructions = new JButton("Instructions");
+		btnInstructions.setBounds(10, 526, 89, 23);
+		frame.getContentPane().add(btnInstructions);
 		
 		//button.
 	}
@@ -76,6 +81,8 @@ public class GUI {
 			putValue(SHORT_DESCRIPTION, "Some short description");
 		}
 		public void actionPerformed(ActionEvent e) {
+			frame.setVisible(false);
+			Level1.run();
 		}
 	}
 }
