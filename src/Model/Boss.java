@@ -5,7 +5,7 @@ import java.awt.Image;
 public class Boss extends Entity{
 
 	public Boss(int x, int y, Image icon) {
-		super(y, y, icon);
+		super(x, y, icon);
 	}
 
 	@Override
@@ -13,5 +13,7 @@ public class Boss extends Entity{
 		// TODO Auto-generated method stub
 		
 	}
+
+	
 
 }

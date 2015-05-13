@@ -5,7 +5,7 @@ import java.awt.Image;
 public class Fireflower extends Entity implements Powerup{
 
 	public Fireflower(int x, int y, Image icon) {
-		super(y, y, icon);
+		super(x, y, icon);
 	}
 
 	@Override

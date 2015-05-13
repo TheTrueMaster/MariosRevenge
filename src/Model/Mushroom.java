@@ -5,7 +5,7 @@ import java.awt.Image;
 public class Mushroom extends Entity implements Powerup {
 
 	public Mushroom(int x, int y, Image icon) {
-		super(y, y, icon);
+		super(x, y, icon);
 	}
 
 	@Override
