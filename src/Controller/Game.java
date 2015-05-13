@@ -1,9 +1,20 @@
 package Controller;
 
+import java.util.ArrayList;
+
+import Model.*;
+
 public class Game {
 
+	ArrayList<Entity> objects;
+	
 	public Game() {
-		// TODO Auto-generated constructor stub
+		objects = new ArrayList<Entity>();
+		//objects.add(new Player(10));
+	}
+	
+	public ArrayList<Entity> getObjects(){
+		return objects;
 	}
 
 }

@@ -48,6 +48,7 @@ public class Level1 {
 		frame.setBounds(100, 100, 949, 599);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
+		Game game = new Game();
 		
 		JButton btnMain = new JButton("");
 		btnMain.setAction(action);
@@ -67,7 +68,7 @@ public class Level1 {
 		panel.setLayout(new GridLayout(1, 0, 0, 0));
 		//level objects init below
 		Render objCreator = new Render();
-		objCreator.init(panel);
+		objCreator.init(panel, game);
 		JMenuItem mntmNewMenuItem = new JMenuItem("Main Menu");
 		
 	}
