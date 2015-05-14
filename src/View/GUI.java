@@ -67,7 +67,7 @@ public class GUI {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		//frame.setExtendedState(JFrame.MAXIMIZED_BOTH); 
-
+//
 		logoImage = new JLabel();
 		ImageIcon icon = new ImageIcon("C:\\Users\\Ronak Shah\\Documents\\School\\AP Computer Science\\MariosRevenge\\res\\logo.png");
 		Image logo = icon.getImage().getScaledInstance(779, 214, Image.SCALE_DEFAULT);

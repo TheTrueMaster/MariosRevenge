@@ -81,7 +81,7 @@ public class Level1 implements ActionListener {
         Timer timer = new javax.swing.Timer(1, this);
         timer.start();
 		
-	}
+	}//COMMIT ME
 
     public void paint(Graphics g) {
     	frame.paint(g);

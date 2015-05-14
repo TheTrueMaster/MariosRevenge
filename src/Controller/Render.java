@@ -19,7 +19,7 @@ public class Render {
 		ArrayList<Entity> obs = game.getObjects();
 		for(Entity a: obs){
 			JLabel b = new JLabel();
-			b.setIcon(new ImageIcon(a.getImg()));
+			b.setIcon(new ImageIcon(a.getImg()));//
 			panel.add(b);
 		}
 	}
