@@ -20,4 +20,10 @@ public class Fireflower extends Entity implements Powerup{
 		
 	}
 
+	@Override
+	public void interact(Entity other) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

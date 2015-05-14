@@ -15,4 +15,10 @@ public class Box extends Entity{
 		
 	}
 
+	@Override
+	public void interact(Entity other) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

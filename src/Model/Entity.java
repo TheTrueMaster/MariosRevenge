@@ -2,9 +2,9 @@ package Model;
 
 import java.awt.Image;
 
-public class Entity {
+public abstract class Entity {
 
-	int xLoc, yLoc;
+	int xLoc , yLoc;
 	boolean status, hasHealth;
 
 	Image sprite;
@@ -16,11 +16,8 @@ public class Entity {
 		sprite = icon;
 	}
 
-	public Image getSprite()
-	{
-		return sprite;
-	}
-
+	public abstract void interact(Entity other);
+	
 	public int getX()
 	{
 		return xLoc;
@@ -31,13 +28,19 @@ public class Entity {
 		return yLoc;
 	}
 
-	public void act()
-	{
-
+	public Image getImg(){
+		return sprite;
 	}
+	
+	public abstract void act();
 
 	public boolean getStatus()
 	{
 		return status;
 	}
+	
+	public void changeStatus(){
+		status = !status;
+	}
+	
 }

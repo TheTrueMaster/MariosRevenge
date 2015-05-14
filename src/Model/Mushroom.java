@@ -19,6 +19,12 @@ public class Mushroom extends Entity implements Powerup {
 		// TODO Auto-generated method stub
 		
 	}
+
+	@Override
+	public void interact(Entity other) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 
 }

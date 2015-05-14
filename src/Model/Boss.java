@@ -14,6 +14,12 @@ public class Boss extends Entity{
 		
 	}
 
+	@Override
+	public void interact(Entity other) {
+		// TODO Auto-generated method stub
+		
+	}
+
 	
 
 }

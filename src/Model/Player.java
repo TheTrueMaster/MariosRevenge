@@ -13,4 +13,10 @@ public class Player extends Entity {
 		// TODO Auto-generated method stub
 		
 	}
+
+	@Override
+	public void interact(Entity other) {
+		// TODO Auto-generated method stub
+		
+	}
 }
