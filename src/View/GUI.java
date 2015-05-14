@@ -30,6 +30,8 @@ public class GUI {
 	private JLabel logoImage;
 	private JButton btnInstructions;
 	private JButton start;
+	
+	
 	/**
 	 * Launch the application.
 	 */

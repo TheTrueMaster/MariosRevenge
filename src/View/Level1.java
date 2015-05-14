@@ -1,22 +1,24 @@
 package View;
 import java.awt.EventQueue;
+import java.awt.Graphics;
 import java.awt.Image;
 
 import javax.swing.*;
+
 import java.awt.event.ActionEvent;
+
 import Controller.*;
 
 import java.awt.event.ActionListener;
-
 import java.awt.GridLayout;
 
 
 
-public class Level1 {
+public class Level1 implements ActionListener {
 
 	private JFrame frame;
 	private final Action action = new SwingAction();
-
+	
 	/**
 	 * Launch the application.
 	 */
@@ -40,10 +42,15 @@ public class Level1 {
 		initialize();
 	}
 
+	public static JFrame getLvl(){
+		Level1 lvl = new Level1();
+		return lvl.frame;
+	}
 	/**
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
+		
 		frame = new JFrame();
 		frame.setBounds(100, 100, 949, 599);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -71,8 +78,18 @@ public class Level1 {
 		objCreator.init(panel, game);
 		JMenuItem mntmNewMenuItem = new JMenuItem("Main Menu");
 		
+        Timer timer = new javax.swing.Timer(1, this);
+        timer.start();
+		
 	}
 
+    public void paint(Graphics g) {
+    	frame.paint(g);
+    	g.drawString("Hello, World", 300, 300);
+    	
+    }
+
+	
 	private class SwingAction extends AbstractAction {
 		public SwingAction() {
 			//putValue(NAME, "SwingAction");
@@ -82,5 +99,12 @@ public class Level1 {
 			frame.setVisible(false);
 			GUI.main(null);
 		}
+	}
+
+
+	@Override
+	public void actionPerformed(ActionEvent arg0) {
+		frame.repaint();
+		
 	}
 }
