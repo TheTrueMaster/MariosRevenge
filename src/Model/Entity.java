@@ -23,11 +23,11 @@ public abstract class Entity {
 
 	public abstract void interact(Entity other);
 	
-	public void setVelocityX(int x){
+	public void setVelX(int x){
 		velocityX = x;
 	}
 	
-	public void setVelocityY(int y){
+	public void setVelY(int y){
 		velocityY = y;
 	}
 	

@@ -17,6 +17,7 @@ public class Mushroom extends Entity implements Powerup {
 	@Override
 	public void giveAbility(Player p) {
 		// TODO Auto-generated method stub
+		p.addHealth(1);
 
 	}
 
@@ -27,7 +28,6 @@ public class Mushroom extends Entity implements Powerup {
 		if (other instanceof Player)
 		{
 			giveAbility((Player)other);
-			changeStatus();
 		}
 
 	}
