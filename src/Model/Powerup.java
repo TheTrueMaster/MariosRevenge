@@ -2,6 +2,6 @@ package Model;
 
 public interface Powerup {
 
-	public abstract void getAbility();
+	public abstract void giveAbility(Player p);
 	
 }

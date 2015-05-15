@@ -15,15 +15,21 @@ public class Fireflower extends Entity implements Powerup{
 	}
 
 	@Override
-	public void getAbility() {
+	public void giveAbility(Player p) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void interact(Entity other) {
-		// TODO Auto-generated method stub
-		
+		//Pseudocode: recognizes what kind of entity is being interacted with
+		// and interacts accordingly
+		if (other instanceof Player)
+		{
+			giveAbility((Player)other);
+			changeStatus();
+		}
+
 	}
 
 }
