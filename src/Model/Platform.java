@@ -14,11 +14,10 @@ public class Platform extends Entity{
 		
 	}
 
-	@Override
+	/* @Override
 	public void interact(Entity other) {
 		// TODO Auto-generated method stub
-		
-	}
+	} */
 	
 
 }

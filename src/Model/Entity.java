@@ -21,7 +21,7 @@ public abstract class Entity {
 		velocityY = 0;
 	}
 
-	public abstract void interact(Entity other);
+	//public abstract void interact(Entity other);
 	
 	public void setVelX(int x){
 		velocityX = x;

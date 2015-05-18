@@ -17,11 +17,11 @@ public class Fireflower extends Entity implements Powerup{
 	@Override
 	public void giveAbility(Player p) {
 		// TODO Auto-generated method stub
-		p.addHealth(1);
+		p.setHealth(p.playerHealth +1);
 
 	}
 
-	@Override
+	/*@Override
 	public void interact(Entity other) {
 		//Pseudocode: recognizes what kind of entity is being interacted with
 		// and interacts accordingly
@@ -30,6 +30,6 @@ public class Fireflower extends Entity implements Powerup{
 			giveAbility((Player)other);
 		}
 
-	}
+	} */
 
 }

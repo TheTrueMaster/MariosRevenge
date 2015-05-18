@@ -12,10 +12,15 @@ public class Player extends Entity {
 		this.hasHealth = true;
 		playerHealth = 1;
 	}
-	
-	public void addHealth(int a)
+
+	public void setHealth(int a)
 	{
-		playerHealth += a;
+		playerHealth = a;
+	}
+
+	public int getHealth()
+	{
+		return playerHealth;
 	}
 
 	@Override
@@ -24,19 +29,49 @@ public class Player extends Entity {
 
 	}
 
-	@Override
+
 	public void interact(Entity other) {
-		// TODO Auto-generated method stub
-		if (other instanceof Mushroom || other instanceof Fireflower)
+		if (other instanceof Powerup)
 		{
-			other.interact(this);
-			other.changeStatus();
+			((Powerup)other).giveAbility(this);			
 		}
-		
-		else if (other instanceof Platform)
+
+		else if (other instanceof Destroyable)
 		{
-			other.interact(this);
+
+			if (other instanceof Enemy)
+			{
+				if (getX() == other.getX() && getY() == other.getY() && getVelY() < 0)
+				{
+					((Enemy)other).changeStatus();
+				}
+
+				else
+				{
+					setHealth(playerHealth - 1);
+					changeStatus();
+				}
+			}
+
+			else if (other instanceof Box )
+			{
+				if (getX() == other.getX() && getY() == other.getY() && getVelY() > 0)
+				{
+					if (other instanceof Powerbox)
+					{
+						//((Powerbox)other).getPowerup(this);			
+					}
+
+					((Box)other).changeStatus();
+				}
+			}
+
 		}
-		
+
+		else if (other instanceof Standable)
+		{
+			falling = false;
+		}
+
 	}
 }
