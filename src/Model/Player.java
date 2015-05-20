@@ -4,7 +4,7 @@ import java.awt.Image;
 
 public class Player extends Entity {
 
-	private int playerHealth;
+	protected int playerHealth;
 
 	private boolean movingRight, movingLeft, jumping, falling;//Booleans So GUI can see players current status
 
