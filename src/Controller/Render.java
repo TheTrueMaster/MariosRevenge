@@ -21,7 +21,7 @@ public class Render {
 			JLabel b = new JLabel();
 			b.setIcon(new ImageIcon(a.getImg()));//
 			panel.add(b);
-		}
+		}//test to see if my new workspace is working
 	}
 	
 	//public 
