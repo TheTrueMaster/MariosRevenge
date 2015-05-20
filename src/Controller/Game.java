@@ -1,20 +1,24 @@
 package Controller;
 
-import java.util.ArrayList;
+import java.util.*;
 
 import Model.*;
 
 public class Game {
 
-	ArrayList<Entity> objects;
+	Map<String, Entity> objects;
 	
 	public Game() {
-		objects = new ArrayList<Entity>();
-		//objects.add(new Player(10));
+		objects = new HashMap<String, Entity>();
+		objects.put("player", new Player(10, 10, null));
 	}
 	
-	public ArrayList<Entity> getObjects(){
+	public Map<String, Entity> getObjects(){
 		return objects;
+	}
+	
+	public Player getPlayer(){
+		return (Player)objects.get("player");
 	}
 
 }

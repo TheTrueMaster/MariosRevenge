@@ -1,142 +1,203 @@
 package View;
 
-import java.awt.Color;
+
 import java.awt.EventQueue;
-import java.awt.Image;
+import java.awt.Graphics;
+import java.awt.event.*;
+
+import Controller.*;
+import Model.*;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.ImageIcon;
+import javax.swing.Timer;
 
-import java.awt.Font;
+public class Gui extends JFrame implements KeyListener, ActionListener{
 
-import javax.swing.SwingConstants;
-import javax.swing.AbstractAction;
-
-import java.awt.event.ActionEvent;
-
-import javax.swing.Action;
-
-public class GUI {
-
-	private JFrame frame;
-	private final Action action = new SwingAction();
-	private JPanel ins;
-	private boolean panelIsOn = false;
-	private final Action action_1 = new SwingAction_1();
-	private JLabel logoImage;
-	private JButton btnInstructions;
-	private JButton start;
-	
-	
+	private Game game;
+	public static final int movePixels = 10;
 	/**
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					GUI window = new GUI();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
+		Game game = new Game();
+		Gui gui = new Gui(game);
+		
 	}
-
 
 	/**
 	 * Create the application.
 	 */
-	public GUI() {
-		initialize();
+	public Gui(Game g) {
+		//Frame Construction
+		super("Mario's Revenge");
+		getContentPane().setLayout(null);
 
+		//giving private instance variable reference to Game object
+		game = g;
+		//Creating a Timer that goes off every half second
+        Timer timer = new javax.swing.Timer(500, this);
+
+		initialize();
+		this.setVisible(true);
+		timer.start();
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frame = new JFrame("Mario's Revenge");
-		frame.getContentPane().setBackground(Color.BLACK);
-		frame.setBounds(100, 100, 949, 599);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setLayout(null);
-		//frame.setExtendedState(JFrame.MAXIMIZED_BOTH); 
-//
-		logoImage = new JLabel();
-		ImageIcon icon = new ImageIcon("C:\\Users\\Ronak Shah\\Documents\\School\\AP Computer Science\\MariosRevenge\\res\\logo.png");
-		Image logo = icon.getImage().getScaledInstance(779, 214, Image.SCALE_DEFAULT);
-		logoImage.setIcon(new ImageIcon(logo));
-		logoImage.setBounds(57, 42, 779, 239);
-		frame.getContentPane().add(logoImage);
-
-		/*Below is JPanel code for instruction screen*/
-		ins = new JPanel();
-		ins.setBackground(Color.black);
-		ins.setSize(949, 599);
-		frame.getContentPane().add(ins);
-		ins.setVisible(false);
-		
-		JLabel insContent = new JLabel();
-		insContent.setIcon(new ImageIcon("C:\\Users\\Ronak Shah\\Documents\\School\\AP Computer Science\\MariosRevenge\\res\\instructions.png"));
-		ins.add(insContent);
-		/*End of JPanel code*/
-		
-		start = new JButton("");
-		start.setAction(action);
-		start.setIcon(new ImageIcon("C:\\Users\\Ronak Shah\\Documents\\School\\AP Computer Science\\MariosRevenge\\res\\start.png"));
-		start.setBounds(310, 291, 312, 89);
-		frame.getContentPane().add(start);
-
-		btnInstructions = new JButton("Instructions");
-		btnInstructions.setAction(action_1);
-		btnInstructions.setBounds(10, 526, 146, 30);
-		frame.getContentPane().add(btnInstructions);
-
-		//button.
+		this.setBounds(100, 100, 734, 492);
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
-	private class SwingAction extends AbstractAction {
-		public SwingAction() {
-			putValue(NAME, "SwingAction");
-			putValue(SHORT_DESCRIPTION, "Some short description");
+
+	@Override
+	public void paint(Graphics g){
+		super.paint(g);
+		
+		Player player = game.getPlayer();
+		//move player
+		if(player.isMovingRight()){
+			updatePlayer(0, player);
 		}
-		public void actionPerformed(ActionEvent e) {
-			frame.setVisible(false);
-			Level1.run();
+		
+		else if(player.isMovingLeft()){
+			updatePlayer(180, player);
 		}
+		
+		else if(player.isJumping()){
+			updatePlayer(90, player);
+		}
+		
+		else if(player.isFalling()){
+			updatePlayer(270, player);
+		}
+		
+		drawObject(player, g);
+	}
+	/**
+	 * Draws the given Entity at its Location
+	 * 
+	 * Designed to make it easier to draw an object
+	 * @param e
+	 * @param g
+	 */
+	private void drawObject(Entity e, Graphics g){
+		g.drawImage(e.getImg(), e.getX(), e.getY(), getContentPane());
 	}
 	
 	/**
+	 * Updates the Player Location
 	 * 
-	 * @author Ronak Shah
-	 *	INSTRUCTIONS BUTTON HANDLER
+	 * Uses Compass Directions:
+	 *						90
+	 *						||
+	 *			180<-------------------->0
+	 *						||
+	 *						270
+	 * @param dir
+	 * @param p
 	 */
-	private class SwingAction_1 extends AbstractAction {
-		public SwingAction_1() {
-			putValue(NAME, "Instructions");
-			//putValue(SHORT_DESCRIPTION, "Some short description");
+	private void updatePlayer(int dir, Player p) {
+		
+		switch(dir){
+		case 0:
+			p.setX(movePixels + p.getX());
+			break;
+		case 90:
+			p.setX(movePixels + p.getY());
+			break;
+		case 180:
+			p.setX(movePixels - p.getX());
+			break;
+		case 270:
+			p.setX(movePixels - p.getX());
+			break;
 		}
-		public void actionPerformed(ActionEvent e) {
-			if(panelIsOn){
-				ins.setVisible(false);
-				panelIsOn = false;
-				logoImage.setVisible(true);
-				start.setVisible(true);
-				putValue(NAME, "Instructions");
-			}
-			else{
-				putValue(NAME, "Back to main");
-				ins.setVisible(true);
-				panelIsOn = true;
-				logoImage.setVisible(false);
-				start.setVisible(false);
-			    
-			}
-		}
+	}
+
+	@Override
+	public void keyPressed(KeyEvent e) {
+		/*
+		 PUEDOCODE
+		 if(rightKey is pressed)
+		  	tell player that it is moving right
+		 else if(leftKey is pressed)
+		 	tell player that it is moving left
+		 else if(up key is being pressed)
+		 	tell player that it is jumping
+		 else
+		 	do nothing
+		 */
+		int keyCode = e.getKeyCode();
+	    switch( keyCode ) { 
+	        case KeyEvent.VK_UP:
+	            // handle up 
+	        	game.getPlayer().changeMovingStatus("up");
+	            break;
+	        case KeyEvent.VK_DOWN:
+	            // handle down 
+	        	game.getPlayer().changeMovingStatus("down");
+
+	            break;
+	        case KeyEvent.VK_LEFT:
+	            // handle left
+	        	game.getPlayer().changeMovingStatus("left");
+
+	            break;
+	        case KeyEvent.VK_RIGHT :
+	            // handle right
+	        	game.getPlayer().changeMovingStatus("right");
+	            break;
+	     }
+	}
+
+	@Override
+	public void keyReleased(KeyEvent e) {
+		/*
+		 PUEDOCODE
+		 if(rightKey is released)
+		  	tell player that it is no longer moving right
+		 else if(leftKey is released)
+		 	tell player that it is no longer moving left
+		 else if(up key is being released)
+		 	tell player that it is no longer jumping
+		 else
+		 	do nothing
+		 */
+		
+		int keyCode = e.getKeyCode();
+	    switch( keyCode ) { 
+	        case KeyEvent.VK_UP:
+	            // handle up 
+	        	game.getPlayer().changeMovingStatus("up");
+	            break;
+	        case KeyEvent.VK_DOWN:
+	            // handle down 
+	        	game.getPlayer().changeMovingStatus("down");
+
+	            break;
+	        case KeyEvent.VK_LEFT:
+	            // handle left
+	        	game.getPlayer().changeMovingStatus("left");
+
+	            break;
+	        case KeyEvent.VK_RIGHT :
+	            // handle right
+	        	game.getPlayer().changeMovingStatus("right");
+	            break;
+	     }
+	}
+
+	@Override
+	public void keyTyped(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent arg0) {
+		// TODO Auto-generated method stub
+		repaint();
 	}
 }
