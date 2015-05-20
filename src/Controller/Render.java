@@ -2,6 +2,7 @@ package Controller;
 
 import java.awt.Image;
 import java.util.ArrayList;
+import java.util.Map;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -16,12 +17,8 @@ public class Render {
 	}
 
 	public void init(JPanel panel, Game game) {
-		ArrayList<Entity> obs = game.getObjects();
-		for(Entity a: obs){
-			JLabel b = new JLabel();
-			b.setIcon(new ImageIcon(a.getImg()));//
-			panel.add(b);
-		}//test to see if my new workspace is working
+		Map<String, Entity> obs = game.getObjects();
+		//test to see if my new workspace is working
 	}
 	
 	//public 
