@@ -31,7 +31,7 @@ public class GuiPictLoader extends JFrame {
 		
 //		PictLoader test = new PictLoader();	// when using IDE
 		JarPictLoader test = new JarPictLoader();	// when using JAR file
-		
+		//
 		ImageIcon fish1Icon = test.getFishy1();
 		ImageIcon fish2Icon = test.getFishy2();
 		
