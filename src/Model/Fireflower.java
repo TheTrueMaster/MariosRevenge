@@ -17,7 +17,7 @@ public class Fireflower extends Entity implements Powerup{
 	@Override
 	public void giveAbility(Player p) {
 		// TODO Auto-generated method stub
-		p.setHealth(p.playerHealth +1);
+		p.setHealth(p.getHealth() +1);
 
 	}
 
