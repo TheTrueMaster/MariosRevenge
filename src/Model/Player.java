@@ -12,6 +12,10 @@ public class Player extends Entity {
 		super(x, y, icon);
 		this.hasHealth = true;
 		playerHealth = 1;
+		movingRight = false;
+		movingLeft = false;
+		jumping = false;
+		falling = false;
 	}
 
 	public void setHealth(int a)
