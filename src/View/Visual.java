@@ -13,6 +13,7 @@ public class Visual {
 	private JFrame frame;
 	private JPanel splash;
 	private JPanel instructions;
+	private JPanel level;
 	private boolean panelIsOn = false;
 	private JLabel logoImage;
 	private JButton btnInstructions;
@@ -26,7 +27,8 @@ public class Visual {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Game game = new Game();
+					ClassLoader cldr = this.getClass().getClassLoader();
+					Game game = new Game(cldr);
 					Visual window = new Visual(game);
 					window.frame.setVisible(true);
 				} catch (Exception e) {
@@ -35,6 +37,9 @@ public class Visual {
 			}
 		});
 	}
+	/*
+	 * JPanel instructions dkfdsf 
+	 * */
 
 
 	/**
@@ -51,7 +56,7 @@ public class Visual {
 	 */
 	private void initialize() {
 		frame = new JFrame("Mario's Revenge");
-		frame.getContentPane().setBackground(Color.BLACK);
+		frame.getContentPane().setBackground(Color.WHITE);
 		frame.getContentPane().setForeground(Color.BLACK);
 		frame.setBounds(100, 100, 949, 599);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -112,8 +117,13 @@ public class Visual {
 		start.setSize(50, 8);
 		start.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				Level level = new Level(frame.getHeight(), frame.getWidth(), game);
-				frame.getContentPane().add(level);
+				Level lev = new Level(frame.getHeight(), frame.getWidth(), game);
+				lev.init();
+				JPanel p = (JPanel)lev;
+				frame.getContentPane().add(p);
+				splash.setVisible(false);
+				lev.setSize(949, 513);
+
 			}
 		});
 		
@@ -122,11 +132,16 @@ public class Visual {
 		start.setIcon(new ImageIcon(scaled));
 		start.setBounds(307, 289, 320, 120);
 		splash.add(start);
-
+		
+		//temp code
 		splash.setBounds(0, 0, 949, 513);
 		frame.getContentPane().add(splash);
 		frame.getContentPane().add(instructions);
+
 		frame.getContentPane().add(btnInstructions);
+		
+		
+
 		
 		splash.setVisible(true);
 		instructions.setVisible(false);

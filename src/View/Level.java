@@ -7,7 +7,7 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
-public class Level extends JFrame implements KeyListener, ActionListener{
+public class Level extends JPanel implements KeyListener, ActionListener{
 
 	private JPanel contentPane;
 	private Game game;
@@ -20,17 +20,22 @@ public class Level extends JFrame implements KeyListener, ActionListener{
 	/**
 	 * Create the frame.
 	 */
-	public Level(int width, int height, Game g) {//official constructor will be public Level(int width, int height, int levelNo)
+	public Level(int width, int height, Game g) {
+		game  =g;
+	}
+	
+	public void init(){
+
+		setBackground(Color.RED);//official constructor will be public Level(int width, int height, int levelNo)
 		//setBounds(0, 0, width, height); //OFFICIAL SETBOUNDS, commented out for window builder dev
-		game = g;
 		setBounds(0,0, 850, 450);
 		contentPane = new JPanel();
 		//contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(null);
 		//initializeLevel(int levelNo
 		initializeLevel();
-	}
 	
+	}
 	private void initializeLevel() {
 		// TODO Auto-generated method stub
 		
@@ -41,6 +46,7 @@ public class Level extends JFrame implements KeyListener, ActionListener{
 	public void paint(Graphics g){
 		super.paint(g);
 		
+		/*Player Movement Code Below*/
 		Player player = game.getPlayer();
 		//move player
 		if(player.isMovingRight()){
@@ -59,7 +65,8 @@ public class Level extends JFrame implements KeyListener, ActionListener{
 			updatePlayer(270, player);
 		}
 		
-		drawObject(player, g);
+		/*End of Player Movement*/
+		
 	}
 	/**
 	 * Draws the given Entity at its Location
@@ -69,7 +76,7 @@ public class Level extends JFrame implements KeyListener, ActionListener{
 	 * @param g
 	 */
 	private void drawObject(Entity e, Graphics g){
-		g.drawImage(e.getImg(), e.getX(), e.getY(), getContentPane());
+		g.drawImage(e.getImg(), e.getX(), e.getY(), this);
 	}
 	
 	/**
