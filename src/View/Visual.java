@@ -1,7 +1,11 @@
 package View;
 
 import java.awt.*;
+
 import javax.swing.*;
+
+import Controller.Game;
+
 import java.awt.event.*;
 
 public class Visual {
@@ -13,7 +17,7 @@ public class Visual {
 	private JLabel logoImage;
 	private JButton btnInstructions;
 	private JButton start;
-
+	private Game game;
 
 	/**
 	 * Launch the application.
@@ -22,7 +26,8 @@ public class Visual {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Visual window = new Visual();
+					Game game = new Game();
+					Visual window = new Visual(game);
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -35,7 +40,8 @@ public class Visual {
 	/**
 	 * Create the application.
 	 */
-	public Visual() {
+	public Visual(Game g) {
+		game = g;
 		initialize();
 
 	}
@@ -106,7 +112,8 @@ public class Visual {
 		start.setSize(50, 8);
 		start.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				
+				Level level = new Level(frame.getHeight(), frame.getWidth(), game);
+				frame.getContentPane().add(level);
 			}
 		});
 		
