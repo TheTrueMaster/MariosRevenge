@@ -24,7 +24,7 @@ public class JarPictLoader {
   		try {
 			// the two steps required to get an image’s file location 
 			// and then load it
-			URL fishy1IconURL   = cldr.getResource("fish.gif");
+			URL fishy1IconURL   = cldr.getResource("res/fish.gif");
 			fishy1 = new ImageIcon(fishy1IconURL);
 
  /***************************************************************

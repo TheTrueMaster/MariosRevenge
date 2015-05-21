@@ -19,7 +19,7 @@ public class Visual {
 	private JButton btnInstructions;
 	private JButton start;
 	private Game game;
-
+	private int screen = 0;//0 -> splash ; 1 -> instructions ; 2->Level
 	/**
 	 * Launch the application.
 	 */
@@ -56,7 +56,8 @@ public class Visual {
 	 */
 	private void initialize() {
 		frame = new JFrame("Mario's Revenge");
-		frame.getContentPane().setBackground(Color.WHITE);
+		frame.getContentPane().setBackground(Color.BLACK);
+		frame.setBackground(Color.BLACK);
 		frame.getContentPane().setForeground(Color.BLACK);
 		frame.setBounds(100, 100, 949, 599);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -88,17 +89,22 @@ public class Visual {
 		btnInstructions.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//System.out.println(panelIsOn);
-				if(panelIsOn){
-					panelIsOn = false;
-					instructions.setVisible(false);
-					splash.setVisible(true);
-					
-				}
-				else{
-					panelIsOn = true;
+				if(screen == 0){
 					instructions.setVisible(true);
 					splash.setVisible(false);
-
+					screen = 1;
+					btnInstructions.setText("Main Menu");
+				}
+				else if (screen == 1){
+					instructions.setVisible(false);
+					splash.setVisible(true);
+					screen = 0;
+					btnInstructions.setText("Instructions");
+				}
+				else if(screen == 2){
+					splash.setVisible(true);
+					screen = 0;
+					btnInstructions.setText("Instructions");
 				}
 			}
 		});;
@@ -123,7 +129,8 @@ public class Visual {
 				frame.getContentPane().add(p);
 				splash.setVisible(false);
 				lev.setSize(949, 513);
-
+				btnInstructions.setText("Back to Main");
+				screen = 2;
 			}
 		});
 		

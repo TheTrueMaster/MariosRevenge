@@ -12,11 +12,11 @@ import Model.*;
 public class Render {
 
 	public Render() {
-		// TODO Auto-generated constructor stub
+		//Reads In All The Pictures
 	}
 
 	public void init(JPanel panel, Game game) {
-		Map<String, Entity> obs = game.getObjects();
+		Map<Character, ImageIcon> obs;
 		//test to see if my new workspace is working
 	}
 	
