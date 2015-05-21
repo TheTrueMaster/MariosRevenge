@@ -5,6 +5,8 @@ import Model.*;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.io.IOException;
+
 import javax.swing.*;
 
 public class Level extends JPanel implements KeyListener, ActionListener{
@@ -12,6 +14,8 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 	private JPanel contentPane;
 	private Game game;
 	public final static int movePixels = 10;
+	char[][] level;
+	private ClassLoader cldr;
 	/**
 	 * Launch the application.
 	 */
@@ -21,7 +25,9 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 	 * Create the frame.
 	 */
 	public Level(int width, int height, Game g) {
-		game  =g;
+		game  = g;
+		init();
+		cldr = game.getCldr();
 	}
 	
 	public void init(){
@@ -33,11 +39,17 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 		//contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(null);
 		//initializeLevel(int levelNo
-		initializeLevel();
+		initializeLevel(1);
 	
 	}
-	private void initializeLevel() {
-		// TODO Auto-generated method stub
+	private void initializeLevel(int levelNo) {
+		try {
+			level = TextLoader.getFile("files/"+"level" + levelNo + ".txt", cldr);
+		}
+		catch (IOException e) {
+			//do nothing
+		}
+		
 		
 	}
 

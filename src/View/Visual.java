@@ -124,7 +124,6 @@ public class Visual {
 		start.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				Level lev = new Level(frame.getHeight(), frame.getWidth(), game);
-				lev.init();
 				JPanel p = (JPanel)lev;
 				frame.getContentPane().add(p);
 				splash.setVisible(false);
