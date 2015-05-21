@@ -11,15 +11,16 @@ import Model.*;
 
 public class Render {
 
+	private Map<Character, ImageIcon> obs;
+	
 	public Render() {
 		//Reads In All The Pictures
 	}
 
-	public void init(JPanel panel, Game game) {
-		Map<Character, ImageIcon> obs;
-		//test to see if my new workspace is working
+	public void init(Game game) {
+		ClassLoader cldr = game.getCldr();
+		
 	}
 	
-	//public 
 	
 }

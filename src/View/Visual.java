@@ -28,6 +28,7 @@ public class Visual {
 			public void run() {
 				try {
 					ClassLoader cldr = this.getClass().getClassLoader();
+					
 					Game game = new Game(cldr);
 					Visual window = new Visual(game);
 					window.frame.setVisible(true);
