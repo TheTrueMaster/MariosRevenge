@@ -11,7 +11,7 @@ public abstract class Entity {
 	int velocityY;
 	
 	Image sprite;
-
+	char self;
 	public Entity(int x, int y, Image icon) {
 		// TODO Auto-generated constructor stub
 		xLoc = x;
@@ -19,8 +19,16 @@ public abstract class Entity {
 		sprite = icon;
 		velocityX = 0;
 		velocityY = 0;
+		self = 'G';
+	}
+	
+	public void setChar(char set){
+		self = set;
 	}
 
+	public char getChar(){
+		return self;
+	}
 	//public abstract void interact(Entity other);
 	
 	public void setVelX(int x){

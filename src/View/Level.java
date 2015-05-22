@@ -14,7 +14,7 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 	private JPanel contentPane;
 	private Game game;
 	public final static int movePixels = 10;
-	char[][] level;
+	Entity[][] level;
 	private ClassLoader cldr;
 	/**
 	 * Launch the application.
@@ -63,17 +63,17 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 		g.setColor(Color.white);
 		for(int r = 0; r < level.length; r++){
 			for(int c = 0; c < level[r].length; c++){
-				ImageIcon icon = render.getImage(level[r][c]);
+				ImageIcon icon = render.getImage(level[r][c].getChar());
 				int x = (c * 16) + 10;
 				int y = (r * 30)+20;
 				//System.out.print(level[r][c]);
 				//g.drawRect(x, y, 15, 35);
 				String str = "";
-				str += level[r][c];
+				str += level[r][c].getChar();
 				g.drawString(str, x, y);
 				//Graphics Draw Image Parameters: (Image, X-Coord, Y-Coord, Color, ImageObserver)
-				//g.drawImage(icon.getImage().getScaledInstance(10, 10, Image.SCALE_DEFAULT), x, y, null, null);
-				
+				//g.drawImage(icon.getImage().getScaledInstance(16, 35, Image.SCALE_DEFAULT), x, y, null, null);
+
 			}
 			//System.out.println();
 		}	
@@ -222,7 +222,22 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 	public void actionPerformed(ActionEvent arg0) {
 		//before repainting, we update all the Entities locations
 		/*Player Movement Code Below*/
+		Player p = game.getPlayer();
+		if(p.isMovingRight()){
+			//shift player
+		}
 
+		else if(p.isMovingLeft()){
+			//shift player		
+		}
+
+		else if(p.isJumping()){
+			//shift player		
+		}
+
+		else if(p.isFalling()){
+			//shift player
+		}
 		/*End of Player Movement*/
 
 		//Then, after that, we repaint

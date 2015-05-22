@@ -3,6 +3,7 @@ package View;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
+import Model.Entity;
 
 /* REFRENCE TABLE
  * Conversion table from chn.util.FileInput to java.util.Scanner:
@@ -17,9 +18,9 @@ import java.util.Scanner;
 
 public class TextLoader
 { 
-	public char[][] getFile(String path) throws IOException
+	public Entity[][] getFile(String path) throws IOException
 	{
-		char[][] level = new char[12][57];
+		Entity[][] level = new Entity[12][57];
 		ArrayList<String> strings = new ArrayList<String>();
 
 
@@ -45,7 +46,7 @@ public class TextLoader
 			String str = strings.get(r);
 			for(int c = 0; c < level[r].length; c++){
 				try{
-					level[r][c] = str.charAt(c);
+					level[r][c].setChar(str.charAt(c));
 				}
 				catch(StringIndexOutOfBoundsException e){
 					//in case the line in the text file has no text

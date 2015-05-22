@@ -14,7 +14,7 @@ public class Render {
 	private Map<Character, ImageIcon> pics;
 	
 	public Render() {
-		//Reads In All The Pictures
+		
 	}
 
 	public void init(Game game) {
