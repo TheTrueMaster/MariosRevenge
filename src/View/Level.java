@@ -19,7 +19,7 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 	/**
 	 * Launch the application.
 	 */
-	
+
 
 	/**
 	 * Create the frame.
@@ -29,7 +29,7 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 		init();
 		cldr = game.getCldr();
 	}
-	
+
 	public void init(){
 
 		setBackground(Color.WHITE);//official constructor will be public Level(int width, int height, int levelNo)
@@ -40,7 +40,7 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 		contentPane.setLayout(null);
 		//initializeLevel(int levelNo
 		initializeLevel(1);
-	
+
 	}
 	private void initializeLevel(int levelNo) {
 		TextLoader loader = new TextLoader();
@@ -50,8 +50,8 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 		catch (IOException e) {
 			//do nothing
 		}
-		
-		
+
+
 	}
 
 
@@ -59,14 +59,14 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 	public void paint(Graphics g){
 		super.paint(g);
 		Render render = new Render();
-		
+
 		for(int r = 0; r < level.length; r++){
 			for(int c = 0; c < level[r].length; c++){
 				ImageIcon icon = render.getImage(level[r][c]);
 				int x = c * 10;
 				int y = r * 10;
 				System.out.print(level[r][c]);
-				
+
 				//Graphics Draw Image Parameters: (Image, X-Coord, Y-Coord, Color, ImageObserver)
 				//g.drawImage(icon.getImage().getScaledInstance(10, 10, Image.SCALE_DEFAULT), x, y, null, null);
 			}
@@ -83,7 +83,7 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 	private void drawObject(Entity e, Graphics g){
 		g.drawImage(e.getImg(), e.getX(), e.getY(), this);
 	}
-	
+
 	/**
 	 * Updates the Player Location
 	 * 
@@ -96,27 +96,27 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 	 * @param dir
 	 * @param p
 	 */
-	
+
 	private void updatePlayer() {
 		Player p = game.getPlayer();
 		int dir = -1;
 		//move player
 		if(p.isMovingRight()){
 			dir = 0;
- 		}
-		
+		}
+
 		else if(p.isMovingLeft()){
 			dir = 180;
 		}
-		
-		else if(player.isJumping()){
+
+		else if(p.isJumping()){
 			dir = 90;
 		}
-		
-		else if(player.isFalling()){
+
+		else if(p.isFalling()){
 			dir = 270;
 		}
-		
+
 		switch(dir){
 		case 0:
 			p.setX(movePixels + p.getX());
@@ -147,27 +147,27 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 		 	do nothing
 		 */
 		int keyCode = e.getKeyCode();
-	    switch( keyCode ) { 
-	        case KeyEvent.VK_UP:
-	            // handle up 
-	        	game.getPlayer().changeMovingStatus("up");
-	            break;
-	        case KeyEvent.VK_DOWN:
-	            // handle down 
-	        	game.getPlayer().changeMovingStatus("down");
+		switch( keyCode ) { 
+		case KeyEvent.VK_UP:
+			// handle up 
+			game.getPlayer().changeMovingStatus("up");
+			break;
+		case KeyEvent.VK_DOWN:
+			// handle down 
+			game.getPlayer().changeMovingStatus("down");
 
-	            break;
-	        case KeyEvent.VK_LEFT:
-	            // handle left
-	        	game.getPlayer().changeMovingStatus("left");
+			break;
+		case KeyEvent.VK_LEFT:
+			// handle left
+			game.getPlayer().changeMovingStatus("left");
 
-	            break;
-	        case KeyEvent.VK_RIGHT :
-	            // handle right
-	        	game.getPlayer().changeMovingStatus("right");
-	            break;
-	     }
-	    System.out.println(keyCode);
+			break;
+		case KeyEvent.VK_RIGHT :
+			// handle right
+			game.getPlayer().changeMovingStatus("right");
+			break;
+		}
+		System.out.println(keyCode);
 	}
 
 	@Override
@@ -183,28 +183,28 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 		 else
 		 	do nothing
 		 */
-		
+
 		int keyCode = e.getKeyCode();
-	    switch( keyCode ) { 
-	        case KeyEvent.VK_UP:
-	            // handle up 
-	        	game.getPlayer().changeMovingStatus("up");
-	            break;
-	        case KeyEvent.VK_DOWN:
-	            // handle down 
-	        	game.getPlayer().changeMovingStatus("down");
+		switch( keyCode ) { 
+		case KeyEvent.VK_UP:
+			// handle up 
+			game.getPlayer().changeMovingStatus("up");
+			break;
+		case KeyEvent.VK_DOWN:
+			// handle down 
+			game.getPlayer().changeMovingStatus("down");
 
-	            break;
-	        case KeyEvent.VK_LEFT:
-	            // handle left
-	        	game.getPlayer().changeMovingStatus("left");
+			break;
+		case KeyEvent.VK_LEFT:
+			// handle left
+			game.getPlayer().changeMovingStatus("left");
 
-	            break;
-	        case KeyEvent.VK_RIGHT :
-	            // handle right
-	        	game.getPlayer().changeMovingStatus("right");
-	            break;
-	     }
+			break;
+		case KeyEvent.VK_RIGHT :
+			// handle right
+			game.getPlayer().changeMovingStatus("right");
+			break;
+		}
 	}
 
 	@Override
@@ -217,9 +217,9 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 	public void actionPerformed(ActionEvent arg0) {
 		//before repainting, we update all the Entities locations
 		/*Player Movement Code Below*/
-		
+
 		/*End of Player Movement*/
-		
+
 		//Then, after that, we repaint
 		repaint();
 	}
