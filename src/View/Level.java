@@ -65,11 +65,12 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 				ImageIcon icon = render.getImage(level[r][c]);
 				int x = c * 10;
 				int y = r * 10;
-				System.out.println(level[r][c]);
+				System.out.print(level[r][c]);
 				
 				//Graphics Draw Image Parameters: (Image, X-Coord, Y-Coord, Color, ImageObserver)
 				//g.drawImage(icon.getImage().getScaledInstance(10, 10, Image.SCALE_DEFAULT), x, y, null, null);
 			}
+			System.out.println();
 		}	
 	}
 	/**
@@ -96,7 +97,25 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 	 * @param p
 	 */
 	
-	private void updatePlayer(int dir, Player p) {
+	private void updatePlayer() {
+		Player p = game.getPlayer();
+		int dir = -1;
+		//move player
+		if(p.isMovingRight()){
+			dir = 0;
+ 		}
+		
+		else if(p.isMovingLeft()){
+			dir = 180;
+		}
+		
+		else if(player.isJumping()){
+			dir = 90;
+		}
+		
+		else if(player.isFalling()){
+			dir = 270;
+		}
 		
 		switch(dir){
 		case 0:
@@ -198,23 +217,6 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 	public void actionPerformed(ActionEvent arg0) {
 		//before repainting, we update all the Entities locations
 		/*Player Movement Code Below*/
-		Player player = game.getPlayer();
-		//move player
-		if(player.isMovingRight()){
-			updatePlayer(0, player);
-		}
-		
-		else if(player.isMovingLeft()){
-			updatePlayer(180, player);
-		}
-		
-		else if(player.isJumping()){
-			updatePlayer(90, player);
-		}
-		
-		else if(player.isFalling()){
-			updatePlayer(270, player);
-		}
 		
 		/*End of Player Movement*/
 		
