@@ -19,7 +19,6 @@ public class Render {
 	}
 
 	public void init(Game game) {
-		ClassLoader cldr = game.getCldr();
 
 	}
 
@@ -31,7 +30,7 @@ public class Render {
 		ImageIcon img = new ImageIcon("res/fish.gif");
 
 		URL u = cldr.getResource("fish.gif");
-
+		
 
 		ImageIcon returnMe = new ImageIcon(u);
 		

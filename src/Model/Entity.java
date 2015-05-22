@@ -2,7 +2,7 @@ package Model;
 
 import java.awt.Image;
 
-public abstract class Entity {
+public  class Entity {
 
 	int xLoc , yLoc;
 	boolean status, hasHealth;
@@ -17,6 +17,15 @@ public abstract class Entity {
 		xLoc = x;
 		yLoc = y;
 		sprite = icon;
+		velocityX = 0;
+		velocityY = 0;
+		self = 'G';
+	}
+	
+	public Entity(){
+		xLoc = 0;
+		yLoc = 0;
+		sprite = null;
 		velocityX = 0;
 		velocityY = 0;
 		self = 'G';
@@ -69,7 +78,6 @@ public abstract class Entity {
 		return sprite;
 	}
 	
-	public abstract void act();
 
 	public boolean getStatus()
 	{

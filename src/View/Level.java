@@ -70,9 +70,9 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 				//g.drawRect(x, y, 15, 35);
 				String str = "";
 				str += level[r][c].getChar();
-				g.drawString(str, x, y);
+				//g.drawString(str, x, y);
 				//Graphics Draw Image Parameters: (Image, X-Coord, Y-Coord, Color, ImageObserver)
-				//g.drawImage(icon.getImage().getScaledInstance(16, 35, Image.SCALE_DEFAULT), x, y, null, null);
+				g.drawImage(icon.getImage().getScaledInstance(16, 35, Image.SCALE_DEFAULT), x, y, null, null);
 
 			}
 			//System.out.println();
@@ -225,6 +225,7 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 		Player p = game.getPlayer();
 		if(p.isMovingRight()){
 			//shift player
+			
 		}
 
 		else if(p.isMovingLeft()){

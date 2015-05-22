@@ -21,6 +21,13 @@ public class TextLoader
 	public Entity[][] getFile(String path) throws IOException
 	{
 		Entity[][] level = new Entity[12][57];
+		
+		for(int r = 0; r < level.length; r++){
+			for(int c = 0; c < level[r].length; c++){
+				level[r][c]= new Entity();
+			}
+		}
+		
 		ArrayList<String> strings = new ArrayList<String>();
 
 
