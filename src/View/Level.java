@@ -32,7 +32,7 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 	
 	public void init(){
 
-		setBackground(Color.RED);//official constructor will be public Level(int width, int height, int levelNo)
+		setBackground(Color.WHITE);//official constructor will be public Level(int width, int height, int levelNo)
 		//setBounds(0, 0, width, height); //OFFICIAL SETBOUNDS, commented out for window builder dev
 		setBounds(0,0, 850, 450);
 		contentPane = new JPanel();
@@ -58,28 +58,19 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 	@Override
 	public void paint(Graphics g){
 		super.paint(g);
+		Render render = new Render();
 		
-		/*Player Movement Code Below*/
-		Player player = game.getPlayer();
-		//move player
-		if(player.isMovingRight()){
-			updatePlayer(0, player);
-		}
-		
-		else if(player.isMovingLeft()){
-			updatePlayer(180, player);
-		}
-		
-		else if(player.isJumping()){
-			updatePlayer(90, player);
-		}
-		
-		else if(player.isFalling()){
-			updatePlayer(270, player);
-		}
-		
-		/*End of Player Movement*/
-		
+		for(int r = 0; r < level.length; r++){
+			for(int c = 0; c < level[r].length; c++){
+				ImageIcon icon = render.getImage(level[r][c]);
+				int x = c * 10;
+				int y = r * 10;
+				System.out.println(level[r][c]);
+				
+				//Graphics Draw Image Parameters: (Image, X-Coord, Y-Coord, Color, ImageObserver)
+				//g.drawImage(icon.getImage().getScaledInstance(10, 10, Image.SCALE_DEFAULT), x, y, null, null);
+			}
+		}	
 	}
 	/**
 	 * Draws the given Entity at its Location
@@ -205,7 +196,29 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-		// TODO Auto-generated method stub
+		//before repainting, we update all the Entities locations
+		/*Player Movement Code Below*/
+		Player player = game.getPlayer();
+		//move player
+		if(player.isMovingRight()){
+			updatePlayer(0, player);
+		}
+		
+		else if(player.isMovingLeft()){
+			updatePlayer(180, player);
+		}
+		
+		else if(player.isJumping()){
+			updatePlayer(90, player);
+		}
+		
+		else if(player.isFalling()){
+			updatePlayer(270, player);
+		}
+		
+		/*End of Player Movement*/
+		
+		//Then, after that, we repaint
 		repaint();
 	}
 

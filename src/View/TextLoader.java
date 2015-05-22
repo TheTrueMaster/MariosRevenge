@@ -53,13 +53,13 @@ public class TextLoader
 				}
 			}
 		}
-		
+		/*
 		for(int r = 0; r < level.length; r++){
 			for(int c = 0; c < level[r].length; c++){
 				System.out.print(level[r][c]);
 			}
 			System.out.println();
-		}		
+		}		*/
 		
 	
 		return level;

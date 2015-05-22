@@ -11,7 +11,7 @@ import Model.*;
 
 public class Render {
 
-	private Map<Character, ImageIcon> obs;
+	private Map<Character, ImageIcon> pics;
 	
 	public Render() {
 		//Reads In All The Pictures
@@ -20,6 +20,13 @@ public class Render {
 	public void init(Game game) {
 		ClassLoader cldr = game.getCldr();
 		
+	}
+
+	public ImageIcon getImage(char c) {
+		// TODO Auto-generated method stub
+		return new ImageIcon("res/fish.gif");//stubCode
+		//return pics.get(c);
+		//^^ what the code will be eventually
 	}
 	
 	
