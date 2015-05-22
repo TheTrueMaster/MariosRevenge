@@ -32,7 +32,7 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 
 	public void init(){
 
-		setBackground(Color.WHITE);//official constructor will be public Level(int width, int height, int levelNo)
+		setBackground(Color.BLACK);//official constructor will be public Level(int width, int height, int levelNo)
 		//setBounds(0, 0, width, height); //OFFICIAL SETBOUNDS, commented out for window builder dev
 		setBounds(0,0, 850, 450);
 		contentPane = new JPanel();
@@ -63,10 +63,10 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 		for(int r = 0; r < level.length; r++){
 			for(int c = 0; c < level[r].length; c++){
 				ImageIcon icon = render.getImage(level[r][c]);
-				int x = c * 10;
-				int y = r * 10;
+				int x = c * 15;
+				int y = r * 15;
 				System.out.print(level[r][c]);
-
+				g.drawRect(x, y, 30, 30);
 				//Graphics Draw Image Parameters: (Image, X-Coord, Y-Coord, Color, ImageObserver)
 				//g.drawImage(icon.getImage().getScaledInstance(10, 10, Image.SCALE_DEFAULT), x, y, null, null);
 			}

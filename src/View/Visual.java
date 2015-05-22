@@ -60,16 +60,16 @@ public class Visual {
 		frame.getContentPane().setBackground(Color.BLACK);
 		frame.setBackground(Color.BLACK);
 		frame.getContentPane().setForeground(Color.BLACK);
-		frame.setBounds(100, 100, 949, 599);
+		frame.setBounds(100, 100, 997, 599);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		//frame.setExtendedState(JFrame.MAXIMIZED_BOTH); 
-
+		
 		ImageIcon icon = new ImageIcon("C:\\Users\\Ronak Shah\\Documents\\School\\AP Computer Science\\MariosRevenge\\res\\logo.png");
 		Image scaled = icon.getImage().getScaledInstance(779, 214, Image.SCALE_DEFAULT);
-
-	
-
+		
+		
+		
 		/*Below is JPanel code for instruction screen*/
 		instructions = new JPanel();
 		instructions.setLocation(0, 0);
@@ -82,11 +82,11 @@ public class Visual {
 		insContent.setIcon(new ImageIcon("C:\\Users\\Ronak Shah\\Documents\\School\\AP Computer Science\\MariosRevenge\\res\\instructions.png"));
 		instructions.add(insContent);
 		/*End of JPanel code*/
-
-
+		
+		
 		btnInstructions = new JButton("Instructions");
 		btnInstructions.setBounds(10, 526, 146, 30);
-
+		
 		btnInstructions.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//System.out.println(panelIsOn);
@@ -109,12 +109,12 @@ public class Visual {
 				}
 			}
 		});;
-
+		
 		splash = new JPanel();
 		splash.setBackground(Color.BLACK);
 		splash.setLayout(null);
-
-
+		
+		
 		logoImage = new JLabel();
 		logoImage.setIcon(new ImageIcon(scaled));
 		logoImage.setBounds(77, 33, 818, 245);
