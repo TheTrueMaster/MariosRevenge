@@ -43,8 +43,9 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 	
 	}
 	private void initializeLevel(int levelNo) {
+		TextLoader loader = new TextLoader();
 		try {
-			level = TextLoader.getFile("files/"+"level" + levelNo + ".txt", cldr);
+			level = loader.getFile("files" + "/" + "lvl" + levelNo + ".txt");
 		}
 		catch (IOException e) {
 			//do nothing
