@@ -60,17 +60,22 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 		super.paint(g);
 		Render render = new Render();
 
+		g.setColor(Color.white);
 		for(int r = 0; r < level.length; r++){
 			for(int c = 0; c < level[r].length; c++){
 				ImageIcon icon = render.getImage(level[r][c]);
-				int x = c * 15;
-				int y = r * 15;
-				System.out.print(level[r][c]);
-				g.drawRect(x, y, 30, 30);
+				int x = (c * 16) + 10;
+				int y = (r * 30)+20;
+				//System.out.print(level[r][c]);
+				//g.drawRect(x, y, 15, 35);
+				String str = "";
+				str += level[r][c];
+				g.drawString(str, x, y);
 				//Graphics Draw Image Parameters: (Image, X-Coord, Y-Coord, Color, ImageObserver)
 				//g.drawImage(icon.getImage().getScaledInstance(10, 10, Image.SCALE_DEFAULT), x, y, null, null);
+				
 			}
-			System.out.println();
+			//System.out.println();
 		}	
 	}
 	/**
