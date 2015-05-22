@@ -12,11 +12,7 @@ public class Boss extends Entity{
 		bossHealth = health;
 	}
 
-	@Override
-	public void act() {
-		// TODO Auto-generated method stub
-		
-	}
+	
 
 	/* @Override
 	public void interact(Entity other) {
