@@ -35,7 +35,7 @@ public class Render {
 	public ImageIcon getImage(char c) {
 
 		return new ImageIcon(pics.get('p'));
-
+		//return new ImageIcon(pics.get(c);
 	}
 
 

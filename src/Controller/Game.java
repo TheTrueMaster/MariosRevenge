@@ -17,8 +17,10 @@ public class Game {
 		return objects;
 	}
 	
+	
 	public Player getPlayer(){
 		return (Player)objects.get("player");
+		
 	}
 	
 	
