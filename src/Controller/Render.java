@@ -25,17 +25,16 @@ public class Render {
 	public ImageIcon getImage(char c) {
 		// TODO Auto-generated method stub
 		//testing class loader
-		//ClassLoader cldr = this.getClass().getClassLoader();
+		ClassLoader cldr = this.getClass().getClassLoader();
 
-		URL u = ClassLoader.getSystemResource("res/fish.gif");
+		ImageIcon img = new ImageIcon("res/fish.gif");
+
+		URL u = cldr.getResource("fish.gif");
 		
-		ImageIcon img = new ImageIcon(u);
+
+		ImageIcon returnMe = new ImageIcon(u);
 		
-		return img;
-		
-		
-	
-		 //not sure if this works. :/
+		return returnMe; //not sure if this works. :/
 
 		//stubCode
 		//return pics.get(c);
