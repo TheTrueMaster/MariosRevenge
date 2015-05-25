@@ -15,7 +15,6 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 	private Game game;
 	public final static int movePixels = 10;
 	Entity[][] level;
-	private ClassLoader cldr;
 	/**
 	 * Launch the application.
 	 */
@@ -27,7 +26,6 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 	public Level(int width, int height, Game g) {
 		game  = g;
 		init();
-		cldr = game.getCldr();
 	}
 
 	public void init(){
@@ -45,7 +43,7 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 	private void initializeLevel(int levelNo) {
 		TextLoader loader = new TextLoader();
 		try {
-			level = loader.getFile("files" + "/" + "lvl" + levelNo + ".txt");
+			level = loader.getFile(levelNo);
 		}
 		catch (IOException e) {
 			//do nothing

@@ -8,11 +8,6 @@ public class Fireflower extends Entity implements Powerup{
 		super(x, y, icon);
 	}
 
-	@Override
-	public void act() {
-		// TODO Auto-generated method stub
-		
-	}
 
 	@Override
 	public void giveAbility(Player p) {

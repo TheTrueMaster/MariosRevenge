@@ -7,12 +7,10 @@ public class Game {
 
 	Map<String, Entity> objects;
 	Entity[][] grid;
-	ClassLoader cldr;
 	
-	public Game(ClassLoader c) {
+	public Game() {
 		objects = new HashMap<String, Entity>();
 		objects.put("player", new Player(10, 10, null));
-		cldr = c;
 	}
 	
 	public Map<String, Entity> getObjects(){
@@ -23,8 +21,6 @@ public class Game {
 		return (Player)objects.get("player");
 	}
 	
-	public ClassLoader getCldr(){
-		return cldr;
-	}
+	
 
 }

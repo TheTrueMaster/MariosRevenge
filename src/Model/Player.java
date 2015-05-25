@@ -28,12 +28,6 @@ public class Player extends Entity {
 		return playerHealth;
 	}
 
-	@Override
-	public void act() {
-		// TODO Auto-generated method stub
-
-	}
-
 
 	public void interact(Entity other) {
 		if (other instanceof Powerup)
