@@ -8,17 +8,4 @@ public class Box extends Entity{
 		super(y, y, icon);
 		// TODO Auto-generated constructor stub
 	}
-
-	@Override
-	public void act() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	/* @Override
-	public void interact(Entity other) {
-		// TODO Auto-generated method stub
-		
-	} */
-
 }

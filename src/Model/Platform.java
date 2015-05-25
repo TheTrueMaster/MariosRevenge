@@ -8,11 +8,6 @@ public class Platform extends Entity{
 		super(x, y, icon);
 	}
 
-	@Override
-	public void act() {
-		// TODO Auto-generated method stub
-		
-	}
 
 	/* @Override
 	public void interact(Entity other) {

@@ -1,8 +1,8 @@
 package View;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.Scanner;
+import java.util.*;
+import ImportManager.*;
 import Model.Entity;
 
 /* REFRENCE TABLE
@@ -18,7 +18,7 @@ import Model.Entity;
 
 public class TextLoader
 { 
-	public Entity[][] getFile(String path) throws IOException
+	public Entity[][] getFile(int no) throws IOException
 	{
 		Entity[][] level = new Entity[12][57];
 		
@@ -33,7 +33,7 @@ public class TextLoader
 
 		try	//try-with-resources - new in Java 7
 		{
-			Scanner file = new Scanner(new File(path));
+			Scanner file = new Scanner(ImportManager.lvl1);
 			while(file.hasNext())
 			{
 				String read = file.nextLine();

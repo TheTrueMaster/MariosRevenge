@@ -5,7 +5,7 @@ import java.awt.*;
 import javax.swing.*;
 
 import Controller.Game;
-
+import ImportManager.ImportManager;//pun intented
 import java.awt.event.*;
 
 public class Visual {
@@ -26,10 +26,9 @@ public class Visual {
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
-				try {
-					ClassLoader cldr = this.getClass().getClassLoader();
-					
-					Game game = new Game(cldr);
+				try {					
+					ImportManager.loadFiles();
+					Game game = new Game();
 					Visual window = new Visual(game);
 					window.frame.setVisible(true);
 				} catch (Exception e) {
@@ -65,7 +64,7 @@ public class Visual {
 		frame.getContentPane().setLayout(null);
 		//frame.setExtendedState(JFrame.MAXIMIZED_BOTH); 
 		
-		ImageIcon icon = new ImageIcon("C:\\Users\\Ronak Shah\\Documents\\School\\AP Computer Science\\MariosRevenge\\res\\logo.png");
+		ImageIcon icon = new ImageIcon(ImportManager.title);
 		Image scaled = icon.getImage().getScaledInstance(779, 214, Image.SCALE_DEFAULT);
 		
 		
@@ -79,7 +78,7 @@ public class Visual {
 		instructions.setVisible(false);
 		panelIsOn = false;
 		JLabel insContent = new JLabel();
-		insContent.setIcon(new ImageIcon("C:\\Users\\Ronak Shah\\Documents\\School\\AP Computer Science\\MariosRevenge\\res\\instructions.png"));
+		insContent.setIcon(new ImageIcon(ImportManager.instructions));
 		instructions.add(insContent);
 		/*End of JPanel code*/
 		
