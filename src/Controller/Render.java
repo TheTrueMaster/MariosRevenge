@@ -24,7 +24,7 @@ public class Render {
 
 	public ImageIcon getImage(char c) {
 		return pics.get(c);
-		
+
 	}
 
 
