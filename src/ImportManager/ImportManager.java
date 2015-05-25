@@ -13,9 +13,11 @@ public class ImportManager {
 	public static BufferedImage startLogo;
 	public static BufferedImage backToMain;
 	public static File lvl1;
+	public static BufferedImage player;
 
 	public static void loadFiles(){
 		try{
+			player = ImageIO.read(ImportManager.class.getResource("fish.gif"));
 			title = ImageIO.read(ImportManager.class.getResource("logo.png"));
 			instructions = ImageIO.read(ImportManager.class.getResource("Instructions.png"));
 			startLogo = ImageIO.read(ImportManager.class.getResource("start.png"));

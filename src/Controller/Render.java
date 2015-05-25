@@ -2,20 +2,30 @@ package Controller;
 
 import java.awt.Image;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
-import javax.swing.ImageIcon;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
+
+import javax.swing.*;
+
 import java.net.URL;
 
+import ImportManager.ImportManager;
 import Model.*;
 
 public class Render {
 
-	private Map<Character, ImageIcon> pics;
+	private Map<Character, Image> pics;
 
 	public Render() {
+		pics = new HashMap<Character, Image>();
+		Character character = new Character('[');
+		Image img = null;
+		//player image
+		character = 'p';
+		img = ImportManager.player;;
+		pics.put(character, img);
 		
+		 
 	}
 
 	public void init(Game game) {
@@ -24,7 +34,7 @@ public class Render {
 
 	public ImageIcon getImage(char c) {
 
-		return pics.get(c);
+		return new ImageIcon(pics.get('p'));
 
 	}
 
