@@ -198,17 +198,18 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 			shift(p, 90);
 
 		case 180:
-			p.setX(movePixels - p.getX());
+			p.setX(p.getX() - movePixels);
 			shift(p, 180);
 			break;
 		case 270:
-			p.setX(movePixels - p.getX());
+			p.setY(p.getY() - movePixels);
 			shift(p, 270);
 			break;
 		}
 	}
 
 	private void shift(Player p, int i) {
+		try{
 		//we go into the first switch to asses the direction
 		Entity ent;
 		switch(i){
@@ -227,25 +228,23 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 			ent = getEnt(p.getRow(), p.getCol() - 1);
 			//now we asses the Entity
 			if(ent == null){
-				p.moveLeft();
+				//p.moveLeft();
 				level[p.getRow()][p.getCol()] = ' ';
 				p.setCol(p.getCol() - 1);
 				level[p.getRow()][p.getCol() - 1] = 'P';
 			}
 			break;
 		}
-
+		}catch(IndexOutOfBoundsException e){}
 	}
 
-	private Entity getEnt(int row, int i) {
-		for(int r = 0; r < level.length; r++){
-			for(int c = 0; c < level.length; c++){
-				for(Entity e : inGameObs){
-					if(e.getRow() == r || e.getCol() == c)
-						return e;
-				}
-			}
+	private Entity getEnt(int row, int col) {
+
+		for(Entity e : inGameObs){
+			if(e.getRow() == row && e.getCol() == col)
+				return e;
 		}
+
 		return null;
 	}
 
@@ -298,7 +297,7 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 			player.changeMovingStatus("left");
 		}
 
-		
+
 	}
 
 	@Override
