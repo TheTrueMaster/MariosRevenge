@@ -1,7 +1,7 @@
 package Model;
 
 import java.awt.Image;
-
+import ImportManager.ImportManager;
 import View.Level;
 
 public class Player extends Entity {
@@ -9,7 +9,7 @@ public class Player extends Entity {
 	protected int playerHealth;
 
 	private boolean movingRight, movingLeft, jumping, falling;//Booleans So GUI can see players current status
-
+	private int moveImage;
 
 	public Player(int x, int y, Image icon) {
 		super(x, y, icon);
@@ -19,10 +19,14 @@ public class Player extends Entity {
 		movingLeft = false;
 		jumping = false;
 		falling = false;
-
+		moveImage = 0;
 	}
 
 
+	public Image getImg(){
+		
+		return ImportManager.mario[moveImage];
+	}
 	public void setHealth(int a)
 	{
 		playerHealth = a;
@@ -80,6 +84,11 @@ public class Player extends Entity {
 	}
 
 	public boolean isMovingRight(){
+		if(moveImage == 6){
+			moveImage = 0;
+		}
+		int m = moveImage;
+		moveImage++;
 		return movingRight;
 	}
 

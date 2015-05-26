@@ -27,8 +27,8 @@ public class TextLoader
 		ArrayList<String> strings = new ArrayList<String>();
 
 
-		try	//try-with-resources - new in Java 7
-		{
+		//try	//try-with-resources - new in Java 7
+		
 			Scanner file = new Scanner(ImportManager.lvl1);
 			while(file.hasNext())
 			{
@@ -38,11 +38,8 @@ public class TextLoader
 				strings.add(read);
 			}
 			file.close();
-		}
-		catch(FileNotFoundException e)
-		{
-			//in case the file is not found
-		}
+		
+		
 		//after getting the file, parsing through each string and adding it to the char array
 		
 		for(int r = 0; r < level.length; r++){

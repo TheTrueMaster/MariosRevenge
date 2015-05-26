@@ -29,21 +29,28 @@ public class Render {
 		Character character = new Character('[');
 		Image img = null;
 		//player img
-		character = 'p';
+		character = 'P';
 		img = ImportManager.mario[0];
 		pics.put(character, img);
-		
+
 		//enemy img
-		
+
 		//platform img
-		
+
 		//power up box img
-		
-		//power img
-		
+		character = 'G';
+		img = ImportManager.box;
+		pics.put(character, img);
+		//powerbox img
+		character = 'A';
+		img = ImportManager.box;
+		pics.put(character, img);
 		//box img
-		
-				 
+		character = 'G';
+		img = ImportManager.pwrBox;
+		pics.put(character, img);
+
+
 	}
 
 	public void init(Game game) {
@@ -52,8 +59,13 @@ public class Render {
 
 	public ImageIcon getImage(char c) {
 
-		return new ImageIcon(pics.get('p'));
-		//return new ImageIcon(pics.get(c);
+
+		//return new ImageIcon(pics.get('P'));
+		Image a = (pics.get(c));
+		if(a!=null)
+			return new ImageIcon(a);
+		else
+			return new ImageIcon(pics.get('G'));
 	}
 
 

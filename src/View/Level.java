@@ -13,13 +13,13 @@ import javax.swing.*;
 
 public class Level extends JPanel implements KeyListener, ActionListener{
 
-	public static final int width = 16;
-	public static final int height = 35;
+	public static final int width = 26;
+	public static final int height = 45;
 
 
 	private JPanel contentPane;
 	private Game game;
-	public final static int movePixels = 10;
+	public final static int movePixels = 4;
 	char[][] level;//for interaction handling
 	ArrayList<Entity> inGameObs;//for visualization (more fluid)
 	private Player player;//quick refrence
@@ -61,7 +61,7 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 		for(int r = 0; r < level.length; r++){
 			for(int c = 0; c < level[r].length; c++){
 				int x = c* width +10;
-				int y = r * height + 20;
+				int y = r * height -50;
 				ImageIcon img = render.getImage(level[r][c]);
 				char entity = level[r][c];
 				Entity ent = null;
@@ -122,7 +122,7 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 	@Override
 	public void paint(Graphics g){
 
-		Image offImage = createImage(600,600);
+		Image offImage = createImage(this.getWidth(), this.getHeight());
 
 		// Creates an off-screen drawable image to be used for
 		// double buffering; XSIZE, YSIZE are each of type ‘int’
@@ -140,20 +140,12 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 
 		g.setColor(Color.white);
 		for(Entity e : inGameObs){
-			g.drawImage(e.getImg().getScaledInstance(height, width, Image.SCALE_DEFAULT), e.getX(), e.getY(), null, null);
-
+			//g.drawRect(e.getX(), e.getY(), width, height);
+			g.drawImage(e.getImg().getScaledInstance(width, height, Image.SCALE_DEFAULT), e.getX(), e.getY(), this);
+		
 		}
 	}
-	/**
-	 * Draws the given Entity at its Location
-	 * 
-	 * Designed to make it easier to draw an object
-	 * @param e
-	 * @param g
-	 */
-	private void drawObject(Entity e, Graphics g){
-		g.drawImage(e.getImg(), e.getX(), e.getY(), this);
-	}
+	
 
 	/**
 	 * Updates the Player Location
