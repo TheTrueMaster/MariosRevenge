@@ -16,6 +16,7 @@ import Model.Entity;
  * |  hasMoreTokens()|  hasNext()    |
  */
 
+
 public class TextLoader
 { 
 	public char[][] getFile(int no) throws IOException

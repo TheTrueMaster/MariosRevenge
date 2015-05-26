@@ -37,7 +37,7 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 		addKeyListener(this);
 		game  = g;
 		init();
-		javax.swing.Timer timer = new javax.swing.Timer(30, this);
+		javax.swing.Timer timer = new javax.swing.Timer(150, this);
 		timer.start();
 	}
 
@@ -201,6 +201,7 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 	}
 
 	private void shift(Player p, int i) {
+		p.changeAnimation();
 		try{
 		//we go into the first switch to asses the direction
 		Entity ent;
@@ -226,6 +227,15 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 				level[p.getRow()][p.getCol() - 1] = 'P';
 			}
 			break;
+		case 90://up
+			ent = getEnt(p.getRow() + 1, p.getCol());
+			//now we asses the Entity
+			if(ent == null){
+				//p.moveLeft();
+				level[p.getRow()][p.getCol()] = ' ';
+				p.setCol(p.getCol() - 1);
+				level[p.getRow() + 1][p.getCol()] = 'P';
+			}
 		}
 		}catch(IndexOutOfBoundsException e){}
 	}
@@ -287,6 +297,9 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 		}
 		if(player.isMovingLeft()){
 			player.changeMovingStatus("left");
+		}
+		if(player.isJumping()){
+			player.changeMovingStatus("up");
 		}
 
 

@@ -103,6 +103,7 @@ public class Visual implements KeyListener {
 					btnInstructions.setText("Instructions");
 				}
 				else if(screen == 2){
+					level.setVisible(false);
 					splash.setVisible(true);
 					screen = 0;
 					btnInstructions.setText("Instructions");
@@ -124,11 +125,11 @@ public class Visual implements KeyListener {
 		start.setSize(50, 8);
 		start.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				Level lev = new Level(frame.getHeight(), frame.getWidth(), game);
-				JPanel p = (JPanel)lev;
+				level = new Level(frame.getHeight(), frame.getWidth(), game);
+				JPanel p = (JPanel)level;
 				frame.getContentPane().add(p);
 				splash.setVisible(false);
-				lev.setSize(949, 513);
+				level.setSize(949, 513);
 				btnInstructions.setText("Back to Main");
 				screen = 2;
 			}

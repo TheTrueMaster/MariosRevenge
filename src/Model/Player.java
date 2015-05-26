@@ -83,12 +83,15 @@ public class Player extends Entity {
 
 	}
 
-	public boolean isMovingRight(){
-		if(moveImage == 6){
+	public void changeAnimation(){
+		if(moveImage == 4){
 			moveImage = 0;
 		}
 		int m = moveImage;
 		moveImage++;
+	}
+	public boolean isMovingRight(){
+		
 		return movingRight;
 	}
 
