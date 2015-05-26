@@ -10,7 +10,6 @@ public class Game {
 	
 	public Game() {
 		objects = new HashMap<String, Entity>();
-		objects.put("player", new Player(10, 10, null));
 	}
 	
 	public Map<String, Entity> getObjects(){

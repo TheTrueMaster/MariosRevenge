@@ -14,6 +14,7 @@ public class ImportManager {
 	public static BufferedImage backToMain;
 	public static File lvl1;
 	public static BufferedImage player;
+	public static BufferedImage[] mario;
 
 	public static void loadFiles(){
 		try{
@@ -23,6 +24,18 @@ public class ImportManager {
 			startLogo = ImageIO.read(ImportManager.class.getResource("start.png"));
 			backToMain = ImageIO.read(ImportManager.class.getResource("mainmenuobj.png"));
 			lvl1 = new File(ImportManager.class.getResource("lvl1.txt").toURI());
+
+			//initializing mario
+			mario = new BufferedImage[7];
+			mario[0] = ImageIO.read(ImportManager.class.getResource("sprite_Mario1.png"));
+			mario[1] = ImageIO.read(ImportManager.class.getResource("sprite_Mario2.png"));
+			mario[2] = ImageIO.read(ImportManager.class.getResource("sprite_Mario3.png"));
+			mario[3] = ImageIO.read(ImportManager.class.getResource("sprite_Mario4.png"));
+			mario[4] = ImageIO.read(ImportManager.class.getResource("sprite_Mario5.png"));
+			mario[5] = ImageIO.read(ImportManager.class.getResource("sprite_Mario6.png"));
+			mario[6] = ImageIO.read(ImportManager.class.getResource("sprite_Mario7.png"));
+
+
 		}
 		catch(IOException e){
 			//do nothing

@@ -4,22 +4,37 @@ import java.awt.Image;
 
 public  class Entity {
 
-	int xLoc , yLoc;
-	boolean status, hasHealth;
+	protected int xLoc , yLoc;
+	protected boolean status, hasHealth;
 	
-	int velocityX;
-	int velocityY;
+	protected int velocityX;
+	protected int velocityY;
 	
-	Image sprite;
-	char self;
-	public Entity(int x, int y, Image icon) {
-		// TODO Auto-generated constructor stub
+	protected int row, col;
+	
+	protected Image sprite;
+	protected char self;
+	
+	protected int timesMoved = 0;//increases until object has moved into next cell
+	
+	public Entity(int x, int y, Image icon){
 		xLoc = x;
 		yLoc = y;
 		sprite = icon;
 		velocityX = 0;
 		velocityY = 0;
 		self = 'G';
+	}
+	
+	public Entity(int x, int y, Image icon, int xC, int yC) {
+		xLoc = x;
+		yLoc = y;
+		sprite = icon;
+		velocityX = 0;
+		velocityY = 0;
+		self = 'G';
+		row = xC;
+		col = yC;
 	}
 	
 	public Entity(){
@@ -35,6 +50,25 @@ public  class Entity {
 		self = set;
 	}
 
+	/**
+	 * The char array coord
+	 */
+	public void setRow(int x){
+		row = x;
+	}
+	
+	public int getRow(){
+		return row;
+	}
+	
+	public void setCol(int y){
+		col = y;
+	}
+	
+	public int getCol(){
+		return col;
+	}
+	
 	public char getChar(){
 		return self;
 	}

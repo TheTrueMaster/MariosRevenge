@@ -2,11 +2,14 @@ package Model;
 
 import java.awt.Image;
 
+import View.Level;
+
 public class Player extends Entity {
 
 	protected int playerHealth;
 
 	private boolean movingRight, movingLeft, jumping, falling;//Booleans So GUI can see players current status
+
 
 	public Player(int x, int y, Image icon) {
 		super(x, y, icon);
@@ -16,7 +19,9 @@ public class Player extends Entity {
 		movingLeft = false;
 		jumping = false;
 		falling = false;
+
 	}
+
 
 	public void setHealth(int a)
 	{
@@ -81,31 +86,43 @@ public class Player extends Entity {
 	public boolean isMovingLeft(){
 		return movingLeft;
 	}
-	
+
 	public boolean isFalling(){
 		return falling;
 	}
-	
+
 	public boolean isJumping(){
 		return jumping;
 	}
-	
+
 	public void changeMovingStatus(String dir){
 		if(dir.equals("right")){
 			movingRight = !movingRight;
 		}
-		
+
 		else if(dir.equals("left")){
 			movingLeft = !movingLeft;
 		}
-		
+
 		else if(dir.equals("up")){
-			 jumping = !jumping;
+			jumping = !jumping;
 		}
-		
+
 		else if(dir.equals("falling")){
 			falling = !falling;
 		}
+
+	}
+
+
+	public void moveRight() {
+		xLoc = xLoc += Level.movePixels;
+
+	}
+
+
+	public void moveLeft() {
+		xLoc = xLoc -= Level.movePixels;
 		
 	}
 }

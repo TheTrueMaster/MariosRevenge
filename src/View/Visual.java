@@ -6,9 +6,10 @@ import javax.swing.*;
 
 import Controller.Game;
 import ImportManager.ImportManager;//pun intented
+
 import java.awt.event.*;
 
-public class Visual {
+public class Visual implements KeyListener {
 
 	private JFrame frame;
 	private JPanel splash;
@@ -153,5 +154,26 @@ public class Visual {
 		instructions.setVisible(false);
 		//adding to main so that it remains constant for instructions and splash
 		//button.
+	}
+
+
+	@Override
+	public void keyPressed(KeyEvent arg0) {
+		// TODO Auto-generated method stub
+		System.out.println("Visual");
+	}
+
+
+	@Override
+	public void keyReleased(KeyEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void keyTyped(KeyEvent arg0) {
+		// TODO Auto-generated method stub
+		
 	}
 }

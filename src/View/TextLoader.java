@@ -18,15 +18,11 @@ import Model.Entity;
 
 public class TextLoader
 { 
-	public Entity[][] getFile(int no) throws IOException
+	public char[][] getFile(int no) throws IOException
 	{
-		Entity[][] level = new Entity[12][57];
+		char[][] level = new char[12][57];
 		
-		for(int r = 0; r < level.length; r++){
-			for(int c = 0; c < level[r].length; c++){
-				level[r][c]= new Entity();
-			}
-		}
+
 		
 		ArrayList<String> strings = new ArrayList<String>();
 
@@ -53,7 +49,7 @@ public class TextLoader
 			String str = strings.get(r);
 			for(int c = 0; c < level[r].length; c++){
 				try{
-					level[r][c].setChar(str.charAt(c));
+					level[r][c] = str.charAt(c);
 				}
 				catch(StringIndexOutOfBoundsException e){
 					//in case the line in the text file has no text
@@ -61,13 +57,13 @@ public class TextLoader
 				}
 			}
 		}
-		/*
-		for(int r = 0; r < level.length; r++){
-			for(int c = 0; c < level[r].length; c++){
-				System.out.print(level[r][c]);
-			}
-			System.out.println();
-		}		*/
+		
+//		for(int r = 0; r < level.length; r++){
+//			for(int c = 0; c < level[r].length; c++){
+//				System.out.print(level[r][c]);
+//			}
+//			System.out.println();
+//		}		
 		
 	
 		return level;

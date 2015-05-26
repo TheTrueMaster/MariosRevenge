@@ -6,7 +6,7 @@ public class Boss extends Entity{
 	
 	int bossHealth;
 
-	public Boss(int x, int y, Image icon, int health) {
+	public Boss(int x, int y, Image icon, int health, int row) {
 		super(x, y, icon);
 		this.hasHealth = true;
 		bossHealth = health;

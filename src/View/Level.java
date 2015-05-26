@@ -2,19 +2,28 @@ package View;
 
 import Controller.*;
 import Model.*;
+import Model.Box;//required due Box's name (Too Ambiguous)
 
 import java.awt.*;
 import java.awt.event.*;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.swing.*;
 
 public class Level extends JPanel implements KeyListener, ActionListener{
 
+	public static final int width = 16;
+	public static final int height = 35;
+
+
 	private JPanel contentPane;
 	private Game game;
 	public final static int movePixels = 10;
-	Entity[][] level;
+	char[][] level;//for interaction handling
+	ArrayList<Entity> inGameObs;//for visualization (more fluid)
+	private Player player;//quick refrence
+
 	/**
 	 * Launch the application.
 	 */
@@ -24,12 +33,16 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 	 * Create the frame.
 	 */
 	public Level(int width, int height, Game g) {
+		setFocusable(true);
+		addKeyListener(this);
 		game  = g;
 		init();
+		javax.swing.Timer timer = new javax.swing.Timer(30, this);
+		timer.start();
 	}
 
 	public void init(){
-
+		inGameObs = new ArrayList<Entity>();
 		setBackground(Color.BLACK);//official constructor will be public Level(int width, int height, int levelNo)
 		//setBounds(0, 0, width, height); //OFFICIAL SETBOUNDS, commented out for window builder dev
 		setBounds(0,0, 850, 450);
@@ -38,43 +51,98 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 		contentPane.setLayout(null);
 		//initializeLevel(int levelNo
 		initializeLevel(1);
+		updateArrayList();
 
 	}
+	private void updateArrayList() {
+		Render render = new Render();
+
+		inGameObs.clear();
+		for(int r = 0; r < level.length; r++){
+			for(int c = 0; c < level[r].length; c++){
+				int x = c* width +10;
+				int y = r * height + 20;
+				ImageIcon img = render.getImage(level[r][c]);
+				char entity = level[r][c];
+				Entity ent = null;
+
+				switch (entity){
+				case 'G'://ground
+					ent = new Platform(x, y, img.getImage());
+					ent.setCol(c);
+					ent.setRow(r);
+					inGameObs.add(ent);
+					break;
+				case 'P'://player
+					ent = new Player(x, y, img.getImage());
+					ent.setRow(r);
+					ent.setCol(c);
+					player = (Player) ent;
+					inGameObs.add(ent);
+					break;
+				case 'A'://pwrbox
+					ent = new Powerbox(x, y, img.getImage());
+					ent.setCol(c);
+					ent.setRow(r);
+					inGameObs.add(ent);
+					break;
+				case 'E':
+					ent = new Enemy(x, y, img.getImage());
+					ent.setCol(c);
+					ent.setRow(r);
+					inGameObs.add(ent);
+					break;
+				case 'B':
+					ent = new Box(x, y, img.getImage());
+					ent.setCol(c);
+					ent.setRow(r);
+					inGameObs.add(ent);
+					break;
+				}
+
+
+
+			}
+
+		}		
+
+	}
+
 	private void initializeLevel(int levelNo) {
-		TextLoader loader = new TextLoader();
 		try {
-			level = loader.getFile(levelNo);
+			level = new TextLoader().getFile(levelNo);
 		}
 		catch (IOException e) {
 			//do nothing
 		}
-
 
 	}
 
 
 	@Override
 	public void paint(Graphics g){
+
+		Image offImage = createImage(600,600);
+
+		// Creates an off-screen drawable image to be used for
+		// double buffering; XSIZE, YSIZE are each of type ‘int’
+		Graphics buffer = offImage.getGraphics();
+		// Creates a graphics context for drawing to an 
+		// off-screen image
+		paintOffScreen(buffer);     // your own method
+		g.drawImage(offImage, 0, 0, null);  
+		// draws the image with upper left corner at 0,0}
+
+	}
+
+	public void paintOffScreen(Graphics g){
 		super.paint(g);
-		Render render = new Render();
 
 		g.setColor(Color.white);
-		for(int r = 0; r < level.length; r++){
-			for(int c = 0; c < level[r].length; c++){
-				ImageIcon icon = render.getImage(level[r][c].getChar());
-				int x = (c * 16) + 10;
-				int y = (r * 30)+20;
-				//System.out.print(level[r][c]);
-				//g.drawRect(x, y, 15, 35);
-				String str = "";
-				str += level[r][c].getChar();
-				//g.drawString(str, x, y);
-				//Graphics Draw Image Parameters: (Image, X-Coord, Y-Coord, Color, ImageObserver)
-				g.drawImage(icon.getImage().getScaledInstance(16, 35, Image.SCALE_DEFAULT), x, y, null, null);
+		for(Entity e : inGameObs){
+			g.drawImage(e.getImg().getScaledInstance(height, width, Image.SCALE_DEFAULT), e.getX(), e.getY(), null, null);
 
-			}
-			//System.out.println();
-		}	
+		}
 	}
 	/**
 	 * Draws the given Entity at its Location
@@ -101,7 +169,7 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 	 */
 
 	private void updatePlayer() {
-		Player p = game.getPlayer();
+		Player p = player;
 		int dir = -1;
 		//move player
 		if(p.isMovingRight()){
@@ -123,21 +191,69 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 		switch(dir){
 		case 0:
 			p.setX(movePixels + p.getX());
+			shift(p, 0);
 			break;
 		case 90:
 			p.setX(movePixels + p.getY());
-			break;
+			shift(p, 90);
+
 		case 180:
 			p.setX(movePixels - p.getX());
+			shift(p, 180);
 			break;
 		case 270:
 			p.setX(movePixels - p.getX());
+			shift(p, 270);
 			break;
 		}
 	}
 
+	private void shift(Player p, int i) {
+		//we go into the first switch to asses the direction
+		Entity ent;
+		switch(i){
+
+		case 0://right
+			ent = getEnt(p.getRow(), p.getCol() + 1);
+			//now we asses the Entity
+			if(ent == null){
+				p.moveRight();
+				level[p.getRow()][p.getCol()] = ' ';
+				p.setCol(p.getCol() + 1);
+				level[p.getRow()][p.getCol() + 1] = 'P';
+			}
+			break;
+		case 180://left
+			ent = getEnt(p.getRow(), p.getCol() - 1);
+			//now we asses the Entity
+			if(ent == null){
+				p.moveLeft();
+				level[p.getRow()][p.getCol()] = ' ';
+				p.setCol(p.getCol() - 1);
+				level[p.getRow()][p.getCol() - 1] = 'P';
+			}
+			break;
+		}
+
+	}
+
+	private Entity getEnt(int row, int i) {
+		for(int r = 0; r < level.length; r++){
+			for(int c = 0; c < level.length; c++){
+				for(Entity e : inGameObs){
+					if(e.getRow() == r || e.getCol() == c)
+						return e;
+				}
+			}
+		}
+		return null;
+	}
+
+
+
 	@Override
 	public void keyPressed(KeyEvent e) {
+		//System.out.println("Pressed");
 		/*
 		 PUEDOCODE
 		 if(rightKey is pressed)
@@ -153,94 +269,56 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 		switch( keyCode ) { 
 		case KeyEvent.VK_UP:
 			// handle up 
-			game.getPlayer().changeMovingStatus("up");
+			player.changeMovingStatus("up");
 			break;
 		case KeyEvent.VK_DOWN:
 			// handle down 
-			game.getPlayer().changeMovingStatus("down");
+			player.changeMovingStatus("down");
 
 			break;
 		case KeyEvent.VK_LEFT:
 			// handle left
-			game.getPlayer().changeMovingStatus("left");
+			player.changeMovingStatus("left");
 
 			break;
 		case KeyEvent.VK_RIGHT :
 			// handle right
-			game.getPlayer().changeMovingStatus("right");
+			player.changeMovingStatus("right");
 			break;
 		}
-		System.out.println(keyCode);
+		//System.out.println(keyCode);
 	}
 
 	@Override
 	public void keyReleased(KeyEvent e) {
-		/*
-		 PUEDOCODE
-		 if(rightKey is released)
-		  	tell player that it is no longer moving right
-		 else if(leftKey is released)
-		 	tell player that it is no longer moving left
-		 else if(up key is being released)
-		 	tell player that it is no longer jumping
-		 else
-		 	do nothing
-		 */
-
-		int keyCode = e.getKeyCode();
-		switch( keyCode ) { 
-		case KeyEvent.VK_UP:
-			// handle up 
-			game.getPlayer().changeMovingStatus("up");
-			break;
-		case KeyEvent.VK_DOWN:
-			// handle down 
-			game.getPlayer().changeMovingStatus("down");
-
-			break;
-		case KeyEvent.VK_LEFT:
-			// handle left
-			game.getPlayer().changeMovingStatus("left");
-
-			break;
-		case KeyEvent.VK_RIGHT :
-			// handle right
-			game.getPlayer().changeMovingStatus("right");
-			break;
+		if(player.isMovingRight()){
+			player.changeMovingStatus("right");
 		}
+		if(player.isMovingLeft()){
+			player.changeMovingStatus("left");
+		}
+
+		
 	}
 
 	@Override
 	public void keyTyped(KeyEvent e) {
 		// TODO Auto-generated method stub
-		System.out.println("Key Typed: " + e.getKeyCode());
+		//System.out.println("Key Typed: " + e.getKeyCode());
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
+		doAllChecks();
+
+
+	}
+
+	private void doAllChecks() {
 		//before repainting, we update all the Entities locations
-		/*Player Movement Code Below*/
-		Player p = game.getPlayer();
-		if(p.isMovingRight()){
-			//shift player
-			
-		}
-
-		else if(p.isMovingLeft()){
-			//shift player		
-		}
-
-		else if(p.isJumping()){
-			//shift player		
-		}
-
-		else if(p.isFalling()){
-			//shift player
-		}
-		/*End of Player Movement*/
-
-		//Then, after that, we repaint
+		updatePlayer();
 		repaint();
+
 	}
 
 }
