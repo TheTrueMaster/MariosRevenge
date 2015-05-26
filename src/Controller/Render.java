@@ -34,7 +34,9 @@ public class Render {
 		pics.put(character, img);
 
 		//enemy img
-
+		character = 'E';
+		img = ImportManager.mush;
+		pics.put(character, img);
 		//platform img
 
 		//power up box img
