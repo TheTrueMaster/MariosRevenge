@@ -4,10 +4,10 @@
              E
                    GGGGGGGGGGGGG
          E                   G
-  P      GGGGG               G
+         GGGGG               G
                              G
-                   GGGG      G
+ P                  GGGG     G
           BBABB              G      ABB
                          GGG G
-                       E     G            E          E  F
+                      E      G            E          E  F
 GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG

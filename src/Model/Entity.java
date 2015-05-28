@@ -26,6 +26,9 @@ public  class Entity {
 		self = 'G';
 	}
 	
+	public String toString(){
+		return "Row: " + row + " Col: " + col;
+	}
 	public Entity(int x, int y, Image icon, int xC, int yC) {
 		xLoc = x;
 		yLoc = y;

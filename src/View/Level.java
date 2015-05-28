@@ -61,12 +61,16 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 		inGameObs.clear();
 		for(int r = 0; r < level.length; r++){
 			for(int c = 0; c < level[r].length; c++){
+				char[][] debug = level;
 				int x = c* width +10;
 				int y = r * height -50;
+				if(r == 11){
+					paintable =true;
+				}
 				ImageIcon img = render.getImage(level[r][c]);
 				char entity = level[r][c];
 				Entity ent = null;
-
+				
 				switch (entity){
 				case 'G'://ground
 					ent = new Platform(x, y, img.getImage());
@@ -202,7 +206,9 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 	}
 
 	private Entity getEntityBelowPlayer(Player p) {
-		Entity ent = getEnt(p.getRow() - 1, p.getCol());
+		ArrayList<Entity> debugAL = inGameObs;
+		
+		Entity ent = getEnt(p.getRow() + 1, p.getCol());
 		return ent;
 	}
 
