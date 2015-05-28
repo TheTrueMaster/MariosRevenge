@@ -22,8 +22,8 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 	public final static int movePixels = 8;
 	char[][] level;//for interaction handling
 	ArrayList<Entity> inGameObs;//for visualization (more fluid)
-	private Player player;//quick refrence
-
+	private Player player;//quick refrencej
+	private javax.swing.Timer timer = new javax.swing.Timer(50, this);
 	/**
 	 * Launch the application.
 	 */
@@ -33,15 +33,19 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 	 * Create the frame.
 	 */
 	public Level(int width, int height, Game g) {
-		paintable = true;
+		paintable = false;
 		setFocusable(true);
 		addKeyListener(this);
 		game  = g;
 		init();
-		javax.swing.Timer timer = new javax.swing.Timer(50, this);
-		timer.start();
+		
+		
 	}
-
+	public void start(){
+		timer.start();
+		paintable = true;
+	}
+	
 	public void init(){
 		inGameObs = new ArrayList<Entity>();
 		setBackground(Color.BLACK);//official constructor will be public Level(int width, int height, int levelNo)
@@ -55,6 +59,7 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 		updateArrayList();
 
 	}
+
 	private void updateArrayList() {
 		Render render = new Render();
 
@@ -70,7 +75,7 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 				ImageIcon img = render.getImage(level[r][c]);
 				char entity = level[r][c];
 				Entity ent = null;
-				
+
 				switch (entity){
 				case 'G'://ground
 					ent = new Platform(x, y, img.getImage());
@@ -145,6 +150,9 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 
 		g.setColor(Color.white);
 		for(Entity e : inGameObs){
+			if(e instanceof Player){
+				g.drawString("Row: " + e.getRow() + " Col: " + e.getCol(), e.getX(), e.getY());
+			}
 			//g.drawRect(e.getX(), e.getY(), width, height);
 			g.drawImage(e.getImg().getScaledInstance(width, height, Image.SCALE_DEFAULT), e.getX(), e.getY(), this);
 
@@ -187,15 +195,15 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 
 		switch(dir){
 		case 0:
-			
+
 			shift(p, 0);
 			break;
 		case 90:
-			
+
 			shift(p, 90);
 
 		case 180:
-			//TODO Implement Gravity
+			
 			shift(p, 180);
 			break;
 		case 270:
@@ -207,13 +215,13 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 
 	private Entity getEntityBelowPlayer(Player p) {
 		ArrayList<Entity> debugAL = inGameObs;
-		
+
 		Entity ent = getEnt(p.getRow() + 1, p.getCol());
 		return ent;
 	}
 
 	private void shift(Player p, int i) {
-		
+
 		try{
 			//we go into the first switch to asses the direction
 			p.changeAnimation();
@@ -255,15 +263,15 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 				if(ent == null){
 					p.moveDown();
 					level[p.getRow()][p.getCol()] = ' ';
-					p.setCol(p.getCol() - 1);
-					level[p.getRow() - 1][p.getCol()] = 'P';
+					p.setRow(p.getRow() + 1);
+					level[p.getRow() + 1][p.getCol()] = 'P';
 				}
 				else if(ent instanceof Standable){
 					//do nothing
 				}
 			}
-			
-			
+
+
 		}catch(IndexOutOfBoundsException e){}
 	}
 
