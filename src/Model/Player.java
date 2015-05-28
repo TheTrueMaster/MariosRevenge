@@ -11,6 +11,7 @@ public class Player extends Entity {
 	private boolean movingRight, movingLeft, jumping, falling;//Booleans So GUI can see players current status
 	private int moveImage;
 	private int timesMoved;
+	private int yTraveled;
 
 	public Player(int x, int y, Image icon) {
 		super(x, y, icon);
@@ -22,6 +23,7 @@ public class Player extends Entity {
 		falling = false;
 		moveImage = 0;
 		timesMoved = 0;
+		yTraveled = 0;
 	}
 
 
@@ -138,6 +140,11 @@ public class Player extends Entity {
 		}
 
 	}
+	
+	public int getYTraveled()
+	{
+		return yTraveled;
+	}
 
 
 	public void moveRight() {
@@ -162,13 +169,15 @@ public class Player extends Entity {
 		if (getVelY() == 0)
 		{
 			jumping = false;
+			yTraveled = 0;
 		}
 		
 		else jumping = true;
 		
 		int temp = yLoc;
-		yLoc += Level.movePixels + velY - Level.gravity;
-		if (velY - Level.gravity > -4 && velY > -4)
+		yLoc += 24 + velY - Level.gravity;
+		
+		if (velY - Level.gravity > -5 && velY != -5)
 		{
 			velY += Level.gravity;
 		}
@@ -177,13 +186,10 @@ public class Player extends Entity {
 		{
 			velY += -5 - getVelY();
 		}
-
-		else if (!falling){
-		}
 		
-
+		yTraveled = yLoc - temp;
 		
-		return yLoc - temp;
+		return yTraveled;
 
 	}
 

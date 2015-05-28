@@ -260,14 +260,30 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 				//TODO Write amazing jumping code here
 				if(ent == null && !p.isJumping()){
 					int temp = p.moveUp(10);
-					if (Math.abs(temp) == Level.movePixels)
+					if (Math.abs(p.getYTraveled()) == 24)
 					{
-						level[p.getRow()][p.getCol()] = ' ';
-						p.setRow(p.getRow() - 1);
-						level[p.getRow() - 1][p.getCol()] = 'P';
+						if (p.getYTraveled() < 0)
+						{
+							level[p.getRow()][p.getCol()] = ' ';
+							p.setRow(p.getRow() + 1);
+							level[p.getRow() + 1][p.getCol()] = 'P';
+						}
 					}
+
+					else{
+
+						if (p.getYTraveled() > 0)
+						{
+							level[p.getRow()][p.getCol()] = ' ';
+							p.setRow(p.getRow() - 1);
+							level[p.getRow() - 1][p.getCol()] = 'P';
+						}
+					}
+					break;
 				}
-				break;
+
+
+
 			case 270://do gravity
 				ent = getEntityBelowPlayer(p);
 				if(ent == null){
@@ -277,9 +293,12 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 					level[p.getRow() + 1][p.getCol()] = 'P';
 				}
 				else if(ent instanceof Standable){
-					//do nothing
+					p.interact(ent);
 				}
+				break;
 			}
+
+
 
 
 		}catch(IndexOutOfBoundsException e){}
