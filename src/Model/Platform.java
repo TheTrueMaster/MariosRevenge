@@ -2,7 +2,7 @@ package Model;
 
 import java.awt.Image;
 
-public class Platform extends Entity{
+public class Platform extends Entity implements Standable{
 
 	public Platform(int x, int y, Image icon) {
 		super(x, y, icon);

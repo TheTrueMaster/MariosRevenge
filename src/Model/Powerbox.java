@@ -2,7 +2,7 @@ package Model;
 
 import java.awt.Image;
 
-public class Powerbox extends Box{
+public class Powerbox extends Box implements Standable{
 
 	public Powerbox(int x, int y, Image icon) {
 		super(x, y, icon);

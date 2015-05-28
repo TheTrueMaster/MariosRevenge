@@ -1,14 +1,13 @@
-13
+12
 
 
              E
                    GGGGGGGGGGGGG
          E                   G
-         GGGGG               G
+  P      GGGGG               G
                              G
                    GGGG      G
           BBABB              G      ABB
                          GGG G
- P                     E     G            E          E  F
-
+                       E     G            E          E  F
 GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG

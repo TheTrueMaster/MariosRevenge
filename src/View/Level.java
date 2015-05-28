@@ -211,7 +211,7 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 		try{
 			//we go into the first switch to asses the direction
 			p.changeAnimation();
-			Entity ent;
+			Entity ent = null;
 			switch(i){
 
 			case 0://right
@@ -251,6 +251,9 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 					level[p.getRow()][p.getCol()] = ' ';
 					p.setCol(p.getCol() - 1);
 					level[p.getRow() - 1][p.getCol()] = 'P';
+				}
+				else if(ent instanceof Standable){
+					//do nothing
 				}
 			}
 			
