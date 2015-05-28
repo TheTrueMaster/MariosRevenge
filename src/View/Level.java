@@ -14,12 +14,12 @@ import javax.swing.*;
 public class Level extends JPanel implements KeyListener, ActionListener{
 
 	public static final int width = 26;
-	public static final int height = 45;
+	public static final int height = 26;
 
-
+	public static boolean paintable = false;
 	private JPanel contentPane;
 	private Game game;
-	public final static int movePixels = 4;
+	public final static int movePixels = 8;
 	char[][] level;//for interaction handling
 	ArrayList<Entity> inGameObs;//for visualization (more fluid)
 	private Player player;//quick refrence
@@ -33,11 +33,12 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 	 * Create the frame.
 	 */
 	public Level(int width, int height, Game g) {
+		paintable = true;
 		setFocusable(true);
 		addKeyListener(this);
 		game  = g;
 		init();
-		javax.swing.Timer timer = new javax.swing.Timer(150, this);
+		javax.swing.Timer timer = new javax.swing.Timer(50, this);
 		timer.start();
 	}
 
@@ -190,7 +191,7 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 			shift(p, 90);
 
 		case 180:
-			p.setX(p.getX() - movePixels);
+			//TODO Implement Gravity
 			shift(p, 180);
 			break;
 		case 270:
@@ -230,12 +231,8 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 		case 90://up
 			ent = getEnt(p.getRow() + 1, p.getCol());
 			//now we asses the Entity
-			if(ent == null){
-				//p.moveLeft();
-				level[p.getRow()][p.getCol()] = ' ';
-				p.setCol(p.getCol() - 1);
-				level[p.getRow() + 1][p.getCol()] = 'P';
-			}
+			//now, ent is equal to the space directly above mario
+			//TODO Write amazing jumping code here
 		}
 		}catch(IndexOutOfBoundsException e){}
 	}
@@ -302,6 +299,7 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 			player.changeMovingStatus("up");
 		}
 
+		player.resetAnimation();
 
 	}
 
@@ -313,7 +311,9 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-		doAllChecks();
+		System.out.println("Timer:");
+		if(paintable)
+			doAllChecks();
 
 
 	}

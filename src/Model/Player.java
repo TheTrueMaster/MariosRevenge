@@ -90,6 +90,10 @@ public class Player extends Entity {
 		int m = moveImage;
 		moveImage++;
 	}
+	
+	public void resetAnimation(){
+		moveImage = 0;
+	}
 	public boolean isMovingRight(){
 		
 		return movingRight;

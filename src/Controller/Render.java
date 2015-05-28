@@ -38,17 +38,15 @@ public class Render {
 		img = ImportManager.mush;
 		pics.put(character, img);
 		//platform img
-
-		//power up box img
 		character = 'G';
 		img = ImportManager.box;
 		pics.put(character, img);
-		//powerbox img
-		character = 'A';
+		//power up box img
+		character = 'B';
 		img = ImportManager.box;
 		pics.put(character, img);
 		//box img
-		character = 'G';
+		character = 'A';
 		img = ImportManager.pwrBox;
 		pics.put(character, img);
 

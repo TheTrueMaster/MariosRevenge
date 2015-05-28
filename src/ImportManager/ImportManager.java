@@ -40,7 +40,7 @@ public class ImportManager {
 			mario[6] = ImageIO.read(ImportManager.class.getResource("sprite_Mario7.png"));
 
 			box = ImageIO.read(ImportManager.class.getResource("box.png"));
-			pwrBox = ImageIO.read(ImportManager.class.getResource("pwrBox.png"));
+			pwrBox = ImageIO.read(ImportManager.class.getResource("pwrbox.png"));
 			mush = ImageIO.read(ImportManager.class.getResource("mushroom1.png"));
 		}
 		catch(IOException e){

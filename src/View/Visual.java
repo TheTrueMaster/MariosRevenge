@@ -14,7 +14,7 @@ public class Visual implements KeyListener {
 	private JFrame frame;
 	private JPanel splash;
 	private JPanel instructions;
-	private JPanel level;
+	private Level level;
 	private boolean panelIsOn = false;
 	private JLabel logoImage;
 	private JButton btnInstructions;
@@ -69,6 +69,7 @@ public class Visual implements KeyListener {
 		Image scaled = icon.getImage().getScaledInstance(779, 214, Image.SCALE_DEFAULT);
 		
 		
+		level = new Level(frame.getHeight(), frame.getWidth(), game);
 		
 		/*Below is JPanel code for instruction screen*/
 		instructions = new JPanel();
@@ -105,6 +106,7 @@ public class Visual implements KeyListener {
 				else if(screen == 2){
 					level.setVisible(false);
 					splash.setVisible(true);
+					Level.paintable = false;
 					screen = 0;
 					btnInstructions.setText("Instructions");
 				}
@@ -125,13 +127,15 @@ public class Visual implements KeyListener {
 		start.setSize(50, 8);
 		start.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				level = new Level(frame.getHeight(), frame.getWidth(), game);
+				
 				JPanel p = (JPanel)level;
 				frame.getContentPane().add(p);
 				splash.setVisible(false);
 				level.setSize(949, 513);
 				btnInstructions.setText("Back to Main");
 				screen = 2;
+				level.paintable = true;
+				
 			}
 		});
 		
