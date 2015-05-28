@@ -13,8 +13,8 @@ import javax.swing.*;
 
 public class Level extends JPanel implements KeyListener, ActionListener{
 
-	public static final int width = 26;
-	public static final int height = 26;
+	public static final int width = 24;
+	public static final int height = 24;
 
 	public static boolean paintable = false;
 	private JPanel contentPane;
@@ -143,10 +143,10 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 		for(Entity e : inGameObs){
 			//g.drawRect(e.getX(), e.getY(), width, height);
 			g.drawImage(e.getImg().getScaledInstance(width, height, Image.SCALE_DEFAULT), e.getX(), e.getY(), this);
-		
+
 		}
 	}
-	
+
 
 	/**
 	 * Updates the Player Location
@@ -177,17 +177,17 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 			dir = 90;
 		}
 
-		else if(p.isFalling()){
+		else{
 			dir = 270;
 		}
 
 		switch(dir){
 		case 0:
-			p.setX(movePixels + p.getX());
+			
 			shift(p, 0);
 			break;
 		case 90:
-			p.setX(movePixels + p.getY());
+			
 			shift(p, 90);
 
 		case 180:
@@ -195,45 +195,66 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 			shift(p, 180);
 			break;
 		case 270:
-			p.setY(p.getY() - movePixels);
+			//p.setY(p.getY() - movePixels);
 			shift(p, 270);
 			break;
 		}
 	}
 
-	private void shift(Player p, int i) {
-		p.changeAnimation();
-		try{
-		//we go into the first switch to asses the direction
-		Entity ent;
-		switch(i){
+	private Entity getEntityBelowPlayer(Player p) {
+		Entity ent = getEnt(p.getRow() - 1, p.getCol());
+		return ent;
+	}
 
-		case 0://right
-			ent = getEnt(p.getRow(), p.getCol() + 1);
-			//now we asses the Entity
-			if(ent == null){
-				p.moveRight();
-				level[p.getRow()][p.getCol()] = ' ';
-				p.setCol(p.getCol() + 1);
-				level[p.getRow()][p.getCol() + 1] = 'P';
+	private void shift(Player p, int i) {
+		
+		try{
+			//we go into the first switch to asses the direction
+			p.changeAnimation();
+			Entity ent;
+			switch(i){
+
+			case 0://right
+				ent = getEnt(p.getRow(), p.getCol() + 1);
+				//now we asses the Entity
+				if(ent == null){
+					p.moveRight();
+					if(p.getTimesMoved() == 6){
+						level[p.getRow()][p.getCol()] = ' ';
+						p.setCol(p.getCol() + 1);
+						level[p.getRow()][p.getCol() + 1] = 'P';
+					}
+				}
+				break;
+			case 180://left
+				ent = getEnt(p.getRow(), p.getCol() - 1);
+				//now we asses the Entity
+				if(ent == null){
+					p.moveLeft();
+					if(p.getTimesMoved() == -6){
+						level[p.getRow()][p.getCol()] = ' ';
+						p.setCol(p.getCol() - 1);
+						level[p.getRow()][p.getCol() - 1] = 'P';
+					}
+				}
+				break;
+			case 90://up
+				ent = getEnt(p.getRow() + 1, p.getCol());
+				//now we asses the Entity
+				//now, ent is equal to the space directly above mario
+				//TODO Write amazing jumping code here
+				break;
+			case 270:
+				ent = getEntityBelowPlayer(p);
+				if(ent == null){
+					p.moveDown();
+					level[p.getRow()][p.getCol()] = ' ';
+					p.setCol(p.getCol() - 1);
+					level[p.getRow() - 1][p.getCol()] = 'P';
+				}
 			}
-			break;
-		case 180://left
-			ent = getEnt(p.getRow(), p.getCol() - 1);
-			//now we asses the Entity
-			if(ent == null){
-				//p.moveLeft();
-				level[p.getRow()][p.getCol()] = ' ';
-				p.setCol(p.getCol() - 1);
-				level[p.getRow()][p.getCol() - 1] = 'P';
-			}
-			break;
-		case 90://up
-			ent = getEnt(p.getRow() + 1, p.getCol());
-			//now we asses the Entity
-			//now, ent is equal to the space directly above mario
-			//TODO Write amazing jumping code here
-		}
+			
+			
 		}catch(IndexOutOfBoundsException e){}
 	}
 
@@ -311,7 +332,6 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-		System.out.println("Timer:");
 		if(paintable)
 			doAllChecks();
 

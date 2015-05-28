@@ -21,7 +21,11 @@ public class TextLoader
 { 
 	public char[][] getFile(int no) throws IOException
 	{
-		char[][] level = new char[12][57];
+		Scanner file = new Scanner(ImportManager.lvl1);
+		int height = file.nextInt();
+		file.nextLine();
+		
+		char[][] level = new char[height][57];
 		
 
 		
@@ -30,7 +34,6 @@ public class TextLoader
 
 		//try	//try-with-resources - new in Java 7
 		
-			Scanner file = new Scanner(ImportManager.lvl1);
 			while(file.hasNext())
 			{
 				String read = file.nextLine();

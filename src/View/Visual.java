@@ -134,7 +134,7 @@ public class Visual implements KeyListener {
 				level.setSize(949, 513);
 				btnInstructions.setText("Back to Main");
 				screen = 2;
-				level.paintable = true;
+				Level.paintable = true;
 				
 			}
 		});
