@@ -268,7 +268,7 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 					}
 				}
 				break;
-			case 270:
+			case 270://do gravity
 				ent = getEntityBelowPlayer(p);
 				if(ent == null){
 					p.moveDown();
