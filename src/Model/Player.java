@@ -170,21 +170,25 @@ public class Player extends Entity {
 		{
 			jumping = false;
 			yTraveled = 0;
+		} 
+		
+		 jumping = true;
+		
+		if (getVelY() > 0)
+		{
+			falling = true;
 		}
 		
-		else jumping = true;
-		
 		int temp = yLoc;
-		yLoc += 24 + velY - Level.gravity;
+		yLoc += velY + Level.gravity;
 		
-		if (velY - Level.gravity > -5 && velY != -5)
-		{
+		if (velY + Level.gravity < 5 && velY != 5){
 			velY += Level.gravity;
 		}
 
-		else if (velY > -5)
-		{
-			velY += -5 - getVelY();
+		else if (velY < 5 && velY > 0){
+			
+			velY = Level.gravity;
 		}
 		
 		yTraveled = yLoc - temp;

@@ -1,6 +1,6 @@
 12
 
-P
+
              E
                    GGGGGGGGGGGGG
          E                   G
@@ -8,6 +8,6 @@ P
                              G
                     GGGG     G
           BBABB              G      ABB
-                        GGG G
-                      E      G            E          E  F
+                         GGG G
+        P             E      G            E          E  F
 GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG
