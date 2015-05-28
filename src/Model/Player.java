@@ -168,7 +168,7 @@ public class Player extends Entity {
 		
 		int temp = yLoc;
 		yLoc += Level.movePixels + velY - Level.gravity;
-		if (velY - Level.gravity > -5 && velY > -5)
+		if (velY - Level.gravity > -4 && velY > -4)
 		{
 			velY += Level.gravity;
 		}
