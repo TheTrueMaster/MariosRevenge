@@ -24,6 +24,7 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 	ArrayList<Entity> inGameObs;//for visualization (more fluid)
 	private Player player;//quick refrencej
 	private javax.swing.Timer timer = new javax.swing.Timer(50, this);
+	public final static int gravity = -5;
 	/**
 	 * Launch the application.
 	 */
@@ -38,14 +39,14 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 		addKeyListener(this);
 		game  = g;
 		init();
-		
-		
+
+
 	}
 	public void start(){
 		timer.start();
 		paintable = true;
 	}
-	
+
 	public void init(){
 		inGameObs = new ArrayList<Entity>();
 		setBackground(Color.BLACK);//official constructor will be public Level(int width, int height, int levelNo)
@@ -203,7 +204,7 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 			shift(p, 90);
 
 		case 180:
-			
+
 			shift(p, 180);
 			break;
 		case 270:
@@ -257,6 +258,15 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 				//now we asses the Entity
 				//now, ent is equal to the space directly above mario
 				//TODO Write amazing jumping code here
+				if(ent == null && !p.isJumping()){
+					int temp = p.moveUp(10);
+					if (Math.abs(temp) == Level.movePixels)
+					{
+						level[p.getRow()][p.getCol()] = ' ';
+						p.setRow(p.getRow() + 1);
+						level[p.getRow() + 1][p.getCol()] = 'P';
+					}
+				}
 				break;
 			case 270:
 				ent = getEntityBelowPlayer(p);

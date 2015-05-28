@@ -11,7 +11,7 @@ public class Player extends Entity {
 	private boolean movingRight, movingLeft, jumping, falling;//Booleans So GUI can see players current status
 	private int moveImage;
 	private int timesMoved;
-	
+
 	public Player(int x, int y, Image icon) {
 		super(x, y, icon);
 		this.hasHealth = true;
@@ -28,12 +28,12 @@ public class Player extends Entity {
 	public int getTimesMoved(){
 		return timesMoved;
 	}
-	
+
 	public void resetTime(){
 		timesMoved = 0;
 	}
 	public Image getImg(){
-		
+
 		return ImportManager.mario[moveImage];
 	}
 	public void setHealth(int a)
@@ -99,12 +99,12 @@ public class Player extends Entity {
 		int m = moveImage;
 		moveImage++;
 	}
-	
+
 	public void resetAnimation(){
 		moveImage = 0;
 	}
 	public boolean isMovingRight(){
-		
+
 		return movingRight;
 	}
 
@@ -154,6 +154,37 @@ public class Player extends Entity {
 
 	public void moveDown() {
 		yLoc += Level.movePixels;
-		
+
 	}
+
+	public int moveUp(int velY)
+	{
+		if (getVelY() == 0)
+		{
+			jumping = false;
+		}
+		
+		else jumping = true;
+		
+		int temp = yLoc;
+		yLoc += Level.movePixels + velY - Level.gravity;
+		if (velY - Level.gravity > -5 && velY > -5)
+		{
+			velY += Level.gravity;
+		}
+
+		else if (velY > -5)
+		{
+			velY += -5 - getVelY();
+		}
+
+		else if (!falling){
+		}
+		
+
+		
+		return yLoc - temp;
+
+	}
+
 }
