@@ -263,8 +263,8 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 					if (Math.abs(temp) == Level.movePixels)
 					{
 						level[p.getRow()][p.getCol()] = ' ';
-						p.setRow(p.getRow() + 1);
-						level[p.getRow() + 1][p.getCol()] = 'P';
+						p.setRow(p.getRow() - 1);
+						level[p.getRow() - 1][p.getCol()] = 'P';
 					}
 				}
 				break;
