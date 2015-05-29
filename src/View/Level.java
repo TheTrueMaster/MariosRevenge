@@ -265,12 +265,17 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 				//now, ent is equal to the space directly above mario
 				//TODO Write amazing jumping code here
 				if(ent == null ){
+					//Gets the difference between new and old locations in y.
 					int dY = p.moveUp(-40);
+					//Determines if this difference is at least the height of a row.
 					int amtMoved = Math.abs(dY) % 24;
+					//If it is, . . .
 					if (amtMoved > 0)
 					{
+						//If player moved up (difference is negative)
 						if (dY < 0)
 						{
+							//row decreases by whatever the amount of rows moved was.
 							level[p.getRow()][p.getCol()] = ' ';
 							p.setRow(p.getRow() - amtMoved);
 							level[p.getRow() - amtMoved][p.getCol()] = 'P';
@@ -278,9 +283,10 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 					}
 
 					else{
-
+						//if the player moved down (difference is positive)
 						if (dY > 0)
 						{
+							//row increases by whatever amount of rows moved.
 							level[p.getRow()][p.getCol()] = ' ';
 							p.setRow(p.getRow() + amtMoved);
 							level[p.getRow() + amtMoved][p.getCol()] = 'P';
@@ -292,10 +298,18 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 				break;
 
 
-			case 270://do gravity
+			case 270:
 				p.resetAnimation();
 				ent = getEntityBelowPlayer(p);
+				//Attempted to have platforms work properly. Would check if there's a platform
+				//below, and if so, would set falling to false. Doing this would prevent the player
+				//executing the code for changing y, and so the player would simply stop upon hitting a platform.
+				// **This change did not work. **
+				if(ent instanceof Standable){
+					p.interact(ent);
+				}
 				if(ent == null){
+					//Similar code to 'case: 90' 
 					int temp = Math.abs(p.moveUp(p.getVelY())) % 24;
 					if (temp > 0)
 					{
@@ -304,10 +318,9 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 					level[p.getRow() + temp][p.getCol()] = 'P';
 					}
 				}
-				else if(ent instanceof Standable){
-					p.interact(ent);
-				}
+				
 				break;
+			
 			}
 
 

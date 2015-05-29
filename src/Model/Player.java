@@ -140,7 +140,7 @@ public class Player extends Entity {
 		}
 
 	}
-	
+
 	public int getYTraveled()
 	{
 		return yTraveled;
@@ -166,33 +166,56 @@ public class Player extends Entity {
 
 	public int moveUp(int velY)
 	{
-		if (getVelY() == 0)
-		{
+		//If the player is stationary in y, then the player
+        // must not be jumping. The variable 'yTraveled' is
+        // reset to avoid problems.
+		if (getVelY() == 0) { 
+		
 			jumping = false;
 			yTraveled = 0;
 		} 
-		
-		 jumping = true;
-		
-		if (getVelY() > 0)
+
+		//If the velocity is greater than 0, i.e. row is increasing, then
+		//the player must be falling.
+		else if (getVelY() > 0)
 		{
 			falling = true;
 		}
+
+		else jumping = true;
 		
+		
+		//temp stores current yLoc. yLoc is modified according to current
+		//y velocity and gravity to move player.
 		int temp = yLoc;
 		yLoc += velY + Level.gravity;
-		
-		if (velY + Level.gravity < 5 && velY != 5){
-			velY += Level.gravity;
+
+		//These changes should only occur if the player is falling.
+		//If the player is on a platform, it is no longer falling and 
+		//so the player will move downwards (y velocity is updated) until
+		// reaching a platform, if any.
+		if (falling)
+		{
+
+			//Terminal velocity is gravity (5). So this checks if the difference
+			//between current velocity and terminal vel is at more than or equal 
+			//to gravity. If so, it decreases the velocity.
+			if (Level.gravity - getVelY() >= 5){
+				setVelY(getVelY() + Level.gravity);
+			}
+			
+			//otherwise if the velocity is not terminal but the difference
+			//is less than the magnitude of gravity than it decreases 
+			//y velocity by whatever's left.
+			else if (velY < 5){
+
+				setVelY(Level.gravity);
+			}
 		}
 
-		else if (velY < 5 && velY > 0){
-			
-			velY = Level.gravity;
-		}
-		
+		//returns the difference in the old and new locations.
 		yTraveled = yLoc - temp;
-		
+
 		return yTraveled;
 
 	}
