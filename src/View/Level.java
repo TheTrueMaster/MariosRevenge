@@ -259,6 +259,7 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 				}
 				break;
 			case 90://up
+			{
 				p.resetAnimation();
 				ent = getEnt(p.getRow() - 1, p.getCol());
 				//now we asses the Entity
@@ -296,6 +297,7 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 				}
 
 				break;
+				}
 
 
 			case 270:
@@ -387,9 +389,9 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 		if(player.isMovingLeft()){
 			player.changeMovingStatus("left");
 		}
-		if(player.isJumping()){
+		/*if(player.isJumping()){
 			player.changeMovingStatus("up");
-		}
+		} */
 
 		player.resetAnimation();
 

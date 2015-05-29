@@ -131,9 +131,9 @@ public class Player extends Entity {
 			movingLeft = !movingLeft;
 		}
 
-		else if(dir.equals("up")){
+		 else if(dir.equals("up")){
 			jumping = !jumping;
-		}
+		} 
 
 		else if(dir.equals("falling")){
 			falling = !falling;
