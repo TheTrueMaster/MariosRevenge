@@ -26,7 +26,7 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 	private javax.swing.Timer timer = new javax.swing.Timer(30, this);
 	public final static int gravity = 5;
 	private int counter;
-	
+
 	/**
 	 * Launch the application.
 	 */
@@ -228,7 +228,7 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 
 		try{
 			//we go into the first switch to asses the direction
-			
+
 			Entity ent = null;
 			switch(i){
 
@@ -269,7 +269,7 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 					//Gets the difference between new and old locations in y.
 					int dY = p.moveUp(-40);
 					//Determines if this difference is at least the height of a row.
-					int amtMoved = Math.abs(dY) % 24;
+					int amtMoved = (int)(Math.abs(dY) / 24);
 					//If it is, . . .
 					if (amtMoved > 0)
 					{
@@ -292,12 +292,13 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 							p.setRow(p.getRow() + amtMoved);
 							level[p.getRow() + amtMoved][p.getCol()] = 'P';
 						}
-					}
-				
-				}
 
-				break;
+
+					}
+
+					break;
 				}
+			}
 
 
 			case 270:
@@ -312,17 +313,17 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 				}
 				if(ent == null){
 					//Similar code to 'case: 90' 
-					int temp = Math.abs(p.moveUp(p.getVelY())) % 24;
+					int temp = (int)(Math.abs(p.moveUp(p.getVelY())) / 24);
 					if (temp > 0)
 					{
-					level[p.getRow()][p.getCol()] = ' ';
-					p.setRow(p.getRow() + temp);
-					level[p.getRow() + temp][p.getCol()] = 'P';
+						level[p.getRow()][p.getCol()] = ' ';
+						p.setRow(p.getRow() + temp);
+						level[p.getRow() + temp][p.getCol()] = 'P';
 					}
 				}
-				
+
 				break;
-			
+
 			}
 
 
