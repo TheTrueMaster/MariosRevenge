@@ -12,7 +12,8 @@ public class Player extends Entity {
 	private int moveImage;
 	private int timesMoved;
 	private int yTraveled;
-
+	public boolean hasJumped;
+	
 	public Player(int x, int y, Image icon) {
 		super(x, y, icon);
 		this.hasHealth = true;
@@ -24,9 +25,14 @@ public class Player extends Entity {
 		moveImage = 0;
 		timesMoved = 0;
 		yTraveled = 0;
+		hasJumped = false;
 	}
 
 
+	public boolean hasJumped(){
+		return hasJumped;
+	}
+	
 	public int getTimesMoved(){
 		return timesMoved;
 	}
@@ -176,6 +182,7 @@ public class Player extends Entity {
 
 			jumping = false;
 			yTraveled = 0;
+			hasJumped = false;
 		} 
 
 		else{ 
