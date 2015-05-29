@@ -8,6 +8,6 @@
                              G
                     GGGG     G
           BBABB              G      ABB
-                         GGG G
-        P             E      G            E          E  F
+      P                  GGG G
+                      E      G            E          E  F
 GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG
