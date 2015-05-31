@@ -18,8 +18,6 @@ public class ImportManager {
 	public static BufferedImage box;
 	public static BufferedImage pwrBox;
 	public static BufferedImage mush;
-	public static BufferedImage platform1;
-	public static BufferedImage platform2;
 	
 	
 	public static void loadFiles(){
@@ -44,8 +42,6 @@ public class ImportManager {
 			box = ImageIO.read(ImportManager.class.getResource("box.png"));
 			pwrBox = ImageIO.read(ImportManager.class.getResource("pwrbox.png"));
 			mush = ImageIO.read(ImportManager.class.getResource("mushroom1.png"));
-			platform1 = ImageIO.read(ImportManager.class.getResource("platform1.png"));
-			platform2 = ImageIO.read(ImportManager.class.getResource("platform2.png"));
 		}
 		catch(IOException e){
 			//do nothing
