@@ -12,7 +12,7 @@ public class Player extends Entity {
 	private int moveImage;
 	private int timesMoved;
 	private int yTraveled;
-
+//
 	public Player(int x, int y, Image icon) {
 		super(x, y, icon);
 		this.hasHealth = true;

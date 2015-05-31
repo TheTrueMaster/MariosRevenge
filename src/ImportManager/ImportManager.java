@@ -19,7 +19,7 @@ public class ImportManager {
 	public static BufferedImage pwrBox;
 	public static BufferedImage mush[];
 	public static BufferedImage deadMush;
-	
+	//
 	
 	public static void loadFiles(){
 		try{

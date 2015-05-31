@@ -7,7 +7,7 @@ public class Game {
 
 	Map<String, Entity> objects;
 	Entity[][] grid;
-	
+	//
 	public Game() {
 		objects = new HashMap<String, Entity>();
 	}

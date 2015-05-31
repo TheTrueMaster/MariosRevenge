@@ -11,7 +11,7 @@ public class Mushroom extends Enemy implements Powerup {
 		imageNo = 0;
 	}
 
-
+//
 
 	public void kill(){
 		this.sprite = ImportManager.deadMush;

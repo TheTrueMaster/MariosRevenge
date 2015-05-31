@@ -32,7 +32,7 @@ public class Render {
 		character = 'P';
 		img = ImportManager.mario[0];
 		pics.put(character, img);
-
+//
 		//enemy img
 		character = 'M';
 		img = ImportManager.mush[0];
