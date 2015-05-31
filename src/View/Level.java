@@ -101,7 +101,7 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 					inGameObs.add(ent);
 					break;
 				case 'E':
-					ent = new Enemy(x, y, img.getImage());
+					ent = new Mushroom(x, y, img.getImage());
 					ent.setCol(c);
 					ent.setRow(r);
 					inGameObs.add(ent);
