@@ -11,7 +11,7 @@ public  class Entity {
 	protected int velocityY;
 	
 	protected int row, col;
-	
+	protected int height, width;
 	protected Image sprite;
 	protected char self;
 	
