@@ -39,7 +39,7 @@ public class Render {
 		pics.put(character, img);
 		//platform img
 		character = 'G';
-		img = ImportManager.box;
+		img = ImportManager.platform1;
 		pics.put(character, img);
 		//power up box img
 		character = 'B';
