@@ -217,12 +217,12 @@ public class Player extends Entity {
 
 		//If the velocity is greater than 0, i.e. row is increasing, then
 		//the player must be falling.
-		 if (getVelY() < 0)
+		if (getVelY() <= 0)
 		{
 			falling = true;
 		}
 
-		else{ 
+		else if (getVelY() < 0){ 
 			jumping = true;
 		}
 
@@ -247,16 +247,41 @@ public class Player extends Entity {
 			//Terminal velocity is gravity (5). So this checks if the difference
 			//between current velocity and terminal vel is at more than or equal 
 			//to gravity. If so, it decreases the velocity.
-			if (Level.gravity - getVelY() >= 5){
-				setVelY(getVelY() + Level.gravity);
+			if (getVelY() < 0)
+			{
+
+				if (getVelY() > -5)
+				{
+					setVelY(0);
+				}
+				//if (Level.gravity - getVelY() >= 5){
+				else{
+					setVelY(getVelY() + Level.gravity);
+				}
+				//}
+
+				//otherwise if the velocity is not terminal but the difference
+				//is less than the magnitude of gravity than it decreases 
+				//y velocity by whatever's left.
+			/*	else if (velY < 5){
+
+					setVelY(Level.gravity);
+				} */
 			}
+			
+			else if (getVelY() > 0)
+			{
+				if (Level.gravity - getVelY() <= 5){
+					setVelY(getVelY() + Level.gravity);
+				}
 
-			//otherwise if the velocity is not terminal but the difference
-			//is less than the magnitude of gravity than it decreases 
-			//y velocity by whatever's left.
-			else if (velY < 5){
+				//otherwise if the velocity is not terminal but the difference
+				//is less than the magnitude of gravity than it decreases 
+				//y velocity by whatever's left.
+				else if (velY < 5){
 
-				setVelY(Level.gravity);
+					setVelY(Level.gravity);
+				}
 			}
 		}
 
