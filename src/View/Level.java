@@ -21,7 +21,6 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 	private Game game;
 	public final static int movePixels = 8;
 	char[][] level;//for interaction handling
-	char[][] backup;
 	ArrayList<Entity> inGameObs;//for visualization (more fluid)
 	private Player player;//quick refrencej
 	private javax.swing.Timer timer = new javax.swing.Timer(30, this);
@@ -62,7 +61,6 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 		//initializeLevel(int levelNo
 		initializeLevel(1);
 		updateArrayList();
-		backup = level;//reseter
 
 	}
 
@@ -228,7 +226,6 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 
 	private void shift(Player p, int i) {
 
-		
 		try{
 			//we go into the first switch to asses the direction
 
@@ -270,10 +267,7 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 				//TODO Write amazing jumping code here
 				if(ent == null ){
 					//Gets the difference between new and old locations in y.
-					int dY = 0;
-					if (!p.hasJumped){
-						dY = p.moveUp(-40);
-					}
+					int dY = p.moveUp(-40);
 					//Determines if this difference is at least the height of a row.
 					int amtMoved = (int)(Math.abs(dY) / 24);
 					//If it is, . . .
@@ -286,7 +280,6 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 							level[p.getRow()][p.getCol()] = ' ';
 							p.setRow(p.getRow() - amtMoved);
 							level[p.getRow() - amtMoved][p.getCol()] = 'P';
-							p.hasJumped = true;
 						}
 					}
 
