@@ -22,7 +22,7 @@ public class Player extends Entity {
 		jumping = false;
 		falling = false;
 		moveImage = 0;
-		timesMoved = 0;
+		timesMoved = 1;
 		yTraveled = 0;
 	}
 
@@ -60,11 +60,12 @@ public class Player extends Entity {
 
 			if (other instanceof Enemy)
 			{
+				//if the player is jumping on the enemy
 				if (getX() == other.getX() && getY() == other.getY() && getVelY() < 0)
 				{
 					((Enemy)other).changeStatus();
 				}
-
+				//if the player is next to the enemy
 				else
 				{
 					setHealth(playerHealth - 1);
@@ -119,8 +120,6 @@ public class Player extends Entity {
 	}
 
 	public boolean isJumping(){
-
-
 		return jumping;
 	}
 
@@ -133,7 +132,7 @@ public class Player extends Entity {
 			movingLeft = !movingLeft;
 		}
 
-		else if(dir.equals("up")){
+		 else if(dir.equals("up")){
 			jumping = !jumping;
 		} 
 
@@ -168,27 +167,25 @@ public class Player extends Entity {
 
 	public int moveUp(int velY)
 	{
-
 		//If the player is stationary in y, then the player
-		// must not be jumping. The variable 'yTraveled' is
-		// reset to avoid problems.
+        // must not be jumping. The variable 'yTraveled' is
+        // reset to avoid problems.
 		if (getVelY() == 0) { 
-
+		
 			jumping = false;
 			yTraveled = 0;
 		} 
 
-		else{ 
-			jumping = true;
-		} 
 		//If the velocity is greater than 0, i.e. row is increasing, then
 		//the player must be falling.
-		if (getVelY() > 0)
+		else if (getVelY() > 0)
 		{
 			falling = true;
 		}
 
-
+		else jumping = true;
+		
+		
 		//temp stores current yLoc. yLoc is modified according to current
 		//y velocity and gravity to move player.
 		int temp = yLoc;
@@ -207,7 +204,7 @@ public class Player extends Entity {
 			if (Level.gravity - getVelY() >= 5){
 				setVelY(getVelY() + Level.gravity);
 			}
-
+			
 			//otherwise if the velocity is not terminal but the difference
 			//is less than the magnitude of gravity than it decreases 
 			//y velocity by whatever's left.
@@ -220,11 +217,16 @@ public class Player extends Entity {
 		//returns the difference in the old and new locations.
 		yTraveled = yLoc - temp;
 
-
 		return yTraveled;
+
+	}
+
+
+	/**
+	 * Sets TimesMoved to 0
+	 */
+	public void resetTimesMoved() {
+		timesMoved = 0;
 	}
 
 }
-
-
-

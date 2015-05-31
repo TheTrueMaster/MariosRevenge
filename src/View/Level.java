@@ -26,7 +26,7 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 	private javax.swing.Timer timer = new javax.swing.Timer(30, this);
 	public final static int gravity = 5;
 	private int counter;
-
+	
 	/**
 	 * Launch the application.
 	 */
@@ -155,8 +155,10 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 		g.setColor(Color.white);
 		for(Entity e : inGameObs){
 			if(e instanceof Player){
-				g.drawString("Row: " + e.getRow() + " Col: " + e.getCol(), e.getX(), e.getY());
+				g.drawString("Row: " + e.getRow() + " Col: " + e.getCol() + " TimesMoved: " + ((Player) e).getTimesMoved() + " Health: " + ((Player) e).getHealth(), e.getX(), e.getY());
 			}
+				
+			
 			//g.drawRect(e.getX(), e.getY(), width, height);
 			g.drawImage(e.getImg().getScaledInstance(width, height, Image.SCALE_DEFAULT), e.getX(), e.getY(), this);
 
@@ -228,7 +230,7 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 
 		try{
 			//we go into the first switch to asses the direction
-
+			
 			Entity ent = null;
 			switch(i){
 
@@ -238,11 +240,15 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 				//now we asses the Entity
 				if(ent == null){
 					p.moveRight();
-					if(p.getTimesMoved() == 6){
+					if(p.getTimesMoved() == 3){
 						level[p.getRow()][p.getCol()] = ' ';
 						p.setCol(p.getCol() + 1);
 						level[p.getRow()][p.getCol() + 1] = 'P';
+						p.resetTimesMoved();
 					}
+				}
+				else{
+					p.interact(ent);
 				}
 				break;
 			case 180://left
@@ -257,6 +263,9 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 						level[p.getRow()][p.getCol() - 1] = 'P';
 					}
 				}
+				else{
+					p.interact(ent);
+				}
 				break;
 			case 90://up
 			{
@@ -269,7 +278,7 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 					//Gets the difference between new and old locations in y.
 					int dY = p.moveUp(-40);
 					//Determines if this difference is at least the height of a row.
-					int amtMoved = (int)(Math.abs(dY) / 24);
+					int amtMoved = Math.abs(dY) / 24;
 					//If it is, . . .
 					if (amtMoved > 0)
 					{
@@ -292,13 +301,15 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 							p.setRow(p.getRow() + amtMoved);
 							level[p.getRow() + amtMoved][p.getCol()] = 'P';
 						}
-
-
 					}
-
-					break;
+				
 				}
-			}
+				else{
+					p.interact(ent);
+				}
+
+				break;
+				}
 
 
 			case 270:
@@ -308,30 +319,35 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 				//below, and if so, would set falling to false. Doing this would prevent the player
 				//executing the code for changing y, and so the player would simply stop upon hitting a platform.
 				// **This change did not work. **
-				if(ent instanceof Standable){
-					p.interact(ent);
-				}
 				
 				//ent = null;
 				if(ent == null){
 					//Similar code to 'case: 90' 
-					int temp = (int)(Math.abs(p.moveUp(p.getVelY())) / 24);
-					if (temp >= 0)
+
+					
+					int temp = Math.abs(p.moveUp(p.getVelY())) / 24;
+					if (temp > 0)
+
 					{
-						level[p.getRow()][p.getCol()] = ' ';
-						p.setRow(p.getRow() + temp);
-						level[p.getRow() + temp][p.getCol()] = 'P';
+					level[p.getRow()][p.getCol()] = ' ';
+					p.setRow(p.getRow() + temp);
+					level[p.getRow() + temp][p.getCol()] = 'P';
 					}
 				}
-
+				else{
+					p.interact(ent);
+				}
+				
 				break;
-
+			
 			}
 
 
 
 
-		}catch(IndexOutOfBoundsException e){}
+		}catch(IndexOutOfBoundsException e){
+			e.printStackTrace();
+		}
 	}
 
 	private Entity getEnt(int row, int col) {
@@ -392,9 +408,12 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 		if(player.isMovingLeft()){
 			player.changeMovingStatus("left");
 		}
-		/*if(player.isJumping()){
+		if(player.isJumping()){
 			player.changeMovingStatus("up");
-		} */
+		}
+		if(player.isFalling()){
+			player.changeMovingStatus("down");
+		}
 
 		player.resetAnimation();
 
@@ -409,9 +428,9 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		counter += 30;
-		if(player.isJumping()){
-			paintable = true;
-		}
+		//if(player.isJumping()){
+			//paintable = true;
+		//}
 		if(paintable)
 			doAllChecks();
 
