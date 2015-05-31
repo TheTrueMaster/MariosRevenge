@@ -53,7 +53,7 @@ public class ImportManager {
 			mush = new BufferedImage[2];
 			mush[0] = ImageIO.read(ImportManager.class.getResource("mushroom1.png"));
 			mush[1] = ImageIO.read(ImportManager.class.getResource("mushroom2.png"));
-			
+			/*
 			fireMario[0] = ImageIO.read(ImportManager.class.getResource("fireMario1.png"));
 			fireMario[1] = ImageIO.read(ImportManager.class.getResource("fireMario1.png"));
 			fireMario[2] = ImageIO.read(ImportManager.class.getResource("fireMario1.png"));
@@ -63,7 +63,7 @@ public class ImportManager {
 			fireMario[6] = ImageIO.read(ImportManager.class.getResource("fireMario1.png"));
 			
 			deadMush = ImageIO.read(ImportManager.class.getResource("deadMushroom.png"));
-		}
+		}*/}
 		catch(IOException e){
 			//do nothing
 		}
