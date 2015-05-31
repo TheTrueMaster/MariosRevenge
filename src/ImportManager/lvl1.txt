@@ -1,13 +1,13 @@
 12
 
 
-             E
+             M
                    GGGGGGGGGGGGG
-         E                   G
+         M                   G
          GGGGG               G
                              G
                     GGGG     G
           BBABB              G      ABB
                          GGG G
-P                     E      G            E          E  F
+P                     M      G            M          M  
 GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG
