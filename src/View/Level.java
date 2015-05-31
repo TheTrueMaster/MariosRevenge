@@ -346,36 +346,36 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 						//If player moved up (difference is negative)
 						if (difference < 0 )
 						{
-							if (difference <= -0.8){
+							if (difference <= -0.002){
 								//row decreases by whatever the amount of rows moved was.
 								level[p.getRow()][p.getCol()] = ' ';
-								p.setRow(approxMoved - 1);
-								level[approxMoved - 1][p.getCol()] = 'P';
+								p.setRow(approxMoved );
+								level[approxMoved ][p.getCol()] = 'P';
 							}
 
 							else {
 								//row decreases by whatever the amount of rows moved was.
 								level[p.getRow()][p.getCol()] = ' ';
-								p.setRow(approxMoved);
-								level[approxMoved][p.getCol()] = 'P';
+								p.setRow(approxMoved + 1 );
+								level[approxMoved + 1][p.getCol()] = 'P';
 							}
 
 						}
 
 						else 
 						{
-							if (difference >= 0.8){
+							if (difference >= 0.002){
 								//row decreases by whatever the amount of rows moved was.
 								level[p.getRow()][p.getCol()] = ' ';
-								p.setRow(approxMoved + 1);
-								level[approxMoved + 1][p.getCol()] = 'P';
+								p.setRow(approxMoved + 2);
+								level[approxMoved + 2][p.getCol()] = 'P';
 							}
 
 							else {
 								//row decreases by whatever the amount of rows moved was.
 								level[p.getRow()][p.getCol()] = ' ';
-								p.setRow(approxMoved);
-								level[approxMoved][p.getCol()] = 'P';
+								p.setRow(approxMoved + 1);
+								level[approxMoved + 1][p.getCol()] = 'P';
 							}
 						}
 					}
