@@ -278,7 +278,7 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 					//Gets the difference between new and old locations in y.
 					int dY = p.moveUp(-40);
 					//Determines if this difference is at least the height of a row.
-					int amtMoved = Math.abs(dY) / 24;
+					int amtMoved = Math.abs(dY) / height;
 					//If it is, . . .
 					if (amtMoved > 0)
 					{
@@ -339,6 +339,26 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 				}
 				
 				break;
+				
+				//new code below
+				
+				double doubleMoved = (double)p.getY() / height;
+				
+				int approxMoved = (int)p.getY() / height; 
+				
+				double difference = (doubleMoved - approxMoved) / 24;
+				int amtMoved = Math.abs(dY) / height;
+				//If it is, . . .
+				if (Math.abs(difference) > 0)
+				{
+					//If player moved up (difference is negative)
+					if (difference < 0 )
+					{
+						if (difference <= 0.8)
+						//row decreases by whatever the amount of rows moved was.
+						level[p.getRow()][p.getCol()] = ' ';
+						p.setRow(approxMoved + 1);
+						level[approxMoved + 1][p.getCol()] = 'P';
 			
 			}
 

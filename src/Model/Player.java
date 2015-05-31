@@ -90,7 +90,15 @@ public class Player extends Entity {
 
 		else if (other instanceof Standable)
 		{
-			falling = false;
+			if(getY() > other.getY()){
+				falling = true; // :D
+
+			}
+			if(getY() < other.getY()){
+
+
+				falling = false;
+			}
 		}
 
 	}
@@ -132,7 +140,7 @@ public class Player extends Entity {
 			movingLeft = !movingLeft;
 		}
 
-		 else if(dir.equals("up")){
+		else if(dir.equals("up")){
 			jumping = !jumping;
 		} 
 
@@ -164,31 +172,36 @@ public class Player extends Entity {
 		yLoc += Level.movePixels;
 
 	}
-
+	/**
+	 * Returns the pixels traveled in y direction. If it is less than zero,
+	 * direction moved is up, if it is greater than zero direction moved is down.
+	 * @param velY
+	 * @return
+	 */
 	public int moveUp(int velY)
 	{
 		//If the player is stationary in y, then the player
-        // must not be jumping. The variable 'yTraveled' is
-        // reset to avoid problems.
-		setVelY(velY);
-		
+		// must not be jumping. The variable 'yTraveled' is
+		// reset to avoid problems.
+		//setVelY(velY);
+
 		if (getVelY() == 0) { 
-		
+
 			jumping = false;
 			yTraveled = 0;
 		} 
 
 		//If the velocity is greater than 0, i.e. row is increasing, then
 		//the player must be falling.
-		else if (getVelY() > 0)
+		else if (getVelY() < 0)
 		{
 			falling = true;
 		}
 
 		else{ jumping = true;
 		}
-		
-		
+
+
 		//temp stores current yLoc. yLoc is modified according to current
 		//y velocity and gravity to move player.
 		int temp = yLoc;
@@ -201,13 +214,18 @@ public class Player extends Entity {
 		if (falling)
 		{
 
+			// if 
+			//velY + gravity
+
+			//
+
 			//Terminal velocity is gravity (5). So this checks if the difference
 			//between current velocity and terminal vel is at more than or equal 
 			//to gravity. If so, it decreases the velocity.
 			if (Level.gravity - getVelY() >= 5){
 				setVelY(getVelY() + Level.gravity);
 			}
-			
+
 			//otherwise if the velocity is not terminal but the difference
 			//is less than the magnitude of gravity than it decreases 
 			//y velocity by whatever's left.
