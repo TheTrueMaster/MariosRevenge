@@ -1,4 +1,4 @@
-20
+12
 
 
              M
@@ -7,21 +7,7 @@
          GGGGG               G
                              G
                     GGGG     G
-          BBABB      P       G      ABB
+          BBABB             G      ABB
                          GGG G
-<<<<<<< HEAD
-                      M      G            M          M  
-GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG
-=======
-  P                          G            M          M  
-GGGGGGGGGGGGGGGGGGGGGGGG   GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG
-
-GGGGGGGGGGGGGGGGGGGGG
-
-                            GGGGGGG
-
-GGGGGGGGGGGGGGGGGGGGGG
-
-GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG
-
->>>>>>> origin/master
+                      P      G            M          M  
+G   GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG

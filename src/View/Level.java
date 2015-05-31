@@ -271,10 +271,11 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 			{
 				p.resetAnimation();
 				ent = getEnt(p.getRow() - 1, p.getCol());
+				Entity ent2 = getEnt(p.getRow() - 2, p.getCol());
 				//now we asses the Entity
 				//now, ent is equal to the space directly above mario
 				//TODO Write amazing jumping code here
-				if(ent == null ){
+				if(ent == null && ent2 == null){
 					//Gets the difference between new and old locations in y.
 					p.moveUp(-30);
 
