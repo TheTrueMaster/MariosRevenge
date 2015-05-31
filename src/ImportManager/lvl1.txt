@@ -1,4 +1,4 @@
-15
+12
 
 
              E
@@ -8,9 +8,6 @@
                              G
                     GGGG     G
           BBABB              G      ABB
-                         GGG G
+      P                  GGG G
                       E      G            E          E  F
-GGGGGGGGGAGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG
-P
-
-GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG
+GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG
