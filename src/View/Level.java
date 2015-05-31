@@ -155,7 +155,7 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 		g.setColor(Color.white);
 		for(Entity e : inGameObs){
 			if(e instanceof Player){
-				g.drawString("Row: " + e.getRow() + " Col: " + e.getCol() + " TimesMoved: " + ((Player) e).getTimesMoved() + " Health: " + ((Player) e).getHealth(), e.getX(), e.getY());
+				g.drawString("Row: " + e.getRow() + " Col: " + e.getCol() + " TimesMoved: " + ((Player) e).getTimesMoved() + " Health: " + ((Player) e).getHealth() + " VelY: " + e.getVelY(), e.getX(), e.getY());
 			}
 
 
@@ -276,7 +276,7 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 				//TODO Write amazing jumping code here
 				if(ent == null ){
 					//Gets the difference between new and old locations in y.
-					p.moveUp(-40);
+					p.moveUp(-30);
 
 					double doubleMoved = (double)p.getY() / height;
 
