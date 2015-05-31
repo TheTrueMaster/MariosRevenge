@@ -111,6 +111,9 @@ public class Player extends Entity {
 		moveImage++;
 	}
 
+	/**
+	 * Resets The Players Picture to its default
+	 */
 	public void resetAnimation(){
 		moveImage = 0;
 	}
