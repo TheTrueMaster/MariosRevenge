@@ -92,6 +92,7 @@ public class Player extends Entity {
 			if(getY() > other.getY()){
 				falling = true; // :D
 				hitPlatform = true;
+				setVelY(0);
 
 			}
 			else if(getY() < other.getY()){
