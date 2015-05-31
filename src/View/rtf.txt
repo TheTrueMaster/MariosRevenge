@@ -1,2 +1,7 @@
 random text file
+<<<<<<< HEAD
 no this is important
+=======
+
+this is rather important
+>>>>>>> 150ff361dc9b346330299149b414a01279c4034b

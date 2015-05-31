@@ -8,11 +8,11 @@ public class Player extends Entity {
 
 	protected int playerHealth;
 
-	private boolean movingRight, movingLeft, jumping, falling, hasJumped;//Booleans So GUI can see players current status
+	private boolean movingRight, movingLeft, jumping, falling, hitPlatform;//Booleans So GUI can see players current status
 	private int moveImage;
 	private int timesMoved;
 	private int yTraveled;
-//
+	//
 	public Player(int x, int y, Image icon) {
 		super(x, y, icon);
 		this.hasHealth = true;
@@ -24,7 +24,6 @@ public class Player extends Entity {
 		moveImage = 0;
 		timesMoved = 1;
 		yTraveled = 0;
-		hasJumped = false;
 	}
 
 
@@ -70,7 +69,6 @@ public class Player extends Entity {
 				else
 				{
 					setHealth(playerHealth - 1);
-					changeStatus();
 				}
 			}
 
@@ -93,9 +91,10 @@ public class Player extends Entity {
 		{
 			if(getY() > other.getY()){
 				falling = true; // :D
+				hitPlatform = true;
 
 			}
-			if(getY() < other.getY()){
+			else if(getY() < other.getY()){
 
 
 				falling = false;
@@ -225,17 +224,14 @@ public class Player extends Entity {
 
 		else if (getVelY() < 0){ 
 			jumping = true;
-			hasJumped = true;
 		}
 
 
 		//temp stores current yLoc. yLoc is modified according to current
 		//y velocity and gravity to move player.
-		
 		int temp = yLoc;
-		yLoc += velY + Level.gravity; // y = y + vY +g || y = y
+		yLoc += velY + Level.gravity;
 
-		
 		//These changes should only occur if the player is falling.
 		//If the player is on a platform, it is no longer falling and 
 		//so the player will move downwards (y velocity is updated) until
@@ -243,6 +239,11 @@ public class Player extends Entity {
 		if (falling)
 		{
 
+			if (hitPlatform)
+			{
+				hitPlatform = false;
+				setVelY(0);
+			}
 			// if 
 			//velY + gravity
 
@@ -251,40 +252,42 @@ public class Player extends Entity {
 			//Terminal velocity is gravity (5). So this checks if the difference
 			//between current velocity and terminal vel is at more than or equal 
 			//to gravity. If so, it decreases the velocity.
-			if (getVelY() < 0)
-			{
-
-				if (getVelY() > -Level.gravity)
+			else{
+				if (getVelY() < 0)
 				{
-					setVelY(0);
-				}
-				//if (Level.gravity - getVelY() >= 5){
-				else{
-					setVelY(getVelY() + Level.gravity);
-				}
-				//}
 
-				//otherwise if the velocity is not terminal but the difference
-				//is less than the magnitude of gravity than it decreases 
-				//y velocity by whatever's left.
-			/*	else if (velY < 5){
+					if (getVelY() > -5)
+					{
+						setVelY(0);
+					}
+					//if (Level.gravity - getVelY() >= 5){
+					else{
+						setVelY(getVelY() + Level.gravity);
+					}
+					//}
+
+					//otherwise if the velocity is not terminal but the difference
+					//is less than the magnitude of gravity than it decreases 
+					//y velocity by whatever's left.
+					/*	else if (velY < 5){
 
 					setVelY(Level.gravity);
 				} */
-			}
-			
-			else if (getVelY() > 0)
-			{
-				if (getVelY() >=0 ){//  v => 0
-					setVelY(getVelY() + Level.gravity);
 				}
 
-				//otherwise if the velocity is not terminal but the difference
-				//is less than the magnitude of gravity than it decreases 
-				//y velocity by whatever's left.
-				else if (velY < 5){
+				else if (getVelY() > 0)
+				{
+					if (Level.gravity - getVelY() <= 5){
+						setVelY(getVelY() + Level.gravity);
+					}
 
-					setVelY(Level.gravity);
+					//otherwise if the velocity is not terminal but the difference
+					//is less than the magnitude of gravity than it decreases 
+					//y velocity by whatever's left.
+					else if (velY < 5){
+
+						setVelY(Level.gravity);
+					}
 				}
 			}
 		}
