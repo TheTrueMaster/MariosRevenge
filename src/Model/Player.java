@@ -185,7 +185,8 @@ public class Player extends Entity {
 			falling = true;
 		}
 
-		else jumping = true;
+		else{ jumping = true;
+		}
 		
 		
 		//temp stores current yLoc. yLoc is modified according to current
