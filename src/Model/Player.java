@@ -127,10 +127,19 @@ public class Player extends Entity {
 		return falling;
 	}
 
+	/**
+	 * Returns whether the player is jumping
+	 * @return
+	 */
 	public boolean isJumping(){
 		return jumping;
 	}
 
+	/**
+	 * Toggles the moving status of dir
+	 * 
+	 * @param dir
+	 */
 	public void changeMovingStatus(String dir){
 		if(dir.equals("right")){
 			movingRight = !movingRight;
@@ -150,24 +159,37 @@ public class Player extends Entity {
 
 	}
 
+	/**
+	 * Returns the Y pixels the player has traveled
+	 * @return
+	 */
 	public int getYTraveled()
 	{
 		return yTraveled;
 	}
 
 
+	/**
+	 * Visually moves the player right and updates timesMoved
+	 */
 	public void moveRight() {
 		xLoc = xLoc += Level.movePixels;
 		timesMoved++;
 	}
 
 
+	/**
+	 * Visually moves the player left and updates timesMoved
+	 */
 	public void moveLeft() {
 		xLoc = xLoc -= Level.movePixels;
 		timesMoved --;
 	}
 
 
+	/**
+	 * Visually Moves the player down
+	 */
 	public void moveDown() {
 		yLoc += Level.movePixels;
 
@@ -178,7 +200,7 @@ public class Player extends Entity {
 	 * @param velY
 	 * @return
 	 */
-	public int moveUp(int velY)
+	public void moveUp(int velY)
 	{
 		//If the player is stationary in y, then the player
 		// must not be jumping. The variable 'yTraveled' is
@@ -235,10 +257,7 @@ public class Player extends Entity {
 			}
 		}
 
-		//returns the difference in the old and new locations.
-		yTraveled = yLoc - temp;
-
-		return yTraveled;
+		
 
 	}
 
@@ -250,4 +269,15 @@ public class Player extends Entity {
 		timesMoved = 0;
 	}
 
+	@Override
+	/**
+	 * Returns whether the player is dead or not. So if the player's health is below
+	 * 0, the method will return false
+	 */
+	public boolean getStatus(){
+		if(playerHealth <= 0){
+			return false;
+		}
+		return true;
+	}
 }
