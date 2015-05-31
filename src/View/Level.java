@@ -23,7 +23,7 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 	ArrayList<Entity> inGameObs;//for visualization (more fluid)
 	private Player player;//quick refrencej
 	private javax.swing.Timer timer = new javax.swing.Timer(30, this);
-	public final static int gravity = 5;
+	public final static int gravity = 10;
 	private int counter;
 
 	/**
