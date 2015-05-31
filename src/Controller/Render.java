@@ -34,8 +34,8 @@ public class Render {
 		pics.put(character, img);
 
 		//enemy img
-		character = 'E';
-		img = ImportManager.mush;
+		character = 'M';
+		img = ImportManager.mush[0];
 		pics.put(character, img);
 		//platform img
 		character = 'G';

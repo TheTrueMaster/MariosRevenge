@@ -2,7 +2,7 @@ package Model;
 
 import java.awt.Image;
 
-public class Enemy extends Entity implements Destroyable{
+public abstract class Enemy extends Entity implements Destroyable{
 	
 	int health;
 
