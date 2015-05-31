@@ -311,10 +311,12 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 				if(ent instanceof Standable){
 					p.interact(ent);
 				}
+				
+				//ent = null;
 				if(ent == null){
 					//Similar code to 'case: 90' 
 					int temp = (int)(Math.abs(p.moveUp(p.getVelY())) / 24);
-					if (temp > 0)
+					if (temp >= 0)
 					{
 						level[p.getRow()][p.getCol()] = ' ';
 						p.setRow(p.getRow() + temp);
