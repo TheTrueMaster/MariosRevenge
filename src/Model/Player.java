@@ -167,10 +167,10 @@ public class Player extends Entity {
 	 * Returns the Y pixels the player has traveled
 	 * @return
 	 */
-	public int getYTraveled()
+	/*public int getYTraveled()
 	{
 		return yTraveled;
-	}
+	} */
 
 
 	/**
@@ -255,7 +255,7 @@ public class Player extends Entity {
 			//Terminal velocity is gravity (5). So this checks if the difference
 			//between current velocity and terminal vel is at more than or equal 
 			//to gravity. If so, it decreases the velocity.
-			if (getVelY() < 0)
+			if (getVelY() <= 0)
 			{
 
 				if (getVelY() > -5)

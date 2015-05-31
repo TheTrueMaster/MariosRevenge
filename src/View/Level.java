@@ -226,6 +226,7 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 
 	private void shift(Player p, int i) {
 
+		
 		try{
 			//we go into the first switch to asses the direction
 
