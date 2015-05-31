@@ -13,6 +13,8 @@ public class Fireflower extends Entity implements Powerup{
 	public void giveAbility(Player p) {
 		// TODO Auto-generated method stub
 		p.setHealth(p.getHealth() +1);
+		
+		p.changeImage();
 
 	}
 

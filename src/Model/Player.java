@@ -111,6 +111,10 @@ public class Player extends Entity {
 		int m = moveImage;
 		moveImage++;
 	}
+	
+	public void changeImage(){
+		moveImage = 0; //stub code
+	}
 
 	/**
 	 * Resets The Players Picture to its default
