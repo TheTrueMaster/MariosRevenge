@@ -170,6 +170,8 @@ public class Player extends Entity {
 		//If the player is stationary in y, then the player
         // must not be jumping. The variable 'yTraveled' is
         // reset to avoid problems.
+		setVelY(velY);
+		
 		if (getVelY() == 0) { 
 		
 			jumping = false;
