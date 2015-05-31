@@ -488,6 +488,10 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 
 	private void doAllChecks() {
 		//before repainting, we update all the Entities locations
+		if(!player.getStatus()){
+			this.setVisible(false);
+			
+		}
 		updatePlayer();
 		repaint();
 
