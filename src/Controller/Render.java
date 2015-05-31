@@ -53,9 +53,7 @@ public class Render {
 
 	}
 
-	public void init(Game game) {
 
-	}
 
 	public ImageIcon getImage(char c) {
 
