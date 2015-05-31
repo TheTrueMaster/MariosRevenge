@@ -15,6 +15,8 @@ public class ImportManager {
 	public static InputStream lvl1;
 	public static BufferedImage player;
 	public static BufferedImage[] mario;
+	public static BufferedImage[] leftMario;
+
 	public static BufferedImage box;
 	public static BufferedImage pwrBox;
 	public static BufferedImage[] mush;
