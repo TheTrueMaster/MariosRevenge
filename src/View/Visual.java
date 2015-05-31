@@ -3,8 +3,6 @@ package View;
 import java.awt.*;
 
 import javax.swing.*;
-
-import Controller.Game;
 import ImportManager.ImportManager;//pun intented
 
 import java.awt.event.*;
@@ -19,7 +17,6 @@ public class Visual implements KeyListener {
 	private JLabel logoImage;
 	private JButton btnInstructions;
 	private JButton start;
-	private Game game;
 	private int screen = 0;//0 -> splash ; 1 -> instructions ; 2->Level
 	/**
 	 * Launch the application.
@@ -29,8 +26,7 @@ public class Visual implements KeyListener {
 			public void run() {
 				try {					
 					ImportManager.loadFiles();
-					Game game = new Game();
-					Visual window = new Visual(game);
+					Visual window = new Visual();
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -46,8 +42,7 @@ public class Visual implements KeyListener {
 	/**
 	 * Create the application.
 	 */
-	public Visual(Game g) {
-		game = g;
+	public Visual() {
 		initialize();
 
 	}
@@ -69,7 +64,7 @@ public class Visual implements KeyListener {
 		Image scaled = icon.getImage().getScaledInstance(779, 214, Image.SCALE_DEFAULT);
 		
 		
-		level = new Level(frame.getHeight(), frame.getWidth(), game);
+		level = new Level(frame.getHeight(), frame.getWidth());
 		
 		/*Below is JPanel code for instruction screen*/
 		instructions = new JPanel();

@@ -18,7 +18,6 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 
 	public static boolean paintable = false;
 	private JPanel contentPane;
-	private Game game;
 	public final static int movePixels = 8;
 	char[][] level;//for interaction handling
 	ArrayList<Entity> inGameObs;//for visualization (more fluid)
@@ -35,12 +34,11 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 	/**
 	 * Create the frame.
 	 */
-	public Level(int width, int height, Game g) {
+	public Level(int width, int height) {
 		counter= 0;
 		paintable = false;
 		setFocusable(true);
 		addKeyListener(this);
-		game  = g;
 		init();
 
 
