@@ -26,7 +26,7 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 	private javax.swing.Timer timer = new javax.swing.Timer(30, this);
 	public final static int gravity = 5;
 	private int counter;
-	
+
 	/**
 	 * Launch the application.
 	 */
@@ -157,8 +157,8 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 			if(e instanceof Player){
 				g.drawString("Row: " + e.getRow() + " Col: " + e.getCol() + " TimesMoved: " + ((Player) e).getTimesMoved() + " Health: " + ((Player) e).getHealth(), e.getX(), e.getY());
 			}
-				
-			
+
+
 			//g.drawRect(e.getX(), e.getY(), width, height);
 			g.drawImage(e.getImg().getScaledInstance(width, height, Image.SCALE_DEFAULT), e.getX(), e.getY(), this);
 
@@ -230,7 +230,7 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 
 		try{
 			//we go into the first switch to asses the direction
-			
+
 			Entity ent = null;
 			switch(i){
 
@@ -302,14 +302,14 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 							level[p.getRow() + amtMoved][p.getCol()] = 'P';
 						}
 					}
-				
+
 				}
 				else{
 					p.interact(ent);
 				}
 
 				break;
-				}
+			}
 
 
 			case 270:
@@ -319,12 +319,12 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 				//below, and if so, would set falling to false. Doing this would prevent the player
 				//executing the code for changing y, and so the player would simply stop upon hitting a platform.
 				// **This change did not work. **
-				
+
 				//ent = null;
 				if(ent == null){
 					//Similar code to 'case: 90' 
 
-					
+					/*
 					int temp = Math.abs(p.moveUp(p.getVelY())) / 24;
 					if (temp > 0)
 
@@ -332,40 +332,73 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 					level[p.getRow()][p.getCol()] = ' ';
 					p.setRow(p.getRow() + temp);
 					level[p.getRow() + temp][p.getCol()] = 'P';
-					}
-				}
-				else{
-					p.interact(ent);
-				}
-				
-				break;
-				
-				//new code below
-				
-				double doubleMoved = (double)p.getY() / height;
-				
-				int approxMoved = (int)p.getY() / height; 
-				
-				double difference = (doubleMoved - approxMoved) / 24;
-				int amtMoved = Math.abs(dY) / height;
-				//If it is, . . .
-				if (Math.abs(difference) > 0)
-				{
-					//If player moved up (difference is negative)
-					if (difference < 0 )
+					} */
+
+					//new code below
+					
+					p.moveUp(p.getVelY());
+
+					double doubleMoved = (double)p.getY() / height;
+
+					int approxMoved = (int)p.getY() / height; 
+
+					double difference = (doubleMoved - approxMoved) / 24;
+					//int amtMoved = Math.abs(dY) / height;
+					//If it is, . . .
+					if (Math.abs(difference) > 0)
 					{
-						if (difference <= 0.8)
-						//row decreases by whatever the amount of rows moved was.
-						level[p.getRow()][p.getCol()] = ' ';
-						p.setRow(approxMoved + 1);
-						level[approxMoved + 1][p.getCol()] = 'P';
-			
+						//If player moved up (difference is negative)
+						if (difference < 0 )
+						{
+							if (difference <= -0.8){
+								//row decreases by whatever the amount of rows moved was.
+								level[p.getRow()][p.getCol()] = ' ';
+								p.setRow(approxMoved - 1);
+								level[approxMoved - 1][p.getCol()] = 'P';
+							}
+
+							else {
+								//row decreases by whatever the amount of rows moved was.
+								level[p.getRow()][p.getCol()] = ' ';
+								p.setRow(approxMoved);
+								level[approxMoved][p.getCol()] = 'P';
+							}
+
+						}
+
+						else 
+						{
+							if (difference >= 0.8){
+								//row decreases by whatever the amount of rows moved was.
+								level[p.getRow()][p.getCol()] = ' ';
+								p.setRow(approxMoved + 1);
+								level[approxMoved + 1][p.getCol()] = 'P';
+							}
+
+							else {
+								//row decreases by whatever the amount of rows moved was.
+								level[p.getRow()][p.getCol()] = ' ';
+								p.setRow(approxMoved);
+								level[approxMoved][p.getCol()] = 'P';
+							}
+						}
+					}
+					else{
+						p.interact(ent);
+					}
+
+					break;
+
+
+
+
+				}
+
+
+
 			}
-
-
-
-
-		}catch(IndexOutOfBoundsException e){
+		}
+		catch(IndexOutOfBoundsException e){
 			e.printStackTrace();
 		}
 	}
@@ -432,7 +465,7 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 			player.changeMovingStatus("up");
 		}
 		if(player.isFalling()){
-			player.changeMovingStatus("down");
+			player.changeMovingStatus("falling");
 		}
 
 		player.resetAnimation();
@@ -449,7 +482,7 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 	public void actionPerformed(ActionEvent arg0) {
 		counter += 30;
 		//if(player.isJumping()){
-			//paintable = true;
+		//paintable = true;
 		//}
 		if(paintable)
 			doAllChecks();
