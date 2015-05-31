@@ -8,7 +8,11 @@ public class Player extends Entity {
 
 	protected int playerHealth;
 
+<<<<<<< HEAD
 	private boolean movingRight, movingLeft, jumping, falling, hitPlatform;//Booleans So GUI can see players current status
+=======
+	private boolean movingRight, movingLeft, jumping, falling, hasJumped;//Booleans So GUI can see players current status
+>>>>>>> origin/master
 	private int moveImage;
 	private int timesMoved;
 	private int yTraveled;
@@ -24,6 +28,7 @@ public class Player extends Entity {
 		moveImage = 0;
 		timesMoved = 1;
 		yTraveled = 0;
+		hasJumped = false;
 	}
 
 
@@ -224,14 +229,17 @@ public class Player extends Entity {
 
 		else if (getVelY() < 0){ 
 			jumping = true;
+			hasJumped = true;
 		}
 
 
 		//temp stores current yLoc. yLoc is modified according to current
 		//y velocity and gravity to move player.
+		
 		int temp = yLoc;
-		yLoc += velY + Level.gravity;
+		yLoc += velY + Level.gravity; // y = y + vY +g || y = y
 
+		
 		//These changes should only occur if the player is falling.
 		//If the player is on a platform, it is no longer falling and 
 		//so the player will move downwards (y velocity is updated) until
@@ -252,8 +260,15 @@ public class Player extends Entity {
 			//Terminal velocity is gravity (5). So this checks if the difference
 			//between current velocity and terminal vel is at more than or equal 
 			//to gravity. If so, it decreases the velocity.
+<<<<<<< HEAD
 			else{
 				if (getVelY() < 0)
+=======
+			if (getVelY() < 0)
+			{
+
+				if (getVelY() > -Level.gravity)
+>>>>>>> origin/master
 				{
 
 					if (getVelY() > -5)
@@ -273,6 +288,15 @@ public class Player extends Entity {
 
 					setVelY(Level.gravity);
 				} */
+<<<<<<< HEAD
+=======
+			}
+			
+			else if (getVelY() > 0)
+			{
+				if (getVelY() >=0 ){//  v => 0
+					setVelY(getVelY() + Level.gravity);
+>>>>>>> origin/master
 				}
 
 				else if (getVelY() > 0)

@@ -42,6 +42,9 @@ public class ImportManager {
 			mario[5] = ImageIO.read(ImportManager.class.getResource("sprite_Mario6.png"));
 			mario[6] = ImageIO.read(ImportManager.class.getResource("sprite_Mario7.png"));
 
+			//left  mario
+			leftMario = new BufferedImage[7];
+			
 			box = ImageIO.read(ImportManager.class.getResource("box.png"));
 			pwrBox = ImageIO.read(ImportManager.class.getResource("pwrbox.png"));
 			mush = new BufferedImage[2];
