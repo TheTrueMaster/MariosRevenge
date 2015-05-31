@@ -257,10 +257,11 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 				//now we asses the Entity
 				if(ent == null){
 					p.moveLeft();
-					if(p.getTimesMoved() == -6){
+					if(p.getTimesMoved() == -3){
 						level[p.getRow()][p.getCol()] = ' ';
 						p.setCol(p.getCol() - 1);
 						level[p.getRow()][p.getCol() - 1] = 'P';
+						p.resetTimesMoved();
 					}
 				}
 				else{

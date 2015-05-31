@@ -139,7 +139,7 @@ public class Visual implements KeyListener {
 			}
 		});
 		
-		icon = new ImageIcon("C:\\Users\\Ronak Shah\\Documents\\School\\AP Computer Science\\MariosRevenge\\res\\start.png");
+		icon = new ImageIcon(ImportManager.startLogo);
 		scaled = icon.getImage().getScaledInstance(320, 150, Image.SCALE_DEFAULT);
 		start.setIcon(new ImageIcon(scaled));
 		start.setBounds(307, 289, 320, 120);

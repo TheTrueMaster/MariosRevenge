@@ -17,7 +17,7 @@ public class ImportManager {
 	public static BufferedImage[] mario;
 	public static BufferedImage box;
 	public static BufferedImage pwrBox;
-	public static BufferedImage mush[];
+	public static BufferedImage[] mush;
 	public static BufferedImage deadMush;
 	//
 	
@@ -42,9 +42,10 @@ public class ImportManager {
 
 			box = ImageIO.read(ImportManager.class.getResource("box.png"));
 			pwrBox = ImageIO.read(ImportManager.class.getResource("pwrbox.png"));
+			mush = new BufferedImage[2];
 			mush[0] = ImageIO.read(ImportManager.class.getResource("mushroom1.png"));
 			mush[1] = ImageIO.read(ImportManager.class.getResource("mushroom2.png"));
-			deadMush = ImageIO.read(ImportManager.class.getResource("deadMush.png"));
+			deadMush = ImageIO.read(ImportManager.class.getResource("deadMushroom.png"));
 		}
 		catch(IOException e){
 			//do nothing
