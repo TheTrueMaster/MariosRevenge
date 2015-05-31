@@ -276,34 +276,29 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 				//TODO Write amazing jumping code here
 				if(ent == null ){
 					//Gets the difference between new and old locations in y.
-					int dY = p.moveUp(-40);
-					//Determines if this difference is at least the height of a row.
-					int amtMoved = Math.abs(dY) / height;
-					//If it is, . . .
-					if (amtMoved > 0)
-					{
-						//If player moved up (difference is negative)
-						if (dY < 0)
-						{
-							//row decreases by whatever the amount of rows moved was.
-							level[p.getRow()][p.getCol()] = ' ';
-							p.setRow(p.getRow() - amtMoved);
-							level[p.getRow() - amtMoved][p.getCol()] = 'P';
-						}
-					}
+					p.moveUp(-40);
 
-					else{
-						//if the player moved down (difference is positive)
-						if (dY > 0)
-						{
-							//row increases by whatever amount of rows moved.
+					double doubleMoved = (double)p.getY() / height;
+
+					int approxMoved = (int)p.getY() / height; 
+					double difference = (doubleMoved - approxMoved) / 24;
+					if (difference > 0)
+					{
+						if (difference > 0.8){
 							level[p.getRow()][p.getCol()] = ' ';
-							p.setRow(p.getRow() + amtMoved);
-							level[p.getRow() + amtMoved][p.getCol()] = 'P';
+							p.setRow((p.getY() / height) + 1);
+							level[(p.getY() / height) + 1][p.getCol()] = 'P';
+						}
+
+						else {
+							level[p.getRow()][p.getCol()] = ' ';
+							p.setRow(p.getY() / height);
+							level[p.getY() / height][p.getCol()] = 'P';
 						}
 					}
 
 				}
+
 				else{
 					p.interact(ent);
 				}
@@ -335,7 +330,7 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 					} */
 
 					//new code below
-					
+
 					p.moveUp(p.getVelY());
 
 					double doubleMoved = (double)p.getY() / height;

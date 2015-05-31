@@ -205,22 +205,22 @@ public class Player extends Entity {
 		//If the player is stationary in y, then the player
 		// must not be jumping. The variable 'yTraveled' is
 		// reset to avoid problems.
-		//setVelY(velY);
+		setVelY(velY);
 
-		if (getVelY() == 0) { 
+		/*if (getVelY() == 0) { 
 
 			jumping = false;
-			yTraveled = 0;
-		} 
+		} */
 
 		//If the velocity is greater than 0, i.e. row is increasing, then
 		//the player must be falling.
-		else if (getVelY() < 0)
+		 if (getVelY() < 0)
 		{
 			falling = true;
 		}
 
-		else{ jumping = true;
+		else{ 
+			jumping = true;
 		}
 
 
@@ -257,7 +257,7 @@ public class Player extends Entity {
 			}
 		}
 
-		
+
 
 	}
 
