@@ -247,7 +247,7 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 				ent = getEnt(p.getRow(), p.getCol() + 1);
 				//now we asses the Entity
 				if(hasCollided(p, ent)){
-					System.out.println("PLAYER HAS COLLIDED WITH THE ENTITY");
+					p.interact(ent);
 				}
 				else{
 
@@ -266,7 +266,10 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 				p.changeAnimation();
 				ent = getEnt(p.getRow(), p.getCol() - 1);
 				//now we asses the Entity
-				if(ent == null){
+				if(hasCollided(p, ent)){
+					p.interact(ent);
+				}
+				else{
 					p.moveLeft();
 					if(p.getTimesMoved() == -3){
 						level[p.getRow()][p.getCol()] = ' ';
@@ -274,9 +277,6 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 						level[p.getRow()][p.getCol() - 1] = 'P';
 						p.resetTimesMoved();
 					}
-				}
-				else{
-					p.interact(ent);
 				}
 				break;
 			case 90://up
@@ -287,7 +287,7 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 				//now we asses the Entity
 				//now, ent is equal to the space directly above mario
 				//TODO Write amazing jumping code here
-				if(ent == null && ent2 == null){
+				if(hasCollided(p, ent)){
 					//Gets the difference between new and old locations in y.
 					p.moveUp(-30);
 
