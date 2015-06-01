@@ -1,12 +1,14 @@
 package Model;
 
 import java.awt.Image;
+import java.awt.image.BufferedImage;
+
 import ImportManager.*;
 
 public class Mushroom extends Enemy implements Powerup {
 
 	private int imageNo;
-	public Mushroom(int x, int y, Image icon) {
+	public Mushroom(int x, int y, BufferedImage icon) {
 		super(x, y, icon);
 		imageNo = 0;
 	}
@@ -25,7 +27,7 @@ public class Mushroom extends Enemy implements Powerup {
 	}
 	
 	@Override
-	public Image getImg(){
+	public BufferedImage getImg(){
 		if(imageNo == 2){
 			imageNo = 0;
 		}

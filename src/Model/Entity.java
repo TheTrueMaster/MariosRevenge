@@ -1,23 +1,25 @@
 package Model;
 
 import java.awt.Image;
+import java.awt.Rectangle;
+import java.awt.image.BufferedImage;
 
 public  class Entity {
 
 	protected int xLoc , yLoc;
 	protected boolean status, hasHealth;
-	
+	protected Rectangle bounds = null;
 	protected int velocityX;
 	protected int velocityY;
 	
 	protected int row, col;
 	protected int height, width;
-	protected Image sprite;
+	protected BufferedImage sprite;
 	protected char self;
 	
 	protected int timesMoved = 0;//increases until object has moved into next cell
 	
-	public Entity(int x, int y, Image icon){
+	public Entity(int x, int y, BufferedImage icon){
 		xLoc = x;
 		yLoc = y;
 		sprite = icon;
@@ -29,7 +31,7 @@ public  class Entity {
 	public String toString(){
 		return "Row: " + row + " Col: " + col;
 	}
-	public Entity(int x, int y, Image icon, int xC, int yC) {
+	public Entity(int x, int y, BufferedImage icon, int xC, int yC) {
 		xLoc = x;
 		yLoc = y;
 		sprite = icon;
@@ -85,6 +87,14 @@ public  class Entity {
 		velocityY = y;
 	}
 	
+	public void setBounds(Rectangle b){
+		bounds = b;
+	}
+	
+	public Rectangle getBounds(){
+		return bounds;
+	}
+	
 	public int getVelX(){
 		return velocityX;
 	}
@@ -111,7 +121,7 @@ public  class Entity {
 		this.yLoc = y;
 	}
 	
-	public Image getImg(){
+	public BufferedImage getImg(){
 		return sprite;
 	}
 	

@@ -7,7 +7,7 @@
          GGGGG               G
                              G
                     GGGG     G
-          BBABB             G      ABB
-                         GGG G
-                      P      G            M          M  
-G   GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG
+          AAAAA              G         
+                             G
+                            PG            M          M  
+GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG

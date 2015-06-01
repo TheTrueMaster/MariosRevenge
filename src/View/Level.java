@@ -6,6 +6,8 @@ import Model.Box;//required due Box's name (Too Ambiguous)
 
 import java.awt.*;
 import java.awt.event.*;
+import java.awt.geom.Area;
+import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -74,45 +76,49 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 				if(r == 11){
 					paintable =true;
 				}
-				ImageIcon img = render.getImage(level[r][c]);
+				BufferedImage img = render.getImage(level[r][c]);
 				char entity = level[r][c];
 				Entity ent = null;
+				Rectangle bounds = new Rectangle();
 
 				switch (entity){
 				case 'G'://ground
-					ent = new Platform(x, y, img.getImage());
+					ent = new Platform(x, y, img);
 					ent.setCol(c);
 					ent.setRow(r);
 					inGameObs.add(ent);
 					break;
 				case 'P'://player
-					ent = new Player(x, y, img.getImage());
+					ent = new Player(x, y, img);
 					ent.setRow(r);
 					ent.setCol(c);
 					player = (Player) ent;
 					inGameObs.add(ent);
 					break;
 				case 'A'://pwrbox
-					ent = new Powerbox(x, y, img.getImage());
+					ent = new Powerbox(x, y, img);
 					ent.setCol(c);
 					ent.setRow(r);
 					inGameObs.add(ent);
 					break;
 				case 'M':
-					ent = new Mushroom(x, y, img.getImage());
+					ent = new Mushroom(x, y, img);
 					ent.setCol(c);
 					ent.setRow(r);
 					inGameObs.add(ent);
 					break;
 				case 'B':
-					ent = new Box(x, y, img.getImage());
+					ent = new Box(x, y, img);
 					ent.setCol(c);
 					ent.setRow(r);
 					inGameObs.add(ent);
 					break;
 				}
-
-
+				if(ent != null){
+					bounds.setSize(ent.getImg().getWidth(this), ent.getImg().getHeight(this));
+					bounds.setLocation(ent.getX(), ent.getY());
+					ent.setBounds(bounds);
+				}
 
 			}
 
@@ -156,7 +162,10 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 				g.drawString("Row: " + e.getRow() + " Col: " + e.getCol() + " TimesMoved: " + ((Player) e).getTimesMoved() + " Health: " + ((Player) e).getHealth() + " VelY: " + e.getVelY(), e.getX(), e.getY());
 			}
 
+			if(e instanceof Powerbox){
+				g.drawString("POWERBOX" , e.getX(), e.getY());
 
+			}
 			//g.drawRect(e.getX(), e.getY(), width, height);
 			g.drawImage(e.getImg().getScaledInstance(width, height, Image.SCALE_DEFAULT), e.getX(), e.getY(), this);
 
@@ -226,7 +235,7 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 
 	private void shift(Player p, int i) {
 
-		
+
 		try{
 			//we go into the first switch to asses the direction
 
@@ -237,7 +246,11 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 				p.changeAnimation();
 				ent = getEnt(p.getRow(), p.getCol() + 1);
 				//now we asses the Entity
-				if(ent == null){
+				if(hasCollided(p, ent)){
+					System.out.println("PLAYER HAS COLLIDED WITH THE ENTITY");
+				}
+				else{
+
 					p.moveRight();
 					if(p.getTimesMoved() == 3){
 						level[p.getRow()][p.getCol()] = ' ';
@@ -245,10 +258,9 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 						level[p.getRow()][p.getCol() + 1] = 'P';
 						p.resetTimesMoved();
 					}
+				
 				}
-				else{
-					p.interact(ent);
-				}
+				
 				break;
 			case 180://left
 				p.changeAnimation();
@@ -409,6 +421,27 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 		return null;
 	}
 
+	/**
+	 * Checks if the two Entities passes in have collided
+	 * @param a
+	 * @param b
+	 * @return
+	 */
+	protected boolean hasCollided(Entity a, Entity b) {
+		if(a == null || b == null){
+			return false;
+		}
+		Rectangle aBounds = a.getBounds();
+		Rectangle bBounds = b.getBounds();
+ 		// Check if the boundaries intersect
+		if (aBounds.intersects(bBounds)) {
+			return true;
+		}
+
+		return false;
+	}
+
+	
 
 
 	@Override
@@ -490,7 +523,7 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 		//before repainting, we update all the Entities locations
 		if(!player.getStatus()){
 			this.setVisible(false);
-			
+
 		}
 		updatePlayer();
 		repaint();

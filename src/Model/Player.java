@@ -1,6 +1,8 @@
 package Model;
 
 import java.awt.Image;
+import java.awt.image.BufferedImage;
+
 import ImportManager.ImportManager;
 import View.Level;
 
@@ -13,7 +15,7 @@ public class Player extends Entity {
 	private int timesMoved;
 	private int yTraveled;
 	//
-	public Player(int x, int y, Image icon) {
+	public Player(int x, int y, BufferedImage icon) {
 		super(x, y, icon);
 		this.hasHealth = true;
 		playerHealth = 1;
@@ -34,7 +36,7 @@ public class Player extends Entity {
 	public void resetTime(){
 		timesMoved = 0;
 	}
-	public Image getImg(){
+	public BufferedImage getImg(){
 
 		return ImportManager.mario[moveImage];
 	}
@@ -111,7 +113,7 @@ public class Player extends Entity {
 		int m = moveImage;
 		moveImage++;
 	}
-	
+
 	public void changeImage(){
 		moveImage = 0; //stub code
 	}
@@ -210,18 +212,8 @@ public class Player extends Entity {
 	 */
 	public void moveUp(int velY)
 	{
-		//If the player is stationary in y, then the player
-		// must not be jumping. The variable 'yTraveled' is
-		// reset to avoid problems.
 		setVelY(velY);
 
-		/*if (getVelY() == 0) { 
-
-			jumping = false;
-		} */
-
-		//If the velocity is greater than 0, i.e. row is increasing, then
-		//the player must be falling.
 		if (getVelY() <= 0)
 		{
 			falling = true;
@@ -231,34 +223,19 @@ public class Player extends Entity {
 			jumping = true;
 		}
 
-
-		//temp stores current yLoc. yLoc is modified according to current
-		//y velocity and gravity to move player.
 		int temp = yLoc;
 		yLoc += velY + Level.gravity;
-		
+
 		if (hitPlatform)
 		{
 			hitPlatform = false;
 			setVelY(0);
 		}
 
-		//These changes should only occur if the player is falling.
-		//If the player is on a platform, it is no longer falling and 
-		//so the player will move downwards (y velocity is updated) until
-		// reaching a platform, if any.
 		if (falling)
 		{
 
 
-			// if 
-			//velY + gravity
-
-			//
-
-			//Terminal velocity is gravity (5). So this checks if the difference
-			//between current velocity and terminal vel is at more than or equal 
-			//to gravity. If so, it decreases the velocity.
 			if (getVelY() <= 0)
 			{
 
@@ -266,19 +243,10 @@ public class Player extends Entity {
 				{
 					setVelY(0);
 				}
-				//if (Level.gravity - getVelY() >= 5){
+
 				else{
 					setVelY(getVelY() + Level.gravity);
 				}
-				//}
-
-				//otherwise if the velocity is not terminal but the difference
-				//is less than the magnitude of gravity than it decreases 
-				//y velocity by whatever's left.
-				/*	else if (velY < 5){
-
-					setVelY(Level.gravity);
-				} */
 			}
 
 			else if (getVelY() > 0)
@@ -287,9 +255,6 @@ public class Player extends Entity {
 					setVelY(getVelY() + Level.gravity);
 				}
 
-				//otherwise if the velocity is not terminal but the difference
-				//is less than the magnitude of gravity than it decreases 
-				//y velocity by whatever's left.
 				else if (velY < 5){
 
 					setVelY(Level.gravity);

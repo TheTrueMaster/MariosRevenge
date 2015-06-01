@@ -1,6 +1,7 @@
 package Controller;
 
 import java.awt.Image;
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -14,7 +15,7 @@ import Model.*;
 
 public class Render {
 
-	private Map<Character, Image> pics;
+	private Map<Character, BufferedImage> pics;
 
 	/*HOW TO PLACE AN IMAGE INTO THE MAP
 	 * 
@@ -25,9 +26,9 @@ public class Render {
 	 * 
 	 * */
 	public Render() {
-		pics = new HashMap<Character, Image>();
+		pics = new HashMap<Character, BufferedImage>();
 		Character character = new Character('[');
-		Image img = null;
+		BufferedImage img = null;
 		//player img
 		character = 'P';
 		img = ImportManager.mario[0];
@@ -39,13 +40,13 @@ public class Render {
 		pics.put(character, img);
 		//platform img
 		character = 'G';
-		img = ImportManager.box;
+		img = ImportManager.platform;
 		pics.put(character, img);
 		//power up box img
 		character = 'B';
 		img = ImportManager.box;
 		pics.put(character, img);
-		//box img
+		//
 		character = 'A';
 		img = ImportManager.pwrBox;
 		pics.put(character, img);
@@ -55,15 +56,15 @@ public class Render {
 
 
 
-	public ImageIcon getImage(char c) {
+	public BufferedImage getImage(char c) {
 
 
 		//return new ImageIcon(pics.get('P'));
-		Image a = (pics.get(c));
+		BufferedImage a = (pics.get(c));
 		if(a!=null)
-			return new ImageIcon(a);
+			return a;
 		else
-			return new ImageIcon(pics.get('G'));
+			return (pics.get('G'));
 	}
 
 

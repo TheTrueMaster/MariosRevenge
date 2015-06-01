@@ -1,10 +1,11 @@
 package Model;
 
 import java.awt.Image;
+import java.awt.image.BufferedImage;
 
 public class Fireflower extends Entity implements Powerup{
 
-	public Fireflower(int x, int y, Image icon) {
+	public Fireflower(int x, int y, BufferedImage icon) {
 		super(x, y, icon);
 	}
 

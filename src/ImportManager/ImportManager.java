@@ -24,7 +24,7 @@ public class ImportManager {
 	public static BufferedImage pwrBox;
 	public static BufferedImage[] mush;
 	public static BufferedImage deadMush;
-	//
+	public static BufferedImage platform;
 	
 	public static void loadFiles(){
 		try{
@@ -50,6 +50,7 @@ public class ImportManager {
 			
 			box = ImageIO.read(ImportManager.class.getResource("box.png"));
 			pwrBox = ImageIO.read(ImportManager.class.getResource("pwrbox.png"));
+			platform = ImageIO.read(ImportManager.class.getResource("platform1.png"));
 			mush = new BufferedImage[2];
 			mush[0] = ImageIO.read(ImportManager.class.getResource("mushroom1.png"));
 			mush[1] = ImageIO.read(ImportManager.class.getResource("mushroom2.png"));
