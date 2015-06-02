@@ -25,6 +25,8 @@ public class ImportManager {
 	public static BufferedImage[] mush;
 	public static BufferedImage deadMush;
 	public static BufferedImage platform;
+	public static BufferedImage meme;
+	
 	
 	public static void loadFiles(){
 		try{
@@ -54,6 +56,7 @@ public class ImportManager {
 			mush = new BufferedImage[2];
 			mush[0] = ImageIO.read(ImportManager.class.getResource("mushroom1.png"));
 			mush[1] = ImageIO.read(ImportManager.class.getResource("mushroom2.png"));
+			meme = ImageIO.read(ImportManager.class.getResource("amazingmeme.jpg"));
 			/*
 			fireMario[0] = ImageIO.read(ImportManager.class.getResource("fireMario1.png"));
 			fireMario[1] = ImageIO.read(ImportManager.class.getResource("fireMario1.png"));
