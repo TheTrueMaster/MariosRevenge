@@ -52,7 +52,10 @@ public class Player extends Entity {
 	
 	public boolean hasJumped()
 	{
-		return hasJumped;
+		if(hasJumped){
+			return true;
+		}
+		return false;
 	}
 	
 	public void toggleJumped()
