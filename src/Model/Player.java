@@ -32,7 +32,7 @@ public class Player extends Entity {
 	public int getTimesMoved(){
 		return timesMoved;
 	}
-
+//this is a change
 	public void resetTime(){
 		timesMoved = 0;
 	}
