@@ -60,7 +60,7 @@ public class Player extends Entity {
 		hasJumped = !hasJumped;
 	}
 
-
+//made changes
 	public void interact(Entity other) {
 		if (other instanceof Powerup)
 		{
