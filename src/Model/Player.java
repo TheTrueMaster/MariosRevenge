@@ -10,7 +10,7 @@ public class Player extends Entity {
 
 	protected int playerHealth;
 
-	private boolean movingRight, movingLeft, jumping, falling, hitPlatform;//Booleans So GUI can see players current status
+	private boolean movingRight, movingLeft, jumping, falling, isInJump, hasJumped;//Booleans So GUI can see players current status
 	private int moveImage;
 	private int timesMoved;
 	private int yTraveled;
@@ -32,7 +32,7 @@ public class Player extends Entity {
 	public int getTimesMoved(){
 		return timesMoved;
 	}
-//this is a change
+	//this is a change
 	public void resetTime(){
 		timesMoved = 0;
 	}
@@ -48,6 +48,16 @@ public class Player extends Entity {
 	public int getHealth()
 	{
 		return playerHealth;
+	}
+	
+	public boolean hasJumped()
+	{
+		return hasJumped;
+	}
+	
+	public void toggleJumped()
+	{
+		hasJumped = !hasJumped;
 	}
 
 
@@ -92,8 +102,9 @@ public class Player extends Entity {
 		else if (other instanceof Standable)
 		{
 			if(getY() > other.getY()){
-				falling = true; // :D
-				hitPlatform = true;
+				falling = true;
+				isInJump = true;
+				//hitPlatform = true;
 				setVelY(0);
 
 			}
@@ -101,6 +112,10 @@ public class Player extends Entity {
 
 
 				falling = false;
+				hasJumped = false;
+				jumping = false;
+				isInJump = false;
+				setVelY(0);
 			}
 		}
 
@@ -160,7 +175,10 @@ public class Player extends Entity {
 		}
 
 		else if(dir.equals("up")){
-			jumping = !jumping;
+			if (!hasJumped){
+			jumping = true;
+			isInJump = true;
+			}
 		} 
 
 		else if(dir.equals("falling")){
@@ -212,52 +230,51 @@ public class Player extends Entity {
 	 */
 	public void moveUp(int velY)
 	{
-		setVelY(velY);
-
-		if (getVelY() <= 0)
+		if (isInJump)
 		{
-			falling = true;
-		}
+			setVelY(velY);
 
-		else if (getVelY() < 0){ 
-			jumping = true;
-		}
-
-		int temp = yLoc;
-		yLoc += velY + Level.gravity;
-
-		if (hitPlatform)
-		{
-			hitPlatform = false;
-			setVelY(0);
-		}
-
-		if (falling)
-		{
-
-
-			if (getVelY() <= 0)
+			if (getVelY() >= 0)
 			{
+				falling = true;
+				jumping = false;
+			}
 
-				if (getVelY() > -5)
+			else if (getVelY() < 0){ 
+				jumping = true;
+				falling = false;
+			}
+
+			//	int temp = yLoc;
+			yLoc += velY + Level.gravity;
+
+
+			if (jumping){
+
+				if (getVelY() < 0)
 				{
-					setVelY(0);
-				}
 
-				else{
-					setVelY(getVelY() + Level.gravity);
+					if (0 - getVelY() >= Level.gravity)
+					{
+						int fjsklfj = getVelY();
+						setVelY(getVelY() + Level.gravity);
+					}
+
+					else{
+						setVelY(0);
+					}
 				}
 			}
 
-			else if (getVelY() > 0)
+			else if (falling)
 			{
-				if (Level.gravity - getVelY() <= 5){
+				if (Level.MAX_FALL_SPEED - getVelY() >= 0 && Level.MAX_FALL_SPEED - getVelY() >= Level.gravity ){
 					setVelY(getVelY() + Level.gravity);
 				}
 
-				else if (velY < 5){
+				else if (velY < Level.MAX_FALL_SPEED){
 
-					setVelY(Level.gravity);
+					setVelY(Level.MAX_FALL_SPEED);
 				}
 			}
 		}

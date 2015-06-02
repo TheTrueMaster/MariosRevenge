@@ -36,9 +36,10 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 	ArrayList<Entity> inGameObs;//for visualization (more fluid)
 	private Player player;//quick refrencej
 	private javax.swing.Timer timer = new javax.swing.Timer(30, this);
-	public final static int gravity = 10;
+	public final static int gravity = 6;
+	public final static int MAX_FALL_SPEED = gravity + 4;
 	private int counter;
-
+	private int stupid = 0;
 
 	/**
 	 * Create the frame.
@@ -80,12 +81,12 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 			for(int c = 0; c < level[r].length; c++){
 				char entity = level[r][c];
 				int x = c* width +10;
-				int y = r * height -50;
+				int y = r * height +50;
 
 				if(entity == 'A'){
 					paintable =true;
 				}
-				
+
 				BufferedImage img = render.getImage(level[r][c]);
 				Entity ent = null;
 				Rectangle bounds = new Rectangle();
@@ -135,7 +136,7 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 		}		
 		if(pwrBoxes != null){
 			if(pwrBoxes == null){
-				
+
 			}
 		}
 		inGameObs.addAll(pwrBoxes);
@@ -249,12 +250,15 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 	}
 
 	private void shift(Player p, int i) {
-
+		if(stupid == 1){
+			paintable = true;
+		}
 
 		try{
 			//we go into the first switch to asses the direction
 
 			Entity ent = null;
+			Entity ent2;
 			switch(i){
 
 			case 0://right
@@ -295,56 +299,61 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 				}
 				break;
 			case 90://up
-			{
-				p.resetAnimation();
-				ent = getEnt(p.getRow() - 1, p.getCol());
-				Entity ent2 = getEnt(p.getRow() - 2, p.getCol());
-				//now we asses the Entity
-				//now, ent is equal to the space directly above mario
-				//TODO Write amazing jumping code here
-				if(ent == null && ent2 == null){
-					//Gets the difference between new and old locations in y.
-					p.moveUp(-30);
+				if (!p.hasJumped()){
+					p.toggleJumped();
+					stupid = 1;
+					p.resetAnimation();
+					ent = getEnt(p.getRow() - 1, p.getCol());
+					ent2 = getEnt(p.getRow() - 2, p.getCol());
+					//now we asses the Entity
+					//now, ent is equal to the space directly above mario
+					//TODO Write amazing jumping code here
+					if(!hasCollided(ent, p) && !hasCollided(ent2, p)){
+						//Gets the difference between new and old locations in y.
+						p.moveUp(-30);
 
-					double doubleMoved = (double)p.getY() / height;
+						double doubleMoved = (double)p.getY() / height;
 
-					int approxMoved = (int)p.getY() / height; 
-					double difference = (doubleMoved - approxMoved) / 24;
-					if (difference > 0)
-					{
-						if (difference > 0.8){
-							level[p.getRow()][p.getCol()] = ' ';
-							p.setRow((p.getY() / height) + 1);
-							level[(p.getY() / height) + 1][p.getCol()] = 'P';
+						int approxMoved = (int)p.getY() / height; 
+						double difference = (doubleMoved - approxMoved) / 24;
+						if (difference > 0)
+						{
+							if (difference > 0.8){
+								level[p.getRow()][p.getCol()] = ' ';
+								p.setRow((p.getY() / height) + 1);
+								level[(p.getY() / height) + 1][p.getCol()] = 'P';
+							}
+
+							else {
+								level[p.getRow()][p.getCol()] = ' ';
+								p.setRow(p.getY() / height);
+								level[p.getY() / height][p.getCol()] = 'P';
+							}
 						}
 
-						else {
-							level[p.getRow()][p.getCol()] = ' ';
-							p.setRow(p.getY() / height);
-							level[p.getY() / height][p.getCol()] = 'P';
-						}
 					}
 
-				}
-
-				else{
-					p.interact(ent);
+					else{
+						p.interact(ent);
+					}
 				}
 
 				break;
-			}
+
 
 
 			case 270:
 				p.resetAnimation();
 				ent = getEntityBelowPlayer(p);
+				ent2 = getEnt(p.getRow() - 2, p.getCol()); 
 				//Attempted to have platforms work properly. Would check if there's a platform
 				//below, and if so, would set falling to false. Doing this would prevent the player
 				//executing the code for changing y, and so the player would simply stop upon hitting a platform.
 				// **This change did not work. **
 
 				//ent = null;
-				if(ent == null){
+
+				if(!hasCollided(ent, p) && !hasCollided(ent2, p)){
 					//Similar code to 'case: 90' 
 
 					/*
@@ -438,9 +447,9 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 
 	/**
 	 * Checks if the two Entities passes in have collided
-	 * @param a
-	 * @param b
-	 * @return
+	 * @param a (Entity)
+	 * @param b (Entity)
+	 * @return boolean value
 	 */
 	protected boolean hasCollided(Entity a, Entity b) {
 		if(a == null || b == null){
