@@ -1,18 +1,29 @@
 package View;
 
-import Controller.*;
-import Model.*;
-import Model.Box;//required due Box's name (Too Ambiguous)
-
-import java.awt.*;
-import java.awt.event.*;
-import java.awt.geom.Area;
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.Rectangle;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import javax.swing.*;
+import javax.swing.JPanel;
 
+import Controller.Render;
+import Model.Box;
+import Model.Entity;
+import Model.Mushroom;
+import Model.Platform;
+import Model.Player;
+import Model.Powerbox;
+//required due Box's name (Too Ambiguous)
+
+@SuppressWarnings("serial")
 public class Level extends JPanel implements KeyListener, ActionListener{
 
 	public static final int width = 24;
@@ -27,10 +38,6 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 	private javax.swing.Timer timer = new javax.swing.Timer(30, this);
 	public final static int gravity = 10;
 	private int counter;
-
-	/**
-	 * Launch the application.
-	 */
 
 
 	/**
@@ -64,20 +71,22 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 
 	}
 
+	@SuppressWarnings("unused")
 	private void updateArrayList() {
 		Render render = new Render();
-
+		ArrayList<Entity> pwrBoxes = new ArrayList<Entity>();
 		inGameObs.clear();
 		for(int r = 0; r < level.length; r++){
 			for(int c = 0; c < level[r].length; c++){
-				char[][] debug = level;
+				char entity = level[r][c];
 				int x = c* width +10;
 				int y = r * height -50;
-				if(r == 11){
+
+				if(entity == 'A'){
 					paintable =true;
 				}
+				
 				BufferedImage img = render.getImage(level[r][c]);
-				char entity = level[r][c];
 				Entity ent = null;
 				Rectangle bounds = new Rectangle();
 
@@ -100,6 +109,7 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 					ent.setCol(c);
 					ent.setRow(r);
 					inGameObs.add(ent);
+					pwrBoxes.add(ent);
 					break;
 				case 'M':
 					ent = new Mushroom(x, y, img);
@@ -123,7 +133,12 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 			}
 
 		}		
-
+		if(pwrBoxes != null){
+			if(pwrBoxes == null){
+				
+			}
+		}
+		inGameObs.addAll(pwrBoxes);
 	}
 
 	private void initializeLevel(int levelNo) {
@@ -258,9 +273,9 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 						level[p.getRow()][p.getCol() + 1] = 'P';
 						p.resetTimesMoved();
 					}
-				
+
 				}
-				
+
 				break;
 			case 180://left
 				p.changeAnimation();
@@ -287,7 +302,7 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 				//now we asses the Entity
 				//now, ent is equal to the space directly above mario
 				//TODO Write amazing jumping code here
-				if(hasCollided(p, ent)){
+				if(ent == null && ent2 == null){
 					//Gets the difference between new and old locations in y.
 					p.moveUp(-30);
 
@@ -433,7 +448,7 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 		}
 		Rectangle aBounds = a.getBounds();
 		Rectangle bBounds = b.getBounds();
- 		// Check if the boundaries intersect
+		// Check if the boundaries intersect
 		if (aBounds.intersects(bBounds)) {
 			return true;
 		}
@@ -441,7 +456,7 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 		return false;
 	}
 
-	
+
 
 
 	@Override

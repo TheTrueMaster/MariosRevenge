@@ -33,7 +33,7 @@ public class Render {
 		character = 'P';
 		img = ImportManager.mario[0];
 		pics.put(character, img);
-//
+		//
 		//enemy img
 		character = 'M';
 		img = ImportManager.mush[0];
@@ -56,15 +56,8 @@ public class Render {
 
 
 
-	public BufferedImage getImage(char c) {
-
-
-		//return new ImageIcon(pics.get('P'));
-		BufferedImage a = (pics.get(c));
-		if(a!=null)
-			return a;
-		else
-			return (pics.get('G'));
+	public BufferedImage getImage(char c){
+		return pics.get(c);
 	}
 
 
