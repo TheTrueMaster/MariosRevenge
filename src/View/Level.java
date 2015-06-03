@@ -35,11 +35,10 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 	char[][] level;//for interaction handling
 	ArrayList<Entity> inGameObs;//for visualization (more fluid)
 	private Player player;//quick refrencej
-	private javax.swing.Timer timer = new javax.swing.Timer(30, this);
+	private javax.swing.Timer timer = new javax.swing.Timer(15, this);
 	public final static int gravity = 6;
 	public final static int MAX_FALL_SPEED = gravity + 4;
 	private int counter;
-	private int stupid = 0;
 
 	/**
 	 * Create the frame.
@@ -250,15 +249,12 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 	}
 
 	private void shift(Player p, int i) {
-		if(stupid == 1){
-			paintable = true;
-		}
+
 
 		try{
-			//we go into the first switch to asses the direction
+			//we go into the first switch to assess the direction
 
 			Entity ent = null;
-			Entity ent2;
 			switch(i){
 
 			case 0://right
@@ -299,53 +295,62 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 				}
 				break;
 			case 90://up
-				if (!p.hasJumped()){
-					p.toggleJumped();
-					stupid = 1;
-					p.resetAnimation();
-					ent = getEnt(p.getRow() - 1, p.getCol());
-					ent2 = getEnt(p.getRow() - 2, p.getCol());
-					//now we asses the Entity
-					//now, ent is equal to the space directly above mario
-					//TODO Write amazing jumping code here
-					if(!hasCollided(ent, p) && !hasCollided(ent2, p)){
-						//Gets the difference between new and old locations in y.
+
+				p.resetAnimation();
+				ent = getEnt(p.getRow() - 1, p.getCol());
+
+				//now we assess the Entity
+				//now, ent is equal to the space directly above mario
+				//TODO Write amazing jumping code here
+				if(!hasCollided(ent, p)){
+					if (!p.hasJumped())
+					{
 						p.moveUp(-30);
-
-						double doubleMoved = (double)p.getY() / height;
-
-						int approxMoved = (int)p.getY() / height; 
-						double difference = (doubleMoved - approxMoved) / 24;
-						if (difference > 0)
-						{
-							if (difference > 0.8){
-								level[p.getRow()][p.getCol()] = ' ';
-								p.setRow((p.getY() / height) + 1);
-								level[(p.getY() / height) + 1][p.getCol()] = 'P';
-							}
-
-							else {
-								level[p.getRow()][p.getCol()] = ' ';
-								p.setRow(p.getY() / height);
-								level[p.getY() / height][p.getCol()] = 'P';
-							}
-						}
-
 					}
 
-					else{
-						p.interact(ent);
+					else
+					{
+						p.moveUp(p.getVelY());
 					}
 				}
 
+				else{
+					p.interact(ent);
+				}
+
+
+				double playerRowDouble = (double)p.getY() / height;
+
+				int playerRowInt = ((int)p.getY()) / height; 
+				double difference = (playerRowDouble - playerRowInt);
+
+				if (difference > 0)
+				{
+					if (difference > 0.08){
+						level[p.getRow()][p.getCol()] = ' ';
+						p.setRow((p.getY() / height) - 1);
+						level[(p.getY() / height) - 1][p.getCol()] = 'P';
+					}
+
+					else {
+						level[p.getRow()][p.getCol()] = ' ';
+						p.setRow(p.getY() / height);
+						level[p.getY() / height][p.getCol()] = 'P';
+					}
+				}
+
+				if (!p.hasJumped()){
+					p.toggleJumped();//sets hasJumped to true
+				}
 				break;
+
 
 
 
 			case 270:
 				p.resetAnimation();
 				ent = getEntityBelowPlayer(p);
-				ent2 = getEnt(p.getRow() - 2, p.getCol()); 
+
 				//Attempted to have platforms work properly. Would check if there's a platform
 				//below, and if so, would set falling to false. Doing this would prevent the player
 				//executing the code for changing y, and so the player would simply stop upon hitting a platform.
@@ -353,83 +358,44 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 
 				//ent = null;
 
-				if(!hasCollided(ent, p) && !hasCollided(ent2, p)){
-					//Similar code to 'case: 90' 
+				if(!hasCollided(ent, p)){
 
-					/*
-					int temp = Math.abs(p.moveUp(p.getVelY())) / 24;
-					if (temp > 0)
-
-					{
-					level[p.getRow()][p.getCol()] = ' ';
-					p.setRow(p.getRow() + temp);
-					level[p.getRow() + temp][p.getCol()] = 'P';
-					} */
-
-					//new code below
 
 					p.moveUp(p.getVelY());
+				}
 
-					double doubleMoved = (double)p.getY() / height;
+				else{
+					p.interact(ent);
+				}
 
-					int approxMoved = (int)p.getY() / height; 
+				playerRowDouble = (double)p.getY() / height;
 
-					double difference = (doubleMoved - approxMoved) / 24;
-					//int amtMoved = Math.abs(dY) / height;
-					//If it is, . . .
-					if (Math.abs(difference) > 0)
-					{
-						//If player moved up (difference is negative)
-						if (difference < 0 )
-						{
-							if (difference <= -0.002){
-								//row decreases by whatever the amount of rows moved was.
-								level[p.getRow()][p.getCol()] = ' ';
-								p.setRow(approxMoved );
-								level[approxMoved ][p.getCol()] = 'P';
-							}
+				playerRowInt = (int)p.getY() / height; 
 
-							else {
-								//row decreases by whatever the amount of rows moved was.
-								level[p.getRow()][p.getCol()] = ' ';
-								p.setRow(approxMoved + 1 );
-								level[approxMoved + 1][p.getCol()] = 'P';
-							}
-
-						}
-
-						else 
-						{
-							if (difference >= 0.002){
-								//row decreases by whatever the amount of rows moved was.
-								level[p.getRow()][p.getCol()] = ' ';
-								p.setRow(approxMoved + 2);
-								level[approxMoved + 2][p.getCol()] = 'P';
-							}
-
-							else {
-								//row decreases by whatever the amount of rows moved was.
-								level[p.getRow()][p.getCol()] = ' ';
-								p.setRow(approxMoved + 1);
-								level[approxMoved + 1][p.getCol()] = 'P';
-							}
-						}
-					}
-					else{
-						p.interact(ent);
+				difference = (playerRowDouble - playerRowInt);
+				if ((difference) > 0)
+				{
+					if (difference > 0.08){
+						//row decreases by whatever the amount of rows moved was.
+						level[p.getRow()][p.getCol()] = ' ';
+						p.setRow(playerRowInt + 1);
+						level[playerRowInt + 1][p.getCol()] = 'P';
 					}
 
-					break;
-
-
-
+					else {
+						//row decreases by whatever the amount of rows moved was.
+						level[p.getRow()][p.getCol()] = ' ';
+						p.setRow(playerRowInt);
+						level[playerRowInt][p.getCol()] = 'P';
+					}
 
 				}
 
 
-
+				break;
 			}
 		}
+
 		catch(IndexOutOfBoundsException e){
 			e.printStackTrace();
 		}

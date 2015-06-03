@@ -109,6 +109,7 @@ public class Player extends Entity {
 				isInJump = true;
 				//hitPlatform = true;
 				setVelY(0);
+				setY(other.getY() - Level.height);
 
 			}
 			else if(getY() < other.getY()){
@@ -119,8 +120,9 @@ public class Player extends Entity {
 				jumping = false;
 				isInJump = false;
 				setVelY(0);
+				setY(other.getY() + Level.height);
 			}
-		}
+		} 
 
 	}
 
@@ -178,14 +180,15 @@ public class Player extends Entity {
 		}
 
 		else if(dir.equals("up")){
-			if (!hasJumped){
+			
 			jumping = true;
 			isInJump = true;
-			}
+			//toggleJumped();
+			
 		} 
 
 		else if(dir.equals("falling")){
-			falling = !falling;
+			falling = true;
 		}
 
 	}
@@ -249,7 +252,7 @@ public class Player extends Entity {
 			}
 
 			//	int temp = yLoc;
-			yLoc += velY + Level.gravity;
+			yLoc += getVelY() + Level.gravity;
 
 
 			if (jumping){
@@ -259,7 +262,6 @@ public class Player extends Entity {
 
 					if (0 - getVelY() >= Level.gravity)
 					{
-						int fjsklfj = getVelY();
 						setVelY(getVelY() + Level.gravity);
 					}
 
@@ -275,7 +277,7 @@ public class Player extends Entity {
 					setVelY(getVelY() + Level.gravity);
 				}
 
-				else if (velY < Level.MAX_FALL_SPEED){
+				else if (getVelY() < Level.MAX_FALL_SPEED){
 
 					setVelY(Level.MAX_FALL_SPEED);
 				}

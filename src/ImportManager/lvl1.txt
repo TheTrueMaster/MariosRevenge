@@ -1,13 +1,11 @@
-12
+10
 
 
-             M
-                   GGGGGGGGGGGGG
-         M                   G
-         GGGGG               G
-                             G
-                    GGGG     G
-          AAAAA              G         
-                             G
-                            PG            M          M  
-GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG
+
+
+
+
+                 
+            GGGGGGGGG
+           P
+GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG

@@ -110,7 +110,7 @@ public  class Entity {
 
 	public int getY()
 	{
-		return yLoc;
+		return yLoc - 50;//accounts for the Level shift
 	}
 
 	public void setX(int x){
