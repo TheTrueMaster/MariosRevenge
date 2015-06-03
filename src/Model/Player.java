@@ -12,7 +12,7 @@ public class Player extends Entity {
 
 	private boolean movingRight, movingLeft, jumping, falling,
 	isInJump, hasJumped, standing;//Booleans So GUI can see players current status
-	private boolean attacking;//for fireballs
+	private boolean attacking, hasAttacked;//for fireballs
 	private int moveImage;
 	private int timesMoved;
 	private Powerup ability = null;
@@ -32,6 +32,18 @@ public class Player extends Entity {
 	}
 
 
+	public boolean canAttack(){
+		return (ability !=null);
+	}
+	
+	public boolean hasAttacked(){
+		return hasAttacked;
+	}
+	
+	public void toggleHasAttacked(){
+		hasAttacked = !hasAttacked;
+	}
+	
 	public boolean isAttacking(){
 		return attacking;
 	}
@@ -342,6 +354,22 @@ public class Player extends Entity {
 
 	public void setFalling(boolean b) {
 		falling  = b;
+		
+	}
+
+
+	public boolean getDirection() {
+		if(movingLeft){
+			return false;
+		}
+		else{
+			return true;
+		}
+	}
+
+
+	public void setHasAttacked(boolean b) {
+		hasAttacked = b;
 		
 	}
 }

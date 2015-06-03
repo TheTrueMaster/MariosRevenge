@@ -28,7 +28,7 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 	public final static int movePixels = 8;
 	char[][] level;//for interaction handling
 	ArrayList<Entity> inGameObs;//for visualization (more fluid)
-	private Player player;//quick refrencej
+	private Player player;//quick refrence
 	private javax.swing.Timer timer = new javax.swing.Timer(15, this);
 	public final static int gravity = 6;
 	public final static int MAX_FALL_SPEED = gravity + 4;
@@ -196,6 +196,23 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 	}
 
 
+	public void updatePlayer(){
+		updatePlayerY();
+		updatePlayerX();
+
+		//Checks if the player should be throwing a fire flower
+		Player p = player;
+		if(p.canAttack()){
+			if(p.hasAttacked()){
+				//do nothing
+			}
+			else{//p has not attacked
+				Fireball fireball = new Fireball(p.getX()+Level.movePixels, p.getY(),
+						p.getDirection());
+				inGameObs.add(fireball);
+			}
+		}
+	}
 	/**
 	 * Updates the Player Location
 	 * 
@@ -474,6 +491,9 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 			// handle right
 			player.changeMovingStatus("right");
 			break;
+		case KeyEvent.VK_SPACE:
+			player.setAttacking(true);
+			player.setHasAttacked(false);
 		}
 		//System.out.println(keyCode);
 	}
@@ -519,11 +539,15 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 		//before repainting, we update all the Entities locations
 		if(!player.getStatus()){
 
-
 		}
 		else{
-			updatePlayerY();
-			updatePlayerX();
+			updatePlayer();		
+		}
+		
+		for(Entity e: inGameObs){
+			if(e instanceof Fireball){
+				((Fireball) e).move();
+			}
 		}
 		repaint();
 
