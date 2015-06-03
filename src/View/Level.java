@@ -209,7 +209,7 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 	 * @param p
 	 */
 
-	private void updatePlayer() {
+	private void updatePlayerY() {
 		Player p = player;
 		int dir = -1;
 		//move player
@@ -217,10 +217,40 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 			Entity ent = getEntityBelowPlayer(p);
 			if (ent == null)
 			{
-				p.setFalling(true);
+				dir = 270;
+			}
+			
+			else p.interact(ent);
+
+		}
+
+		else if(p.isJumping()){
+			dir = 90;
+		}
+
+		else{
+			if(p.isFalling() || !p.isStanding()){
+				dir = 270;
 			}
 
 		}
+
+		switch(dir){
+		case 90:
+
+			shift(p, 90);
+			break;
+		case 270:
+			//p.setY(p.getY() - movePixels);
+			shift(p, 270);
+			break;
+		}
+	}
+	
+	private void updatePlayerX() {
+		Player p = player;
+		int dir = -1;
+		//move player
 
 		if(p.isMovingRight()){
 			dir = 0;
@@ -230,36 +260,19 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 			dir = 180;
 		}
 
-		else if(p.isJumping()){
-			dir = 90;
-		}
-
-		else{
-			if(p.isFalling()){
-				dir = 270;
-			}
-
-		}
-
 		switch(dir){
 		case 0:
 
 			shift(p, 0);
 			break;
-		case 90:
 
-			shift(p, 90);
-			break;
 		case 180:
 
 			shift(p, 180);
 			break;
-		case 270:
-			//p.setY(p.getY() - movePixels);
-			shift(p, 270);
-			break;
 		}
 	}
+
 
 
 
@@ -421,6 +434,7 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 
 		catch(IndexOutOfBoundsException e){
 			e.printStackTrace();
+			p.setRow(10);
 		}
 	}
 
@@ -538,7 +552,8 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 			this.setVisible(false);
 
 		}
-		updatePlayer();
+		updatePlayerY();
+		updatePlayerX();
 		repaint();
 
 	}

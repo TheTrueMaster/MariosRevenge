@@ -122,6 +122,7 @@ public class Player extends Entity {
 			if(getY() > other.getY()){
 				falling = true;
 				isInJump = true;
+				standing = false;
 				//hitPlatform = true;
 				setVelY(0);
 				setY(other.getY() - Level.height);
@@ -238,7 +239,7 @@ public class Player extends Entity {
 
 	public void moveY(int velY)
 	{
-		if (isInJump) //isInJump is boolean that is reset by landing on a platform
+		if (isInJump || !isStanding()) //isInJump is boolean that is reset by landing on a platform
 		{
 			setVelY(velY); //sets the player velocity to the argument
 
