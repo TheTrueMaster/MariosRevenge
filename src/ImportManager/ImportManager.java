@@ -53,7 +53,13 @@ public class ImportManager {
 			mario[6] = ImageIO.read(ImportManager.class.getResource("sprite_Mario7.png"));
 
 			//left  mario
-			leftMario = new BufferedImage[7];
+			leftMario = new BufferedImage[6];
+			leftMario[0] = ImageIO.read(ImportManager.class.getResource("sprite_Mario_left1.png"));
+			leftMario[1] = ImageIO.read(ImportManager.class.getResource("sprite_Mario_left2.png"));
+			leftMario[2] = ImageIO.read(ImportManager.class.getResource("sprite_Mario_left3.png"));
+			leftMario[3] = ImageIO.read(ImportManager.class.getResource("sprite_Mario_left4.png"));
+			leftMario[4] = ImageIO.read(ImportManager.class.getResource("sprite_Mario_left5.png"));
+			leftMario[5] = ImageIO.read(ImportManager.class.getResource("sprite_Mario_left6.png"));
 			
 			box = ImageIO.read(ImportManager.class.getResource("box.png"));
 			pwrBox = ImageIO.read(ImportManager.class.getResource("pwrbox.png"));
@@ -70,6 +76,16 @@ public class ImportManager {
 			fireMario[3] = ImageIO.read(ImportManager.class.getResource("fireMario4.png"));
 			fireMario[4] = ImageIO.read(ImportManager.class.getResource("fireMario5.png"));
 			fireMario[5] = ImageIO.read(ImportManager.class.getResource("fireMario6.png"));
+			
+			fireLeftMario = new BufferedImage[6];
+			fireLeftMario[0] = ImageIO.read(ImportManager.class.getResource("fireMario_left1.png"));
+			fireLeftMario[1] = ImageIO.read(ImportManager.class.getResource("fireMario_left2.png"));
+			fireLeftMario[2] = ImageIO.read(ImportManager.class.getResource("fireMario_left3.png"));
+			fireLeftMario[3] = ImageIO.read(ImportManager.class.getResource("fireMario_left4.png"));
+			fireLeftMario[4] = ImageIO.read(ImportManager.class.getResource("fireMario_left5.png"));
+			fireLeftMario[5] = ImageIO.read(ImportManager.class.getResource("fireMario_left6.png"));
+			
+			
 			
 			flower = ImageIO.read(ImportManager.class.getResource("Fireflower.gif"));
 			deadMush = ImageIO.read(ImportManager.class.getResource("deadMushroom.png"));

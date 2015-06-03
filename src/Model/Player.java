@@ -40,10 +40,16 @@ public class Player extends Entity {
 	
 	public BufferedImage getImg(){
 		if(ability == null){
-			return ImportManager.mario[moveImage];
+			if(movingLeft)
+				return ImportManager.leftMario[moveImage];
+			else
+				return ImportManager.mario[moveImage];
 		}
 		else{
-			return ImportManager.fireMario[moveImage];
+			if(movingLeft)
+				return ImportManager.fireLeftMario[moveImage];
+			else
+				return ImportManager.fireMario[moveImage];
 		}
 	}
 
