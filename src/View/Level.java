@@ -214,7 +214,7 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 		int dir = -1;
 		//move player
 		if (!p.isJumping()){
-			Entity ent = getEntityBelowPlayer(p);
+			Entity ent = EntityHelper.getEntityBelow(p, inGameObs);
 			if (ent == null)
 			{
 				dir = 270;
@@ -276,12 +276,7 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 
 
 
-	private Entity getEntityBelowPlayer(Player p) {
-		ArrayList<Entity> debugAL = inGameObs;
 
-		Entity ent = getEnt(p.getRow() + 1, p.getCol());
-		return ent;
-	}
 
 	private void shift(Player p, int i) {
 
@@ -294,9 +289,9 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 
 			case 0://right
 				p.changeAnimation();
-				ent = getEnt(p.getRow(), p.getCol() + 1);
+				ent = EntityHelper.getEnt(p.getRow(), p.getCol() + 1, inGameObs);
 				//now we asses the Entity
-				if(hasCollided(p, ent)){
+				if(EntityHelper.hasCollided(p, ent)){
 					p.interact(ent);
 				}
 				else{
@@ -314,9 +309,9 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 				break;
 			case 180://left
 				p.changeAnimation();
-				ent = getEnt(p.getRow(), p.getCol() - 1);
+				ent = EntityHelper.getEnt(p.getRow(), p.getCol() - 1, inGameObs);
 				//now we asses the Entity
-				if(hasCollided(p, ent)){
+				if(EntityHelper.hasCollided(p, ent)){
 					p.interact(ent);
 				}
 				else{
@@ -332,12 +327,12 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 			case 90://up
 
 				p.resetAnimation();
-				ent = getEnt(p.getRow() - 1, p.getCol());
+				ent = EntityHelper.getEnt(p.getRow() - 1, p.getCol(), inGameObs);
 
 				//now we assess the Entity
 				//now, ent is equal to the space directly above mario
 				//TODO Write amazing jumping code here
-				if(!hasCollided(ent, p)){
+				if(!EntityHelper.hasCollided(ent, p)){
 					if (!p.hasJumped())
 					{
 						p.moveY(-30);
@@ -384,7 +379,7 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 
 			case 270:
 				p.resetAnimation();
-				ent = getEntityBelowPlayer(p);
+				ent = EntityHelper.getEntityBelow(p, inGameObs);
 
 
 				//Attempted to have platforms work properly. Would check if there's a platform
@@ -394,7 +389,7 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 
 				//ent = null;
 
-				if(!hasCollided(ent, p)){
+				if(!EntityHelper.hasCollided(ent, p)){
 
 
 					p.moveY(p.getVelY());
@@ -438,35 +433,8 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 		}
 	}
 
-	private Entity getEnt(int row, int col) {
-
-		for(Entity e : inGameObs){
-			if(e.getRow() == row && e.getCol() == col)
-				return e;
-		}
-
-		return null;
-	}
-
-	/**
-	 * Checks if the two Entities passes in have collided
-	 * @param a (Entity)
-	 * @param b (Entity)
-	 * @return boolean value
-	 */
-	protected boolean hasCollided(Entity a, Entity b) {
-		if(a == null || b == null){
-			return false;
-		}
-		Rectangle aBounds = a.getBounds();
-		Rectangle bBounds = b.getBounds();
-		// Check if the boundaries intersect
-		if (aBounds.intersects(bBounds)) {
-			return true;
-		}
-
-		return false;
-	}
+	
+	
 
 
 
