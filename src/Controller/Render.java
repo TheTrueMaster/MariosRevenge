@@ -42,19 +42,20 @@ public class Render {
 		character = 'G';
 		img = ImportManager.platform;
 		pics.put(character, img);
-		//power up box img
+		//box
 		character = 'B';
 		img = ImportManager.box;
 		pics.put(character, img);
-		//
+		//pwrbox
 		character = 'A';
 		img = ImportManager.pwrBox;
 		pics.put(character, img);
-
-		character = 'f';//not to be confused with 'F' which is the exit
+		//fireflower
+		character = 'f';//not to be confused with 'F' which is fireball
 		img = ImportManager.flower;
 		pics.put(character, img);
 
+		character = 'F';
 	}
 
 

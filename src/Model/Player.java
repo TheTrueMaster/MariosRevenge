@@ -10,7 +10,9 @@ public class Player extends Entity {
 
 	protected int playerHealth;
 
-	private boolean movingRight, movingLeft, jumping, falling, isInJump, hasJumped, standing;//Booleans So GUI can see players current status
+	private boolean movingRight, movingLeft, jumping, falling,
+	isInJump, hasJumped, standing;//Booleans So GUI can see players current status
+	private boolean attacking;//for fireballs
 	private int moveImage;
 	private int timesMoved;
 	private Powerup ability = null;
@@ -30,6 +32,14 @@ public class Player extends Entity {
 	}
 
 
+	public boolean isAttacking(){
+		return attacking;
+	}
+	
+	public void setAttacking(boolean b){
+		attacking = b;
+	}
+	
 	public int getTimesMoved(){
 		return timesMoved;
 	}
