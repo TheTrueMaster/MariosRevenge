@@ -11,11 +11,11 @@ import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.ArrayList;
+
 import javax.swing.JPanel;
+
 import Controller.Render;
 import Model.*;
-import Model.Box;
-//required due Box's name (Too Ambiguous)
 
 @SuppressWarnings("serial")
 public class Level extends JPanel implements KeyListener, ActionListener{
@@ -171,7 +171,7 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 	public void paintOffScreen(Graphics g){
 		super.paint(g);
 		ArrayList<Entity> removeMe = new ArrayList<Entity>();
-		
+
 		g.setColor(Color.white);
 		for(Entity e : inGameObs){
 
@@ -184,15 +184,15 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 				removeMe.add(e);
 			}
 			else
-			//g.drawRect(e.getX(), e.getY(), width, height);
-			g.drawImage(e.getImg().getScaledInstance(width, height, Image.SCALE_DEFAULT), e.getX(), e.getY(), this);
+				//g.drawRect(e.getX(), e.getY(), width, height);
+				g.drawImage(e.getImg().getScaledInstance(width, height, Image.SCALE_DEFAULT), e.getX(), e.getY(), this);
 
 		}
-		
+
 		for(Entity e: removeMe){
 			inGameObs.remove(e);
 		}
-		
+
 	}
 
 
@@ -226,7 +226,10 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 		}
 
 		else{
-			dir = 270;
+			if(p.isFalling()){
+				dir = 270;
+			}
+			
 		}
 
 		switch(dir){
@@ -246,6 +249,12 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 			//p.setY(p.getY() - movePixels);
 			shift(p, 270);
 			break;
+		}
+	}
+
+	private void updateStanding(Player p) {
+		for(Entity e: inGameObs){
+
 		}
 	}
 
@@ -358,6 +367,7 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 			case 270:
 				p.resetAnimation();
 				ent = getEntityBelowPlayer(p);
+
 
 				//Attempted to have platforms work properly. Would check if there's a platform
 				//below, and if so, would set falling to false. Doing this would prevent the player

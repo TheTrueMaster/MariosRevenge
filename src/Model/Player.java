@@ -10,7 +10,7 @@ public class Player extends Entity {
 
 	protected int playerHealth;
 
-	private boolean movingRight, movingLeft, jumping, falling, isInJump, hasJumped;//Booleans So GUI can see players current status
+	private boolean movingRight, movingLeft, jumping, falling, isInJump, hasJumped, standing;//Booleans So GUI can see players current status
 	private int moveImage;
 	private int timesMoved;
 	private int yTraveled;
@@ -69,6 +69,8 @@ public class Player extends Entity {
 	{
 		hasJumped = !hasJumped;
 	}
+	
+	
 
 //made changes
 	public void interact(Entity other) {
@@ -127,6 +129,7 @@ public class Player extends Entity {
 				jumping = false;
 				isInJump = false;
 				setVelY(0);
+				standing = true;
 				setY(other.getY() + Level.height);
 			}
 		} 
@@ -317,5 +320,21 @@ public class Player extends Entity {
 			return false;
 		}
 		return true;
+	}
+
+
+	public void setStanding(boolean bool){
+		standing = bool;
+	}
+	
+	public boolean isStanding() {
+		// TODO Auto-generated method stub
+		return standing;
+	}
+
+
+	public void setFalling(boolean b) {
+		falling  = b;
+		
 	}
 }
