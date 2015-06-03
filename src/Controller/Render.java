@@ -55,7 +55,7 @@ public class Render {
 		img = ImportManager.flower;
 		pics.put(character, img);
 
-		character = 'F';
+		
 	}
 
 
