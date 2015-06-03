@@ -3,13 +3,17 @@ package Model;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 
+import View.Level;
 import ImportManager.*;
 
 public class Mushroom extends Enemy {
 
 	private int imageNo;
 	private boolean readyToBeKilled;
-	
+	private int timesMovedLeft;
+	private int timesMovedRight;
+	public int moveDir;
+
 	/**
 	 * Initializes the Mushroom
 	 * @param x
@@ -20,6 +24,7 @@ public class Mushroom extends Enemy {
 		super(x, y, icon);
 		imageNo = 0;
 		readyToBeKilled = false;
+		moveDir = 1;
 	}
 
 
@@ -41,7 +46,7 @@ public class Mushroom extends Enemy {
 		this.changeStatus();
 	}
 
-	
+
 	@Override
 	public BufferedImage getImg(){
 		if(imageNo == 2){
@@ -49,19 +54,65 @@ public class Mushroom extends Enemy {
 		}
 		return ImportManager.mush[imageNo];
 	}
-	
-	public int moveRight(){
-		
+
+	public void moveRight(){
+		if (moveDir > 1){
+			xLoc = xLoc += Level.movePixels;
+			timesMovedRight++;
+		}
+	//	return timesMovedRight;
 	}
-	
-	public int moveLeft(){
-		
+
+	public void moveLeft(){
+		if (moveDir < 1){
+			xLoc = xLoc -= Level.movePixels;
+			timesMovedLeft++;
+		}
+		//return timesMovedRight;
 	}
-	
+
 	public void move(int cols)
 	{
+		if (moveDir > 1 && timesMovedRight != cols){
+			moveRight();
+			if (timesMovedRight == cols)
+			{
+				setMoveDir(-1);
+			}
+		}
 		
+		else if (moveDir < 1 && timesMovedLeft != cols)
+		{
+			moveLeft();
+			if (timesMovedLeft == cols)
+			{
+				setMoveDir(1);
+			}
+		}
 	}
+	
+	public void setMoveDir(int dir)
+	{
+		moveDir = dir;
+	}
+
+	public boolean isMovingRight(){
+		if (moveDir > 1)
+		{
+			return true;
+		}
+
+		else return false;
+	}
+
+	public boolean isMovingLeft(){
+		if (moveDir < 1)
+		{
+			return true;
+		}
+		else return false;
+	}
+
 
 	/* @Override
 	public void interact(Entity other) {
