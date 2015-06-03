@@ -221,6 +221,15 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 			}
 
 		}
+		
+		else if(p.isFalling()){
+				dir = 270;
+			}
+		
+
+		else if(p.isJumping()){
+			dir = 90;
+		}
 
 		if(p.isMovingRight()){
 			dir = 0;
@@ -229,17 +238,10 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 		else if(p.isMovingLeft()){
 			dir = 180;
 		}
+	}
 
-		else if(p.isJumping()){
-			dir = 90;
-		}
 
-		else{
-			if(p.isFalling()){
-				dir = 270;
-			}
 
-		}
 
 		switch(dir){
 		case 0:
@@ -327,12 +329,12 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 				if(!hasCollided(ent, p)){
 					if (!p.hasJumped())
 					{
-						p.moveUp(-30);
+						p.moveY(-30);
 					}
 
 					else
 					{
-						p.moveUp(p.getVelY());
+						p.moveY(p.getVelY());
 					}
 				}
 
@@ -384,7 +386,7 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 				if(!hasCollided(ent, p)){
 
 
-					p.moveUp(p.getVelY());
+					p.moveY(p.getVelY());
 				}
 
 				else{

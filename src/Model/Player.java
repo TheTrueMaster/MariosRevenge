@@ -230,16 +230,7 @@ public class Player extends Entity {
 		timesMoved --;
 	}
 
-
-	/**
-	 * Visually Moves the player down
-	 */
-	public void moveDown() {
-		yLoc += Level.movePixels;
-
-	}
-
-	public void moveUp(int velY)
+	public void moveY(int velY)
 	{
 		if (isInJump) //isInJump is boolean that is reset by landing on a platform
 		{
