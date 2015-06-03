@@ -11,16 +11,10 @@ import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.ArrayList;
-
 import javax.swing.JPanel;
-
 import Controller.Render;
+import Model.*;
 import Model.Box;
-import Model.Entity;
-import Model.Mushroom;
-import Model.Platform;
-import Model.Player;
-import Model.Powerbox;
 //required due Box's name (Too Ambiguous)
 
 @SuppressWarnings("serial")
@@ -67,12 +61,12 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 		contentPane.setLayout(null);
 		//initializeLevel(int levelNo
 		initializeLevel(1);
-		updateArrayList();
+		initArrayList();
 
 	}
 
 	@SuppressWarnings("unused")
-	private void updateArrayList() {
+	private void initArrayList() {
 		Render render = new Render();
 		ArrayList<Entity> pwrBoxes = new ArrayList<Entity>();
 		inGameObs.clear();
@@ -119,6 +113,12 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 					break;
 				case 'B':
 					ent = new Box(x, y, img);
+					ent.setCol(c);
+					ent.setRow(r);
+					inGameObs.add(ent);
+					break;
+				case 'f':
+					ent = new Fireflower(x, y, img);
 					ent.setCol(c);
 					ent.setRow(r);
 					inGameObs.add(ent);
@@ -170,21 +170,29 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 
 	public void paintOffScreen(Graphics g){
 		super.paint(g);
-
+		ArrayList<Entity> removeMe = new ArrayList<Entity>();
+		
 		g.setColor(Color.white);
 		for(Entity e : inGameObs){
+
 			if(e instanceof Player){
 				g.drawString("Row: " + e.getRow() + " Col: " + e.getCol() + " TimesMoved: " + ((Player) e).getTimesMoved() + " Health: " + ((Player) e).getHealth() + " VelY: " + e.getVelY(), e.getX(), e.getY());
 			}
 
-			if(e instanceof Powerbox){
-				g.drawString("POWERBOX" , e.getX(), e.getY());
-
+			if(!e.getStatus()){
+				level[e.getRow()][e.getCol()] = ' ';
+				removeMe.add(e);
 			}
+			else
 			//g.drawRect(e.getX(), e.getY(), width, height);
 			g.drawImage(e.getImg().getScaledInstance(width, height, Image.SCALE_DEFAULT), e.getX(), e.getY(), this);
 
 		}
+		
+		for(Entity e: removeMe){
+			inGameObs.remove(e);
+		}
+		
 	}
 
 

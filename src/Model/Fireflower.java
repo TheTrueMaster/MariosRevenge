@@ -4,7 +4,7 @@ import java.awt.image.BufferedImage;
 
 public class Fireflower extends Entity implements Powerup{
 
-	
+	//;fksdjlkfj
 	/**
 	 * Initializes the powerup
 	 * @param x
@@ -25,7 +25,8 @@ public class Fireflower extends Entity implements Powerup{
 		// TODO Auto-generated method stub
 		p.setHealth(p.getHealth() +1);
 		
-		p.givePowerup();
+		p.givePowerup(this);
+		this.changeStatus();
 
 	}
 }

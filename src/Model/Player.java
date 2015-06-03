@@ -14,6 +14,7 @@ public class Player extends Entity {
 	private int moveImage;
 	private int timesMoved;
 	private int yTraveled;
+	private Powerup ability = null;
 	//
 	public Player(int x, int y, BufferedImage icon) {
 		super(x, y, icon);
@@ -36,10 +37,16 @@ public class Player extends Entity {
 	public void resetTime(){
 		timesMoved = 0;
 	}
+	
 	public BufferedImage getImg(){
-
-		return ImportManager.mario[moveImage];
+		if(ability == null){
+			return ImportManager.mario[moveImage];
+		}
+		else{
+			return ImportManager.fireMario[moveImage];
+		}
 	}
+
 	public void setHealth(int a)
 	{
 		playerHealth = a;
@@ -286,7 +293,10 @@ public class Player extends Entity {
 	}
 
 
-
+	public void givePowerup(Powerup pwr) {
+		ability = pwr;
+		
+	}
 
 
 

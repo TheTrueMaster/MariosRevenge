@@ -33,7 +33,7 @@ public class Render {
 		character = 'P';
 		img = ImportManager.mario[0];
 		pics.put(character, img);
-		//
+		//este clase es muy importante
 		//enemy img
 		character = 'M';
 		img = ImportManager.mush[0];
@@ -51,6 +51,9 @@ public class Render {
 		img = ImportManager.pwrBox;
 		pics.put(character, img);
 
+		character = 'f';//not to be confused with 'F' which is the exit
+		img = ImportManager.flower;
+		pics.put(character, img);
 
 	}
 

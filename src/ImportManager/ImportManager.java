@@ -2,7 +2,6 @@ package ImportManager;
 
 import java.awt.image.BufferedImage;
 import java.io.*;
-import java.net.URL;
 
 import javax.imageio.ImageIO;
 
@@ -16,7 +15,7 @@ public class ImportManager {
 	public static BufferedImage player;
 	public static BufferedImage[] mario;
 	public static BufferedImage[] leftMario;
-	
+	//rebuild pls
 	public static BufferedImage[] fireMario;
 	public static BufferedImage[] fireLeftMario;
 	
@@ -26,7 +25,7 @@ public class ImportManager {
 	public static BufferedImage deadMush;
 	public static BufferedImage platform;
 	public static BufferedImage meme;
-	
+	public static BufferedImage flower;
 	
 	public static void loadFiles(){
 		try{
@@ -57,17 +56,18 @@ public class ImportManager {
 			mush[0] = ImageIO.read(ImportManager.class.getResource("mushroom1.png"));
 			mush[1] = ImageIO.read(ImportManager.class.getResource("mushroom2.png"));
 			meme = ImageIO.read(ImportManager.class.getResource("amazingmeme.jpg"));
-			/*
-			fireMario[0] = ImageIO.read(ImportManager.class.getResource("fireMario1.png"));
-			fireMario[1] = ImageIO.read(ImportManager.class.getResource("fireMario1.png"));
-			fireMario[2] = ImageIO.read(ImportManager.class.getResource("fireMario1.png"));
-			fireMario[3] = ImageIO.read(ImportManager.class.getResource("fireMario1.png"));
-			fireMario[4] = ImageIO.read(ImportManager.class.getResource("fireMario1.png"));
-			fireMario[5] = ImageIO.read(ImportManager.class.getResource("fireMario1.png"));
-			fireMario[6] = ImageIO.read(ImportManager.class.getResource("fireMario1.png"));
 			
+			fireMario = new BufferedImage[6];
+			fireMario[0] = ImageIO.read(ImportManager.class.getResource("fireMario1.png"));
+			fireMario[1] = ImageIO.read(ImportManager.class.getResource("fireMario2.png"));
+			fireMario[2] = ImageIO.read(ImportManager.class.getResource("fireMario3.png"));
+			fireMario[3] = ImageIO.read(ImportManager.class.getResource("fireMario4.png"));
+			fireMario[4] = ImageIO.read(ImportManager.class.getResource("fireMario5.png"));
+			fireMario[5] = ImageIO.read(ImportManager.class.getResource("fireMario6.png"));
+			
+			flower = ImageIO.read(ImportManager.class.getResource("Fireflower.gif"));
 			deadMush = ImageIO.read(ImportManager.class.getResource("deadMushroom.png"));
-		}*/}
+		}
 		catch(IOException e){
 			//do nothing
 		}
