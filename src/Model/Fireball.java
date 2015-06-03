@@ -2,20 +2,37 @@ package Model;
 
 import java.awt.image.BufferedImage;
 
+import View.Level;
+
 public class Fireball extends Entity {
 
-	public Fireball(int x, int y, BufferedImage icon) {
+	private int distanceMoved;
+	private boolean isMovingRight;
+	private int moveImage;
+
+	public Fireball(int x, int y, BufferedImage icon, boolean movingRight) {
 		super(x, y, icon);
-		// TODO Auto-generated constructor stub
+		distanceMoved = 0;
+		moveImage = 0;
+		isMovingRight = movingRight;
 	}
 
-	public Fireball(int x, int y, BufferedImage icon, int xC, int yC) {
-		super(x, y, icon, xC, yC);
-		// TODO Auto-generated constructor stub
+	public void move(){
+		if(distanceMoved != 10){
+			if(isMovingRight){
+				this.xLoc += Level.movePixels;
+				distanceMoved++;
+			}
+			else{
+				this.xLoc -= Level.movePixels;
+				distanceMoved++;
+			}
+		}
+		else{
+			this.changeStatus();
+		}
 	}
 
-	public Fireball() {
-		// TODO Auto-generated constructor stub
-	}
+
 
 }
