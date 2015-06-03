@@ -252,11 +252,7 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 		}
 	}
 
-	private void updateStanding(Player p) {
-		for(Entity e: inGameObs){
 
-		}
-	}
 
 	private Entity getEntityBelowPlayer(Player p) {
 		ArrayList<Entity> debugAL = inGameObs;
