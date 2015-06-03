@@ -27,6 +27,11 @@ public class ImportManager {
 	public static BufferedImage meme;
 	public static BufferedImage flower;
 	
+	/**
+	 * Reads in all the files. MUST BE CALLED FIRST (Like absolutely first) in order to not 
+	 * get apon thousands apon thousands apon thousands apon thousands apon thousands 
+	 * apon thousands apon thousands apon thousands apon thousands apon thousands of java.lang.NULLPOINTEREXCEPTIONS
+	 */
 	public static void loadFiles(){
 		try{
 			player = ImageIO.read(ImportManager.class.getResource("fish.gif"));
