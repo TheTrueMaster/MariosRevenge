@@ -26,6 +26,7 @@ public class ImportManager {
 	public static BufferedImage platform;
 	public static BufferedImage meme;
 	public static BufferedImage flower;
+	public static BufferedImage fireball[];
 	
 	/**
 	 * Reads in all the files. MUST BE CALLED FIRST (Like absolutely first) in order to not 
@@ -72,6 +73,9 @@ public class ImportManager {
 			
 			flower = ImageIO.read(ImportManager.class.getResource("Fireflower.gif"));
 			deadMush = ImageIO.read(ImportManager.class.getResource("deadMushroom.png"));
+			
+			fireball = new BufferedImage[4];
+			
 		}
 		catch(IOException e){
 			//do nothing
