@@ -47,9 +47,20 @@ public class Mushroom extends Enemy {
 		if(imageNo == 2){
 			imageNo = 0;
 		}
-		int im = imageNo;
-		imageNo++;
-		return ImportManager.mush[im];
+		return ImportManager.mush[imageNo];
+	}
+	
+	public int moveRight(){
+		
+	}
+	
+	public int moveLeft(){
+		
+	}
+	
+	public void move(int cols)
+	{
+		
 	}
 
 	/* @Override

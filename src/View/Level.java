@@ -217,9 +217,10 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 			Entity ent = EntityHelper.getEntityBelow(p, inGameObs);
 			if (ent == null)
 			{
+				p.setStanding(false);
 				dir = 270;
 			}
-			
+
 			else p.interact(ent);
 
 		}
@@ -246,7 +247,7 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 			break;
 		}
 	}
-	
+
 	private void updatePlayerX() {
 		Player p = player;
 		int dir = -1;
@@ -429,12 +430,12 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 
 		catch(IndexOutOfBoundsException e){
 			e.printStackTrace();
-			p.setRow(10);
+			p.setHealth(0);
 		}
 	}
 
-	
-	
+
+
 
 
 
@@ -517,11 +518,13 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 	private void doAllChecks() {
 		//before repainting, we update all the Entities locations
 		if(!player.getStatus()){
-			this.setVisible(false);
+
 
 		}
-		updatePlayerY();
-		updatePlayerX();
+		else{
+			updatePlayerY();
+			updatePlayerX();
+		}
 		repaint();
 
 	}
