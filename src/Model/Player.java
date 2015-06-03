@@ -13,7 +13,6 @@ public class Player extends Entity {
 	private boolean movingRight, movingLeft, jumping, falling, isInJump, hasJumped, standing;//Booleans So GUI can see players current status
 	private int moveImage;
 	private int timesMoved;
-	private int yTraveled;
 	private Powerup ability = null;
 	//
 	public Player(int x, int y, BufferedImage icon) {
@@ -26,7 +25,8 @@ public class Player extends Entity {
 		falling = false;
 		moveImage = 0;
 		timesMoved = 1;
-		yTraveled = 0;
+		isInJump = false;
+
 	}
 
 
@@ -238,43 +238,39 @@ public class Player extends Entity {
 		yLoc += Level.movePixels;
 
 	}
-	/**
-	 * Returns the pixels traveled in y direction. If it is less than zero,
-	 * direction moved is up, if it is greater than zero direction moved is down.
-	 * @param velY
-	 * @return
-	 */
+
 	public void moveUp(int velY)
 	{
-		if (isInJump)
+		if (isInJump) //isInJump is boolean that is reset by landing on a platform
 		{
-			setVelY(velY);
+			setVelY(velY); //sets the player velocity to the argument
 
-			if (getVelY() >= 0)
+			if (getVelY() >= 0) //velocity is greater than zero --> you are moving down
 			{
 				falling = true;
 				jumping = false;
 			}
 
-			else if (getVelY() < 0){ 
+			else if (getVelY() < 0){ //velocity is less than zero --> you are moving up
 				jumping = true;
 				falling = false;
 			}
-
-			//	int temp = yLoc;
-			yLoc += getVelY() + Level.gravity;
+			
+			yLoc += getVelY() + Level.gravity; //increments the player position
 
 
 			if (jumping){
 
-				if (getVelY() < 0)
+				if (getVelY() < 0) 
 				{
 
-					if (0 - getVelY() >= Level.gravity)
+					if (0 - getVelY() >= Level.gravity) // if the difference between player vel and zero is at least gravity
 					{
+						//velocity is decreased by gravity
 						setVelY(getVelY() + Level.gravity);
 					}
-
+					
+					//other wise if the difference is less than gravity just set to zero
 					else{
 						setVelY(0);
 					}
@@ -283,12 +279,15 @@ public class Player extends Entity {
 
 			else if (falling)
 			{
+				//if the difference between the terminal vel and current vel is at least gravity
 				if (Level.MAX_FALL_SPEED - getVelY() >= 0 && Level.MAX_FALL_SPEED - getVelY() >= Level.gravity ){
+					//vel accelerates downwards by gravity amount
 					setVelY(getVelY() + Level.gravity);
 				}
 
 				else if (getVelY() < Level.MAX_FALL_SPEED){
-
+					//otherwise if the difference is less than gravity
+					//player just accelerates to terminal v
 					setVelY(Level.MAX_FALL_SPEED);
 				}
 			}

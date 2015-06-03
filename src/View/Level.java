@@ -213,6 +213,15 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 		Player p = player;
 		int dir = -1;
 		//move player
+		if (!p.isJumping()){
+			Entity ent = getEntityBelowPlayer(p);
+			if (ent == null)
+			{
+				p.setFalling(true);
+			}
+
+		}
+
 		if(p.isMovingRight()){
 			dir = 0;
 		}
@@ -229,7 +238,7 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 			if(p.isFalling()){
 				dir = 270;
 			}
-			
+
 		}
 
 		switch(dir){
