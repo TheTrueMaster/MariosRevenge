@@ -7,7 +7,7 @@ import java.awt.image.BufferedImage;
 public  class Entity {
 
 	protected int xLoc , yLoc;
-	protected boolean status, hasHealth;
+	protected boolean status = true, hasHealth;
 	protected Rectangle bounds = null;
 	protected int velocityX;
 	protected int velocityY;
