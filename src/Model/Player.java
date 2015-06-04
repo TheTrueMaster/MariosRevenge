@@ -186,7 +186,10 @@ public class Player extends Entity {
 
 		else if (other instanceof Standable)
 		{
-			if(getY() > other.getY()){
+			if(movingRight || movingLeft){
+				//do nothing
+			}
+			else if(getY() > other.getY()){
 				falling = true;
 				isInJump = true;
 				standing = false;
@@ -197,7 +200,6 @@ public class Player extends Entity {
 			}
 			else if(getY() < other.getY()){
 
-
 				falling = false;
 				hasJumped = false;
 				jumping = false;
@@ -207,10 +209,10 @@ public class Player extends Entity {
 				setY(other.getY() + Level.height);
 			}
 			else{//aka the player is right next to the Standable Object
-				
+
 			}
-			
-			
+
+
 		} 
 
 	}
@@ -280,7 +282,7 @@ public class Player extends Entity {
 			falling = true;
 		}
 
-		
+
 	}
 
 	/**
@@ -306,7 +308,7 @@ public class Player extends Entity {
 	/**
 	 * Visually moves the player left and updates timesMoved
 	 */
-	
+
 	public void moveLeft() {
 		xLoc = xLoc -= Level.movePixels;
 		timesMoved --;
