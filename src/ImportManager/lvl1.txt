@@ -6,6 +6,7 @@
 
                  
                  
-G    M       G         P   f         
+G    G      MG         P   f         
 GGGGGGGGGGGGGG   GGGGGGGGGGGGGG                      
 GGGGGGGGGGGGGG   GGGGGGGGGGGGGG
+0123456789012345678901234567890

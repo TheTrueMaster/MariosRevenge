@@ -170,29 +170,37 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 
 	public void paintOffScreen(Graphics g){
 		super.paint(g);
-		ArrayList<Entity> removeMe = new ArrayList<Entity>();
-
-		g.setColor(Color.white);
-		for(Entity e : inGameObs){
-
-			if(e instanceof Player){
-				g.drawString("Row: " + e.getRow() + " Col: " + e.getCol() + " TimesMoved: " + ((Player) e).getTimesMoved() + " Health: " + ((Player) e).getHealth() + " VelY: " + e.getVelY(), e.getX(), e.getY());
-			}
-
-			if(!e.getStatus()){
-				level[e.getRow()][e.getCol()] = ' ';
-				removeMe.add(e);
-			}
-			else
-				//g.drawRect(e.getX(), e.getY(), width, height);
-				g.drawImage(e.getImg().getScaledInstance(width, height, Image.SCALE_DEFAULT), e.getX(), e.getY(), this);
+		if(paintable == false){
 
 		}
+		else{
+			ArrayList<Entity> removeMe = new ArrayList<Entity>();
 
-		for(Entity e: removeMe){
-			inGameObs.remove(e);
+			g.setColor(Color.white);
+			for(Entity e : inGameObs){
+
+				if(e instanceof Player){
+					g.drawString("Row: " + e.getRow() + " Col: " + e.getCol() + " TimesMoved: " + ((Player) e).getTimesMoved() + " Health: " + ((Player) e).getHealth() + " VelY: " + e.getVelY(), e.getX(), e.getY());
+				}
+
+				if(!e.getStatus()){
+					if(e instanceof Player){
+						paintable = false;
+					}
+					else
+						level[e.getRow()][e.getCol()] = ' ';
+					removeMe.add(e);
+				}
+				else
+					//g.drawRect(e.getX(), e.getY(), width, height);
+					g.drawImage(e.getImg().getScaledInstance(width, height, Image.SCALE_DEFAULT), e.getX(), e.getY(), this);
+
+			}
+
+			for(Entity e: removeMe){
+				inGameObs.remove(e);
+			}
 		}
-
 	}
 
 
@@ -278,47 +286,64 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 	private void updateEnemies(){
 		for (Entity e: inGameObs){
 			if (e instanceof Mushroom){
-				
+
 				Mushroom m = ((Mushroom)e);
 				int dir = m.getMoveDir();
-				
+
 				switch (dir){
-				
+
 				case 180: 
-					
-				Entity other = EntityHelper.getEntitytoLeft(e, inGameObs);
-					{
-						if (!EntityHelper.hasCollided(e, other)){
-							m.moveLeft();
-						}
-						
-						else {
-							
-							m.setMoveDir(0);
-						}
+
+					Entity other = EntityHelper.getEntitytoLeft(m, inGameObs);
+
+					if (EntityHelper.hasCollided(m, other)){
+						m.setMoveDir(0);
 					}
-					
+
+
+					else if (other == null){
+						m.moveLeft();
+						if(m.getTimesMoved() == -6){
+							level[m.getRow()][m.getCol()] = ' ';
+							m.setCol(m.getCol() - 1);
+							level[m.getRow()][m.getCol() - 1] = 'M';
+							m.resetTimesMoved();
+						}
+
+					}
+
+
+
 					break;
-					
+
 				case 0:
-					
-					other = EntityHelper.getEntitytoRight(e, inGameObs);
-					{
-						if (!EntityHelper.hasCollided(e, other)){
-							m.moveRight();
-						}
-						
-						else {
-							
-							m.setMoveDir(180);
-						}
+
+					other = EntityHelper.getEntitytoRight(m, inGameObs);
+				
+					if (EntityHelper.hasCollided(m, other)){
+						m.setMoveDir(180);
 					}
-					
+
+
+					else if (other == null){
+						m.moveRight();
+						if(m.getTimesMoved() == 6){
+							level[m.getRow()][m.getCol()] = ' ';
+							m.setCol(m.getCol() + 1);
+							level[m.getRow()][m.getCol() + 1] = 'M';
+							m.resetTimesMoved();
+						}
+
+					}
+
+
+
 					break;
 				}
 			}
 		}
 	}
+
 
 
 
@@ -512,6 +537,11 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 			// handle right
 			player.changeMovingStatus("right");
 			break;
+		case KeyEvent.VK_SPACE:
+			if(player.canAttack()){
+				player.setAttacking(true);
+				System.out.println("Fireball!");
+			}
 		}
 		//System.out.println(keyCode);
 	}
@@ -554,18 +584,29 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 	}
 
 	private void doAllChecks() {
-		//before repainting, we update all the Entities locations
-		if(!player.getStatus()){
-
-
+		if(paintable == false){
+			this.setVisible(false);
 		}
 		else{
-			updatePlayerY();
-			updatePlayerX();
-			updateEnemies();
-		}
-		repaint();
+			//before repainting, we update all the Entities locations
+			if(!player.getStatus()){
 
+
+			}
+			else{
+				updatePlayer();
+				//updateEnemies();
+			}
+			repaint();
+		}
+	}
+	private void updatePlayer() {
+		updatePlayerY();
+		updatePlayerX();	
+		if(player.isAttacking()){
+			boolean dir = player.isFacingRight();
+			Fireball ball = new Fireball(player.getX()+ Level.width, player.getY(), dir);
+		}
 	}
 
 }
