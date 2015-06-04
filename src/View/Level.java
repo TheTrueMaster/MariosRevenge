@@ -585,7 +585,11 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 	}
 	private void updatePlayer() {
 		updatePlayerY();
-		updatePlayerX();		
+		updatePlayerX();	
+		if(player.isAttacking()){
+			boolean dir = player.isFacingRight();
+			Fireball ball = new Fireball(player.getX()+ Level.width, player.getY(), dir);
+		}
 	}
 
 }

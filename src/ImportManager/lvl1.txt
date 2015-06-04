@@ -1,11 +1,11 @@
 10
 
-
+ 
               
-
-
-                 
-                 
-G    M       G         P   f         
-GGGGGGGGGGGGGG   GGGGGGGGGGGGGG                      
-GGGGGGGGGGGGGG   GGGGGGGGGGGGGG
+G
+G                
+G                
+G           P    f     
+GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG
+GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG
+GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG
