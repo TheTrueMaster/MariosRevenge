@@ -44,8 +44,9 @@ public class Fireball extends Entity {
 	}
 	
 	public boolean isMovingRight(){
-		return isMovingRight();
+		return isMovingRight;
 	}
+	
 	public int getTimesMoved(){
 		return distanceMoved;
 	}
@@ -64,6 +65,21 @@ public class Fireball extends Entity {
 			e.printStackTrace();
 		}
 		return ImportManager.fireball[temp];
+	}
+
+	public void interact(Entity ent) {
+		if(ent instanceof Mushroom){
+			Mushroom e = (Mushroom) ent;
+			e.changeStatus();//because mushrooms only have one health
+		}
+		if(ent == null){
+			this.move();
+			return;//so the fireball doesn't remove itself from the map
+		}
+		
+		//by default, if the fire ball has interacted, the fireball should now no longer be on the map
+		this.changeStatus();
+		
 	}
 
 

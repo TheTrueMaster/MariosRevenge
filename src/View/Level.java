@@ -183,7 +183,7 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 			for(Entity e : inGameObs){
 
 				if(e instanceof Fireball){
-					//g.drawString("Row: " + e.getRow() + " Col: " + e.getCol() + " TimesMoved: " + ((Fireball) e).getTimesMoved(), e.getX(), e.getY());
+					g.drawString("Row: " + e.getRow() + " Col: " + e.getCol() + " TimesMoved: " + ((Fireball) e).getTimesMoved(), e.getX(), e.getY());
 				}
 
 				if(!e.getStatus()){
@@ -465,13 +465,6 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 				ent = EntityHelper.getEntityBelow(p, inGameObs);
 
 
-				//Attempted to have platforms work properly. Would check if there's a platform
-				//below, and if so, would set falling to false. Doing this would prevent the player
-				//executing the code for changing y, and so the player would simply stop upon hitting a platform.
-				// **This change did not work. **
-
-				//ent = null;
-
 				if(!EntityHelper.hasCollided(ent, p)){
 
 
@@ -519,7 +512,6 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 
 	@Override
 	public void keyPressed(KeyEvent e) {
-		//System.out.println("Pressed");
 		/*
 		 PUEDOCODE
 		 if(rightKey is pressed)
@@ -554,12 +546,11 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 		case KeyEvent.VK_SPACE:
 			if(player.canAttack()){
 				player.setAttacking(true);
+				player.setHasAttacked(false);
 				inGameObs.removeAll(fireballs);
 				fireballs.clear();
-				System.out.println("Fireball!");
 			}
 		}
-		//System.out.println(keyCode);
 	}
 
 	@Override
@@ -619,15 +610,17 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 	}
 	private void updateProjectiles() {
 		for(Fireball f: fireballs){//TODO change to class (Also a TODO: create a class called projectile) projectile
-			/*if(f.isMovingRight()){
+			if(f.isMovingRight()){
 				Entity ent = EntityHelper.getEntitytoRight(f, inGameObs);
 				f.interact(ent);
 			}
 			else{
 				Entity ent = EntityHelper.getEntitytoLeft(f, inGameObs);
+				if(ent instanceof Player){
+					ent = EntityHelper.getEntitytoLeft(ent, inGameObs);
+				}
 				f.interact(ent);
-			}*/
-			f.move();
+			}
 		}
 
 	}
@@ -641,13 +634,12 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 			Fireball ball = new Fireball(x, y, dir);
 			ball.setRow(player.getRow());
 			ball.setCol(player.getCol() + 1);
-			if(fireballs.size() != 1){
+			if(!player.hasAttacked()){
 				inGameObs.add(ball);
 				fireballs.add(ball);
-			}
-			else{
 				player.setHasAttacked(true);
 			}
+			
 
 		}
 	}
