@@ -294,39 +294,56 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 
 				case 180: 
 
-					Entity other = EntityHelper.getEntitytoLeft(e, inGameObs);
-					{
-						if (!EntityHelper.hasCollided(e, other)){
-							m.moveLeft();
-						}
+					Entity other = EntityHelper.getEntitytoLeft(m, inGameObs);
 
-						else {
-
-							m.setMoveDir(0);
-						}
+					if (EntityHelper.hasCollided(m, other)){
+						m.setMoveDir(0);
 					}
+
+
+					else if (other == null){
+						m.moveLeft();
+						if(m.getTimesMoved() == -6){
+							level[m.getRow()][m.getCol()] = ' ';
+							m.setCol(m.getCol() - 1);
+							level[m.getRow()][m.getCol() - 1] = 'M';
+							m.resetTimesMoved();
+						}
+
+					}
+
+
 
 					break;
 
 				case 0:
 
-					other = EntityHelper.getEntitytoRight(e, inGameObs);
-					{
-						if (!EntityHelper.hasCollided(e, other)){
-							m.moveRight();
-						}
-
-						else {
-
-							m.setMoveDir(180);
-						}
+					other = EntityHelper.getEntitytoRight(m, inGameObs);
+				
+					if (EntityHelper.hasCollided(m, other)){
+						m.setMoveDir(180);
 					}
+
+
+					else if (other == null){
+						m.moveRight();
+						if(m.getTimesMoved() == 6){
+							level[m.getRow()][m.getCol()] = ' ';
+							m.setCol(m.getCol() + 1);
+							level[m.getRow()][m.getCol() + 1] = 'M';
+							m.resetTimesMoved();
+						}
+
+					}
+
+
 
 					break;
 				}
 			}
 		}
 	}
+
 
 
 
