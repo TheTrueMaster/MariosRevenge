@@ -31,7 +31,7 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 	//below are the individual array lists added to make tracersing more smooth
 	private ArrayList<Enemy> enemies;
 	private ArrayList<Fireball> fireballs;
-
+	
 
 	private Player player;//quick refrencej
 	private javax.swing.Timer timer = new javax.swing.Timer(15, this);
@@ -314,6 +314,9 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 
 					Entity other = EntityHelper.getEntitytoLeft(m, inGameObs);
 
+					if(other instanceof Platform){
+						m.setMoveDir(180);
+					}
 					if (EntityHelper.hasCollided(m, other)){
 						m.setMoveDir(0);
 					}
@@ -611,6 +614,16 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 			}
 			repaint();
 		}
+		updateBounds();
+	}
+	private void updateBounds() {
+		for(Entity e: inGameObs){
+			Rectangle bounds = new Rectangle();
+			bounds.setSize(e.getImg().getWidth(this), e.getImg().getHeight(this));
+			bounds.setLocation(e.getX(), e.getY());
+			e.setBounds(bounds);
+		}
+		
 	}
 	private void updateProjectiles() {
 		for(Fireball f: fireballs){//TODO change to class (Also a TODO: create a class called projectile) projectile
