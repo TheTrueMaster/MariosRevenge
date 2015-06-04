@@ -206,6 +206,9 @@ public class Player extends Entity {
 				standing = true;
 				setY(other.getY() + Level.height);
 			}
+			else{//aka the player is right next to the Standable Object
+				
+			}
 			
 			
 		} 
