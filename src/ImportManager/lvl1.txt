@@ -5,8 +5,8 @@
                  
                  
                  
-                 
-G    G      M        Pf            
+                       A
+G    G       M G      P           
 GGGGGGGGGGGGGGGGGGGGGGGGGGGGGG                      
 GGGGGGGGGGGGGGGGGGGGGGGGGGGGGG
 0123456789012345678901234567890

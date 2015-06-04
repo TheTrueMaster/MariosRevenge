@@ -61,6 +61,9 @@ public class Render {
 
 
 	public BufferedImage getImage(char c){
+		if(c == 'A'){
+			return pics.get('A');
+		}
 		return pics.get(c);
 	}
 
