@@ -37,6 +37,7 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 	private javax.swing.Timer timer = new javax.swing.Timer(15, this);
 	public final static int gravity = 6;
 	public final static int MAX_FALL_SPEED = gravity + 4;
+	public static final int cols = 57;
 	private int counter;
 
 	/**
@@ -181,8 +182,8 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 			g.setColor(Color.white);
 			for(Entity e : inGameObs){
 
-				if(e instanceof Player){
-					//g.drawString("Row: " + e.getRow() + " Col: " + e.getCol() + " TimesMoved: " + ((Player) e).getTimesMoved() + " Health: " + ((Player) e).getHealth() + " VelY: " + e.getVelY(), e.getX(), e.getY());
+				if(e instanceof Fireball){
+					//g.drawString("Row: " + e.getRow() + " Col: " + e.getCol() + " TimesMoved: " + ((Fireball) e).getTimesMoved(), e.getX(), e.getY());
 				}
 
 				if(!e.getStatus()){
@@ -618,6 +619,14 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 	}
 	private void updateProjectiles() {
 		for(Fireball f: fireballs){//TODO change to class (Also a TODO: create a class called projectile) projectile
+			/*if(f.isMovingRight()){
+				Entity ent = EntityHelper.getEntitytoRight(f, inGameObs);
+				f.interact(ent);
+			}
+			else{
+				Entity ent = EntityHelper.getEntitytoLeft(f, inGameObs);
+				f.interact(ent);
+			}*/
 			f.move();
 		}
 
@@ -632,7 +641,7 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 			Fireball ball = new Fireball(x, y, dir);
 			ball.setRow(player.getRow());
 			ball.setCol(player.getCol() + 1);
-			if(fireballs.size() != 3){
+			if(fireballs.size() != 1){
 				inGameObs.add(ball);
 				fireballs.add(ball);
 			}

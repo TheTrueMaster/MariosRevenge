@@ -18,20 +18,36 @@ public class Fireball extends Entity {
 	}
 
 	public void move(){
-		if(distanceMoved != -10){
+		if(col + 1 != Level.cols){
 			if(isMovingRight){
 				this.xLoc += Level.movePixels;
 				distanceMoved++;
+				if(distanceMoved == 3){
+					distanceMoved = 0;
+					col++;
+				}
 			}
 			else{
 				this.xLoc -= Level.movePixels;
 				distanceMoved++;
+				if(distanceMoved == 3){
+					distanceMoved = 0;
+					col--;
+				}
 			}
 			moveImage++;
 		}
 		else{
 			this.changeStatus();
 		}
+		
+	}
+	
+	public boolean isMovingRight(){
+		return isMovingRight();
+	}
+	public int getTimesMoved(){
+		return distanceMoved;
 	}
 	
 	@Override

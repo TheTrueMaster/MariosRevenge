@@ -25,7 +25,7 @@ public class TextLoader
 		int height = file.nextInt();
 		file.nextLine();
 		
-		char[][] level = new char[height][57];
+		char[][] level = new char[height][Level.cols];
 		
 
 		
