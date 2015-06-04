@@ -96,16 +96,25 @@ public class Player extends Entity {
 			if(!facingRight){
 				if(jumping)
 					return ImportManager.fireLeftMario[jumpImage];
-				if(falling)
-					return ImportManager.fireMario[fallingImage];//doesnt matter for falling
-
+				if(falling){
+					BufferedImage wtf = ImportManager.fireMario[fallingImage-1];
+					if(wtf == null){
+						falling = true;
+					}
+					return wtf;//doesnt matter for falling
+				}
 				return ImportManager.fireLeftMario[moveImage];
 			}
 			else{// facingRight == true
 				if(jumping)
 					return ImportManager.fireMario[jumpImage];
-				if(falling)
-					return ImportManager.fireMario[fallingImage];//doesnt matter for falling
+				if(falling){
+					BufferedImage wtf = ImportManager.fireMario[fallingImage-1];
+					if(wtf == null){
+						falling = true;
+					}
+					return wtf;//doesnt matter for falling
+				}
 				return ImportManager.fireMario[moveImage];
 			}
 		}

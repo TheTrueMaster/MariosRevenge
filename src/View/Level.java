@@ -170,29 +170,37 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 
 	public void paintOffScreen(Graphics g){
 		super.paint(g);
-		ArrayList<Entity> removeMe = new ArrayList<Entity>();
-
-		g.setColor(Color.white);
-		for(Entity e : inGameObs){
-
-			if(e instanceof Player){
-				g.drawString("Row: " + e.getRow() + " Col: " + e.getCol() + " TimesMoved: " + ((Player) e).getTimesMoved() + " Health: " + ((Player) e).getHealth() + " VelY: " + e.getVelY(), e.getX(), e.getY());
-			}
-
-			if(!e.getStatus()){
-				level[e.getRow()][e.getCol()] = ' ';
-				removeMe.add(e);
-			}
-			else
-				//g.drawRect(e.getX(), e.getY(), width, height);
-				g.drawImage(e.getImg().getScaledInstance(width, height, Image.SCALE_DEFAULT), e.getX(), e.getY(), this);
+		if(paintable == false){
 
 		}
+		else{
+			ArrayList<Entity> removeMe = new ArrayList<Entity>();
 
-		for(Entity e: removeMe){
-			inGameObs.remove(e);
+			g.setColor(Color.white);
+			for(Entity e : inGameObs){
+
+				if(e instanceof Player){
+					g.drawString("Row: " + e.getRow() + " Col: " + e.getCol() + " TimesMoved: " + ((Player) e).getTimesMoved() + " Health: " + ((Player) e).getHealth() + " VelY: " + e.getVelY(), e.getX(), e.getY());
+				}
+
+				if(!e.getStatus()){
+					if(e instanceof Player){
+						paintable = false;
+					}
+					else
+						level[e.getRow()][e.getCol()] = ' ';
+					removeMe.add(e);
+				}
+				else
+					//g.drawRect(e.getX(), e.getY(), width, height);
+					g.drawImage(e.getImg().getScaledInstance(width, height, Image.SCALE_DEFAULT), e.getX(), e.getY(), this);
+
+			}
+
+			for(Entity e: removeMe){
+				inGameObs.remove(e);
+			}
 		}
-
 	}
 
 
@@ -278,42 +286,42 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 	private void updateEnemies(){
 		for (Entity e: inGameObs){
 			if (e instanceof Mushroom){
-				
+
 				Mushroom m = ((Mushroom)e);
 				int dir = m.getMoveDir();
-				
+
 				switch (dir){
-				
+
 				case 180: 
-					
-				Entity other = EntityHelper.getEntitytoLeft(e, inGameObs);
+
+					Entity other = EntityHelper.getEntitytoLeft(e, inGameObs);
 					{
 						if (!EntityHelper.hasCollided(e, other)){
 							m.moveLeft();
 						}
-						
+
 						else {
-							
+
 							m.setMoveDir(0);
 						}
 					}
-					
+
 					break;
-					
+
 				case 0:
-					
+
 					other = EntityHelper.getEntitytoRight(e, inGameObs);
 					{
 						if (!EntityHelper.hasCollided(e, other)){
 							m.moveRight();
 						}
-						
+
 						else {
-							
+
 							m.setMoveDir(180);
 						}
 					}
-					
+
 					break;
 				}
 			}
@@ -559,18 +567,25 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 	}
 
 	private void doAllChecks() {
-		//before repainting, we update all the Entities locations
-		if(!player.getStatus()){
-
-
+		if(paintable == false){
+			this.setVisible(false);
 		}
 		else{
-			updatePlayerY();
-			updatePlayerX();
-			updateEnemies();
-		}
-		repaint();
+			//before repainting, we update all the Entities locations
+			if(!player.getStatus()){
 
+
+			}
+			else{
+				updatePlayer();
+				//updateEnemies();
+			}
+			repaint();
+		}
+	}
+	private void updatePlayer() {
+		updatePlayerY();
+		updatePlayerX();		
 	}
 
 }
