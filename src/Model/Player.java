@@ -29,7 +29,7 @@ public class Player extends Entity {
 		jumping = false;
 		falling = false;
 		moveImage = 0;
-		timesMoved = 1;
+		timesMoved = 0;
 		isInJump = false;
 
 	}
@@ -78,7 +78,7 @@ public class Player extends Entity {
 		if(ability == null){
 			if(!facingRight){
 				if(jumping)
-					return ImportManager.leftMario[jumpImage];
+					return ImportManager.leftMario[jumpImage-1];
 				if(falling)
 					return ImportManager.mario[fallingImage];//doesnt matter for falling
 
@@ -86,7 +86,7 @@ public class Player extends Entity {
 			}
 			else{// facingRight == true
 				if(jumping)
-					return ImportManager.mario[jumpImage];
+					return ImportManager.mario[jumpImage-1];
 				if(falling)
 					return ImportManager.mario[fallingImage];//doesnt matter for falling
 				return ImportManager.mario[moveImage];
@@ -95,17 +95,26 @@ public class Player extends Entity {
 		else{//if the player is fire mario
 			if(!facingRight){
 				if(jumping)
-					return ImportManager.fireLeftMario[jumpImage];
-				if(falling)
-					return ImportManager.fireMario[fallingImage];//doesnt matter for falling
-
+					return ImportManager.fireLeftMario[jumpImage-1];
+				if(falling){
+					BufferedImage wtf = ImportManager.fireMario[fallingImage-1];
+					if(wtf == null){
+						falling = true;
+					}
+					return wtf;//doesnt matter for falling
+				}
 				return ImportManager.fireLeftMario[moveImage];
 			}
 			else{// facingRight == true
 				if(jumping)
-					return ImportManager.fireMario[jumpImage];
-				if(falling)
-					return ImportManager.fireMario[fallingImage];//doesnt matter for falling
+					return ImportManager.fireMario[jumpImage-1];
+				if(falling){
+					BufferedImage wtf = ImportManager.fireMario[fallingImage-1];
+					if(wtf == null){
+						falling = true;
+					}
+					return wtf;//doesnt matter for falling
+				}
 				return ImportManager.fireMario[moveImage];
 			}
 		}
