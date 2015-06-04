@@ -185,6 +185,10 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 				if(e instanceof Fireball){
 					g.drawString("Row: " + e.getRow() + " Col: " + e.getCol() + " TimesMoved: " + ((Fireball) e).getTimesMoved(), e.getX(), e.getY());
 				}
+				
+				else if (e instanceof Mushroom){
+					g.drawString(" Col:" + e.getCol() + " MoveDir: " + ((Mushroom)e).getMoveDir(), e.getX(), e.getY());
+				}
 
 				if(!e.getStatus()){
 					if(e instanceof Player){
@@ -315,7 +319,7 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 					}
 
 
-					else if (other == null){
+					else if (!EntityHelper.hasCollided(m, other)){
 						m.moveLeft();
 						if(m.getTimesMoved() == -6){
 							level[m.getRow()][m.getCol()] = ' ';
@@ -339,7 +343,7 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 					}
 
 
-					else if (other == null){
+					else if (!EntityHelper.hasCollided(m, other)){
 						m.moveRight();
 						if(m.getTimesMoved() == 6){
 							level[m.getRow()][m.getCol()] = ' ';

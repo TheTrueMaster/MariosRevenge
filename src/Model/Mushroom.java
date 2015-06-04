@@ -68,16 +68,6 @@ public class Mushroom extends Enemy {
 		//xLoc = xLoc -= Level.width;
 	}
 
-	public void move()
-	{
-		if (moveDir == 0){
-			moveRight();
-		}
-		else if (moveDir == 180)
-		{
-			moveLeft();
-		}
-	}
 
 	public void setMoveDir(int dir)
 	{
