@@ -75,7 +75,7 @@ public class Player extends Entity {
 	}
 
 	public BufferedImage getImg(){
-		if(ability == null){
+		if(playerHealth <= 1){
 			if(!facingRight){
 				if(jumping)
 					return ImportManager.leftMario[jumpImage-1];
