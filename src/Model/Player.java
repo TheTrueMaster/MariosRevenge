@@ -218,6 +218,9 @@ public class Player extends Entity {
 
 
 		} 
+		else if(other instanceof Exit){
+			((Exit)other).toggleCompleted();
+		}
 
 	}
 

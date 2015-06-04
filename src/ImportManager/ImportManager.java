@@ -15,7 +15,6 @@ public class ImportManager {
 	public static BufferedImage player;
 	public static BufferedImage[] mario;
 	public static BufferedImage[] leftMario;
-	//rebuild pls
 	public static BufferedImage[] fireMario;
 	public static BufferedImage[] fireLeftMario;
 	
@@ -28,6 +27,7 @@ public class ImportManager {
 	public static BufferedImage flower;
 	public static BufferedImage fireball[];
 	
+	public static BufferedImage exit;
 	/**
 	 * Reads in all the files. MUST BE CALLED FIRST (Like absolutely first) in order to not 
 	 * get apon thousands apon thousands apon thousands apon thousands apon thousands 
@@ -95,7 +95,8 @@ public class ImportManager {
 			fireball[1] = ImageIO.read(ImportManager.class.getResource("fireball2.png"));
 			fireball[2] = ImageIO.read(ImportManager.class.getResource("fireball3.png"));
 			fireball[3] = ImageIO.read(ImportManager.class.getResource("fireball4.png"));
-
+			
+			exit = ImageIO.read(ImportManager.class.getResource("Exit.gif"));
 			
 		}
 		catch(IOException e){

@@ -54,8 +54,11 @@ public class Render {
 		character = 'f';//not to be confused with 'F' which is fireball
 		img = ImportManager.flower;
 		pics.put(character, img);
+		//exit
+		character = 'E';
+		img = ImportManager.exit;
+		pics.put(character, img);
 
-		
 	}
 
 

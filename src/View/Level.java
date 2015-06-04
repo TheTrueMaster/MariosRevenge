@@ -31,7 +31,7 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 	//below are the individual array lists added to make tracersing more smooth
 	private ArrayList<Enemy> enemies;
 	private ArrayList<Fireball> fireballs;
-	
+	private Exit exit;
 
 	private Player player;//quick refrencej
 	private javax.swing.Timer timer = new javax.swing.Timer(15, this);
@@ -49,6 +49,7 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 		setFocusable(true);
 		addKeyListener(this);
 		init();
+		setBounds(0,0, width, height);
 
 
 	}
@@ -62,7 +63,6 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 		enemies = new ArrayList<Enemy>();
 		fireballs = new ArrayList<Fireball>();
 		setBackground(Color.BLACK);
-		setBounds(0,0, 850, 450);
 		contentPane = new JPanel();
 		//contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(null);
@@ -130,7 +130,14 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 					ent.setRow(r);
 					inGameObs.add(ent);
 					break;
+				case 'E':
+					ent = new Exit(x, y, img);
+					ent.setCol(c);
+					ent.setRow(r);
+					inGameObs.add(ent);
+					exit = (Exit)ent;
 				}
+				
 				if(ent != null){
 					bounds.setSize(ent.getImg().getWidth(this), ent.getImg().getHeight(this));
 					bounds.setLocation(ent.getX(), ent.getY());

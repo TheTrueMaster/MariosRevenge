@@ -55,16 +55,16 @@ public class Visual implements KeyListener {
 		frame.getContentPane().setBackground(Color.BLACK);
 		frame.setBackground(Color.BLACK);
 		frame.getContentPane().setForeground(Color.BLACK);
-		frame.setBounds(100, 100, 997, 599);
+		frame.setBounds(100, 100, 1800, 599);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
-		//frame.setExtendedState(JFrame.MAXIMIZED_BOTH); 
+		frame.setExtendedState(JFrame.MAXIMIZED_BOTH); 
 		
 		ImageIcon icon = new ImageIcon(ImportManager.title);
 		Image scaled = icon.getImage().getScaledInstance(779, 214, Image.SCALE_DEFAULT);
 		
 		
-		level = new Level(frame.getHeight(), frame.getWidth());
+		level = new Level(frame.getHeight() - 30, frame.getWidth());
 		
 		/*Below is JPanel code for instruction screen*/
 		instructions = new JPanel();
@@ -126,7 +126,7 @@ public class Visual implements KeyListener {
 				JPanel p = (JPanel)level;
 				frame.getContentPane().add(p);
 				splash.setVisible(false);
-				level.setSize(949, 513);
+				level.setSize(frame.getWidth(), frame.getHeight());
 				btnInstructions.setText("Back to Main");
 				screen = 2;
 				Level.paintable = true;
