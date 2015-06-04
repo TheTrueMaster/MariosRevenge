@@ -512,6 +512,11 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 			// handle right
 			player.changeMovingStatus("right");
 			break;
+		case KeyEvent.VK_SPACE:
+			if(player.canAttack()){
+				player.setAttacking(true);
+				System.out.println("Fireball!");
+			}
 		}
 		//System.out.println(keyCode);
 	}

@@ -29,7 +29,7 @@ public class Player extends Entity {
 		jumping = false;
 		falling = false;
 		moveImage = 0;
-		timesMoved = 1;
+		timesMoved = 0;
 		isInJump = false;
 
 	}

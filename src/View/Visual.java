@@ -122,7 +122,7 @@ public class Visual implements KeyListener {
 		start.setSize(50, 8);
 		start.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				
+				//level = new Level(frame.getWidth(), frame.getHeight());
 				JPanel p = (JPanel)level;
 				frame.getContentPane().add(p);
 				splash.setVisible(false);
