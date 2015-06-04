@@ -145,7 +145,7 @@ public class Player extends Entity {
 
 
 
-	//made changes
+	@Override
 	public void interact(Entity other) {
 		if (other instanceof Powerup)
 		{
@@ -206,6 +206,8 @@ public class Player extends Entity {
 				standing = true;
 				setY(other.getY() + Level.height);
 			}
+			
+			
 		} 
 
 	}
