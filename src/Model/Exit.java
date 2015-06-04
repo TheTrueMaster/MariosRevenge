@@ -14,6 +14,10 @@ public class Exit extends Entity {
 	public void toggleCompleted(){
 		levelCompleted = !levelCompleted;
 	}
+
+	public boolean isDone() {
+		return levelCompleted;
+	}
 	
 
 }

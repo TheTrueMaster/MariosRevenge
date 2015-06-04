@@ -606,7 +606,7 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 	}
 
 	private void doAllChecks() {
-		if(paintable == false){
+		if(exit.isDone() == true){
 			this.setVisible(false);
 		}
 		else{
