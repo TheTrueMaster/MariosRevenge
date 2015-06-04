@@ -34,7 +34,7 @@ public class EntityHelper {
 
 		return false;
 	}
-	
+
 	public static Entity getEnt(int row, int col, ArrayList<Entity> inGameObs) {
 
 		for(Entity e : inGameObs){
@@ -44,10 +44,21 @@ public class EntityHelper {
 
 		return null;
 	}
-	
+
 	public static Entity getEntityBelow(Entity e, ArrayList<Entity> inGameObs) {
 
 		Entity ent = getEnt(e.getRow() + 1, e.getCol(), inGameObs);
 		return ent;
 	}
+
+	public static Entity getEntitytoLeft(Entity e, ArrayList<Entity> inGameObs){
+		Entity ent = getEnt(e.getRow(), e.getCol() - 1, inGameObs);
+		return ent;
+	}
+
+	public static Entity getEntitytoRight(Entity e, ArrayList<Entity> inGameObs){
+		Entity ent = getEnt(e.getRow(), e.getCol() + 1, inGameObs);
+		return ent;
+	}
+
 }

@@ -478,7 +478,50 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 	}
 
 
-
+	private void updateEnemies(){
+		for (Entity e: inGameObs){
+			if (e instanceof Mushroom){
+				
+				Mushroom m = ((Mushroom)e);
+				int dir = m.getMoveDir();
+				
+				switch (dir){
+				
+				case 180: 
+					
+				Entity other = EntityHelper.getEntitytoLeft(e, inGameObs);
+					{
+						if (!EntityHelper.hasCollided(e, other)){
+							m.moveLeft();
+						}
+						
+						else {
+							
+							m.setMoveDir(0);
+						}
+					}
+					
+					break;
+					
+				case 0:
+					
+					other = EntityHelper.getEntitytoRight(e, inGameObs);
+					{
+						if (!EntityHelper.hasCollided(e, other)){
+							m.moveRight();
+						}
+						
+						else {
+							
+							m.setMoveDir(180);
+						}
+					}
+					
+					break;
+				}
+			}
+		}
+	}
 
 
 
@@ -567,6 +610,7 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 		else{
 			updatePlayerY();
 			updatePlayerX();
+			updateEnemies();
 		}
 		repaint();
 

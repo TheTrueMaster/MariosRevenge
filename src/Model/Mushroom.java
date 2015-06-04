@@ -24,7 +24,7 @@ public class Mushroom extends Enemy {
 		super(x, y, icon);
 		imageNo = 0;
 		readyToBeKilled = false;
-		moveDir = 1;
+		moveDir = 0;
 	}
 
 
@@ -56,48 +56,41 @@ public class Mushroom extends Enemy {
 	}
 
 	public void moveRight(){
-		if (moveDir > 1){
+		if (moveDir == 0){
 			xLoc = xLoc += Level.movePixels;
-			timesMovedRight++;
 		}
-	//	return timesMovedRight;
 	}
 
 	public void moveLeft(){
-		if (moveDir < 1){
+		if (moveDir == 180){
 			xLoc = xLoc -= Level.movePixels;
-			timesMovedLeft++;
 		}
-		//return timesMovedRight;
+
 	}
 
-	public void move(int cols)
+	public void move()
 	{
-		if (moveDir > 1 && timesMovedRight != cols){
+		if (moveDir == 0){
 			moveRight();
-			if (timesMovedRight == cols)
-			{
-				setMoveDir(-1);
-			}
 		}
-		
-		else if (moveDir < 1 && timesMovedLeft != cols)
+		else if (moveDir == 180)
 		{
 			moveLeft();
-			if (timesMovedLeft == cols)
-			{
-				setMoveDir(1);
-			}
 		}
 	}
-	
+
 	public void setMoveDir(int dir)
 	{
 		moveDir = dir;
 	}
+	
+	public int getMoveDir()
+	{
+		return moveDir;
+	}
 
 	public boolean isMovingRight(){
-		if (moveDir > 1)
+		if (moveDir == 0)
 		{
 			return true;
 		}
@@ -106,7 +99,7 @@ public class Mushroom extends Enemy {
 	}
 
 	public boolean isMovingLeft(){
-		if (moveDir < 1)
+		if (moveDir == 180)
 		{
 			return true;
 		}
