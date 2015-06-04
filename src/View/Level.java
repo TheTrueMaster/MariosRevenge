@@ -189,6 +189,10 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 				else if (e instanceof Mushroom){
 					g.drawString(" Col:" + e.getCol() + " MoveDir: " + ((Mushroom)e).getMoveDir(), e.getX(), e.getY());
 				}
+				
+				if (e instanceof Player){
+					g.drawString("Health:" + ((Player)e).getHealth(), e.getX(), e.getY());
+				}
 
 				if(!e.getStatus()){
 					if(e instanceof Player){
@@ -310,15 +314,12 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 
 				switch (dir){
 
-				case 180: 
+				case -1: 
 
 					Entity other = EntityHelper.getEntitytoLeft(m, inGameObs);
 
-					if(other instanceof Platform){
-						m.setMoveDir(180);
-					}
 					if (EntityHelper.hasCollided(m, other)){
-						m.setMoveDir(0);
+						m.interact(other);
 					}
 
 
@@ -337,12 +338,12 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 
 					break;
 
-				case 0:
+				case 1:
 
 					other = EntityHelper.getEntitytoRight(m, inGameObs);
 
 					if (EntityHelper.hasCollided(m, other)){
-						m.setMoveDir(180);
+						m.interact(other);
 					}
 
 

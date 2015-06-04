@@ -123,6 +123,10 @@ public class Player extends Entity {
 	public void setHealth(int a)
 	{
 		playerHealth = a;
+		if (playerHealth == 0){
+			this.changeStatus();
+		}
+			
 	}
 
 	public int getHealth()

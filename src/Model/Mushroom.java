@@ -23,7 +23,7 @@ public class Mushroom extends Enemy {
 		super(x, y, icon);
 		imageNo = 0;
 		readyToBeKilled = false;
-		moveDir = 0;
+		moveDir = 1;
 		timesMoved = 0;
 	}
 
@@ -80,7 +80,7 @@ public class Mushroom extends Enemy {
 	}
 
 	public boolean isMovingRight(){
-		if (moveDir == 0)
+		if (moveDir == 1)
 		{
 			return true;
 		}
@@ -89,7 +89,7 @@ public class Mushroom extends Enemy {
 	}
 
 	public boolean isMovingLeft(){
-		if (moveDir == 180)
+		if (moveDir == -1)
 		{
 			return true;
 		}
@@ -107,14 +107,23 @@ public class Mushroom extends Enemy {
 
 
 
-	/* @Override
+	@Override
 	public void interact(Entity other) {
 		//Pseudocode: recognizes what kind of entity is being interacted with
 		// and interacts accordingly
 		if (other instanceof Player)
 		{
-			giveAbility((Player)other);
-		} */
+			Player p = ((Player)other);
+			setMoveDir(-moveDir);
+
+			p.setHealth(p.getHealth() - 1);
+		} 
+
+		else if(other instanceof Platform){
+			setMoveDir(-moveDir);
+		}
+	}
+
 
 }
 
