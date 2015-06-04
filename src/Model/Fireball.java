@@ -18,7 +18,7 @@ public class Fireball extends Entity {
 	}
 
 	public void move(){
-		if(distanceMoved != 10){
+		if(distanceMoved != -10){
 			if(isMovingRight){
 				this.xLoc += Level.movePixels;
 				distanceMoved++;
@@ -27,10 +27,27 @@ public class Fireball extends Entity {
 				this.xLoc -= Level.movePixels;
 				distanceMoved++;
 			}
+			moveImage++;
 		}
 		else{
 			this.changeStatus();
 		}
+	}
+	
+	@Override
+	public BufferedImage getImg(){
+		if(moveImage == 4){
+			moveImage = 0;
+		}
+		int temp = moveImage;
+		
+		try{
+			BufferedImage wtf = ImportManager.fireball[temp];
+		}
+		catch(ArrayIndexOutOfBoundsException e){
+			e.printStackTrace();
+		}
+		return ImportManager.fireball[temp];
 	}
 
 

@@ -26,8 +26,13 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 	public static boolean paintable = false;
 	private JPanel contentPane;
 	public final static int movePixels = 8;
-	char[][] level;//for interaction handling
-	ArrayList<Entity> inGameObs;//for visualization (more fluid)
+	private char[][] level;//for interaction handling
+	private ArrayList<Entity> inGameObs;//for visualization (more fluid)
+	//below are the individual array lists added to make tracersing more smooth
+	private ArrayList<Enemy> enemies;
+	private ArrayList<Fireball> fireballs;
+
+
 	private Player player;//quick refrencej
 	private javax.swing.Timer timer = new javax.swing.Timer(15, this);
 	public final static int gravity = 6;
@@ -53,8 +58,9 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 
 	public void init(){
 		inGameObs = new ArrayList<Entity>();
-		setBackground(Color.BLACK);//official constructor will be public Level(int width, int height, int levelNo)
-		//setBounds(0, 0, width, height); //OFFICIAL SETBOUNDS, commented out for window builder dev
+		enemies = new ArrayList<Enemy>();
+		fireballs = new ArrayList<Fireball>();
+		setBackground(Color.BLACK);
 		setBounds(0,0, 850, 450);
 		contentPane = new JPanel();
 		//contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -65,7 +71,6 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 
 	}
 
-	@SuppressWarnings("unused")
 	private void initArrayList() {
 		Render render = new Render();
 		ArrayList<Entity> pwrBoxes = new ArrayList<Entity>();
@@ -110,6 +115,7 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 					ent.setCol(c);
 					ent.setRow(r);
 					inGameObs.add(ent);
+					enemies.add((Enemy)ent);
 					break;
 				case 'B':
 					ent = new Box(x, y, img);
@@ -133,11 +139,7 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 			}
 
 		}		
-		if(pwrBoxes != null){
-			if(pwrBoxes == null){
 
-			}
-		}
 		inGameObs.addAll(pwrBoxes);
 	}
 
@@ -180,7 +182,7 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 			for(Entity e : inGameObs){
 
 				if(e instanceof Player){
-					g.drawString("Row: " + e.getRow() + " Col: " + e.getCol() + " TimesMoved: " + ((Player) e).getTimesMoved() + " Health: " + ((Player) e).getHealth() + " VelY: " + e.getVelY(), e.getX(), e.getY());
+					//g.drawString("Row: " + e.getRow() + " Col: " + e.getCol() + " TimesMoved: " + ((Player) e).getTimesMoved() + " Health: " + ((Player) e).getHealth() + " VelY: " + e.getVelY(), e.getX(), e.getY());
 				}
 
 				if(!e.getStatus()){
@@ -191,6 +193,11 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 						level[e.getRow()][e.getCol()] = ' ';
 					removeMe.add(e);
 				}
+				else if(e instanceof Fireball){
+
+					g.drawImage(e.getImg().getScaledInstance(width/4, height/4, Image.SCALE_DEFAULT), e.getX(), e.getY(), this);
+
+				}
 				else
 					//g.drawRect(e.getX(), e.getY(), width, height);
 					g.drawImage(e.getImg().getScaledInstance(width, height, Image.SCALE_DEFAULT), e.getX(), e.getY(), this);
@@ -199,6 +206,12 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 
 			for(Entity e: removeMe){
 				inGameObs.remove(e);
+				if(e instanceof Fireball){
+					fireballs.remove(e);
+				}
+				if(e instanceof Enemy){
+					enemies.remove(e);
+				}
 			}
 		}
 	}
@@ -284,7 +297,7 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 
 
 	private void updateEnemies(){
-		for (Entity e: inGameObs){
+		for (Enemy e: enemies){
 			if (e instanceof Mushroom){
 
 				Mushroom m = ((Mushroom)e);
@@ -319,7 +332,7 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 				case 0:
 
 					other = EntityHelper.getEntitytoRight(m, inGameObs);
-				
+
 					if (EntityHelper.hasCollided(m, other)){
 						m.setMoveDir(180);
 					}
@@ -540,6 +553,8 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 		case KeyEvent.VK_SPACE:
 			if(player.canAttack()){
 				player.setAttacking(true);
+				inGameObs.removeAll(fireballs);
+				fireballs.clear();
 				System.out.println("Fireball!");
 			}
 		}
@@ -595,17 +610,36 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 			}
 			else{
 				updatePlayer();
-				//updateEnemies();
+				updateEnemies();
+				updateProjectiles();
 			}
 			repaint();
 		}
+	}
+	private void updateProjectiles() {
+		for(Fireball f: fireballs){//TODO change to class (Also a TODO: create a class called projectile) projectile
+			f.move();
+		}
+
 	}
 	private void updatePlayer() {
 		updatePlayerY();
 		updatePlayerX();	
 		if(player.isAttacking()){
 			boolean dir = player.isFacingRight();
-			Fireball ball = new Fireball(player.getX()+ Level.width, player.getY(), dir);
+			int x = player.getX() + Level.width;
+			int y = player.getY() + 50;//to account for the shift 
+			Fireball ball = new Fireball(x, y, dir);
+			ball.setRow(player.getRow());
+			ball.setCol(player.getCol() + 1);
+			if(fireballs.size() != 3){
+				inGameObs.add(ball);
+				fireballs.add(ball);
+			}
+			else{
+				player.setHasAttacked(true);
+			}
+
 		}
 	}
 

@@ -25,6 +25,10 @@ public class EntityHelper {
 		if(a == null || b == null){
 			return false;
 		}
+		
+		if(a.getBounds() == null || b.getBounds() == null){//due to fireballs not having bounds (they travel through anything)
+			return false;
+		}
 		boolean collided = false;
 		Rectangle aBounds = a.getBounds();
 		Rectangle bBounds = b.getBounds();
@@ -33,12 +37,8 @@ public class EntityHelper {
 			collided = true;
 		}
 
-		if(aBounds.contains(bBounds)){
-			collided = true;
-		}
-		else{
-			collided = false;
-		}
+		
+		
 		return collided;
 	}
 

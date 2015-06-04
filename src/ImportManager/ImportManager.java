@@ -91,6 +91,11 @@ public class ImportManager {
 			deadMush = ImageIO.read(ImportManager.class.getResource("deadMushroom.png"));
 			
 			fireball = new BufferedImage[4];
+			fireball[0] = ImageIO.read(ImportManager.class.getResource("fireball1.png"));
+			fireball[1] = ImageIO.read(ImportManager.class.getResource("fireball2.png"));
+			fireball[2] = ImageIO.read(ImportManager.class.getResource("fireball3.png"));
+			fireball[3] = ImageIO.read(ImportManager.class.getResource("fireball4.png"));
+
 			
 		}
 		catch(IOException e){
