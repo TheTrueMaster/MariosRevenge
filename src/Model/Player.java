@@ -13,10 +13,13 @@ public class Player extends Entity {
 	private boolean movingRight, movingLeft, jumping, falling,
 	isInJump, hasJumped, standing;//Booleans So GUI can see players current status
 	private boolean attacking, hasAttacked;//for fireballs
+	private boolean facingRight = true;
 	private int moveImage;
 	private int timesMoved;
 	private Powerup ability = null;
-	//
+
+	private final int jumpImage = 5;
+	private final int fallingImage = 6;
 	public Player(int x, int y, BufferedImage icon) {
 		super(x, y, icon);
 		this.hasHealth = true;
@@ -31,27 +34,38 @@ public class Player extends Entity {
 
 	}
 
+	public boolean isFacingRight(){
+		return facingRight;
+	}
+
+	/**
+	 * true if player is facing right, false if facing left
+	 * @param b
+	 */
+	public void setDirection(boolean b){
+		facingRight = b;
+	}
 
 	public boolean canAttack(){
 		return (ability !=null);
 	}
-	
+
 	public boolean hasAttacked(){
 		return hasAttacked;
 	}
-	
+
 	public void toggleHasAttacked(){
 		hasAttacked = !hasAttacked;
 	}
-	
+
 	public boolean isAttacking(){
 		return attacking;
 	}
-	
+
 	public void setAttacking(boolean b){
 		attacking = b;
 	}
-	
+
 	public int getTimesMoved(){
 		return timesMoved;
 	}
@@ -59,19 +73,41 @@ public class Player extends Entity {
 	public void resetTime(){
 		timesMoved = 0;
 	}
-	
+
 	public BufferedImage getImg(){
 		if(ability == null){
-			if(movingLeft)
+			if(!facingRight){
+				if(jumping)
+					return ImportManager.leftMario[jumpImage];
+				if(falling)
+					return ImportManager.mario[fallingImage];//doesnt matter for falling
+
 				return ImportManager.leftMario[moveImage];
-			else
+			}
+			else{// facingRight == true
+				if(jumping)
+					return ImportManager.mario[jumpImage];
+				if(falling)
+					return ImportManager.mario[fallingImage];//doesnt matter for falling
 				return ImportManager.mario[moveImage];
+			}
 		}
-		else{
-			if(movingLeft)
+		else{//if the player is fire mario
+			if(!facingRight){
+				if(jumping)
+					return ImportManager.fireLeftMario[jumpImage];
+				if(falling)
+					return ImportManager.fireMario[fallingImage];//doesnt matter for falling
+
 				return ImportManager.fireLeftMario[moveImage];
-			else
+			}
+			else{// facingRight == true
+				if(jumping)
+					return ImportManager.fireMario[jumpImage];
+				if(falling)
+					return ImportManager.fireMario[fallingImage];//doesnt matter for falling
 				return ImportManager.fireMario[moveImage];
+			}
 		}
 	}
 
@@ -84,7 +120,7 @@ public class Player extends Entity {
 	{
 		return playerHealth;
 	}
-	
+
 	public boolean hasJumped()
 	{
 		if(hasJumped){
@@ -92,15 +128,15 @@ public class Player extends Entity {
 		}
 		return false;
 	}
-	
+
 	public void toggleJumped()
 	{
 		hasJumped = !hasJumped;
 	}
-	
-	
 
-//made changes
+
+
+	//made changes
 	public void interact(Entity other) {
 		if (other instanceof Powerup)
 		{
@@ -219,11 +255,11 @@ public class Player extends Entity {
 		}
 
 		else if(dir.equals("up")){
-			
+
 			jumping = true;
 			isInJump = true;
 			//toggleJumped();
-			
+
 		} 
 
 		else if(dir.equals("falling")){
@@ -248,6 +284,7 @@ public class Player extends Entity {
 	public void moveRight() {
 		xLoc = xLoc += Level.movePixels;
 		timesMoved++;
+		facingRight = true;
 	}
 
 
@@ -257,6 +294,7 @@ public class Player extends Entity {
 	public void moveLeft() {
 		xLoc = xLoc -= Level.movePixels;
 		timesMoved --;
+		facingRight = false;
 	}
 
 	public void moveY(int velY)
@@ -275,7 +313,7 @@ public class Player extends Entity {
 				jumping = true;
 				falling = false;
 			}
-			
+
 			yLoc += getVelY() + Level.gravity; //increments the player position
 
 
@@ -289,7 +327,7 @@ public class Player extends Entity {
 						//velocity is decreased by gravity
 						setVelY(getVelY() + Level.gravity);
 					}
-					
+
 					//other wise if the difference is less than gravity just set to zero
 					else{
 						setVelY(0);
@@ -317,7 +355,7 @@ public class Player extends Entity {
 
 	public void givePowerup(Powerup pwr) {
 		ability = pwr;
-		
+
 	}
 
 
@@ -345,7 +383,7 @@ public class Player extends Entity {
 	public void setStanding(boolean bool){
 		standing = bool;
 	}
-	
+
 	public boolean isStanding() {
 		// TODO Auto-generated method stub
 		return standing;
@@ -354,7 +392,7 @@ public class Player extends Entity {
 
 	public void setFalling(boolean b) {
 		falling  = b;
-		
+
 	}
 
 
@@ -370,6 +408,6 @@ public class Player extends Entity {
 
 	public void setHasAttacked(boolean b) {
 		hasAttacked = b;
-		
+
 	}
 }

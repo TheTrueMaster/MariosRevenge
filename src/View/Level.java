@@ -28,7 +28,7 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 	public final static int movePixels = 8;
 	char[][] level;//for interaction handling
 	ArrayList<Entity> inGameObs;//for visualization (more fluid)
-	private Player player;//quick refrence
+	private Player player;//quick refrencej
 	private javax.swing.Timer timer = new javax.swing.Timer(15, this);
 	public final static int gravity = 6;
 	public final static int MAX_FALL_SPEED = gravity + 4;
@@ -158,7 +158,7 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 		Image offImage = createImage(this.getWidth(), this.getHeight());
 
 		// Creates an off-screen drawable image to be used for
-		// double buffering; XSIZE, YSIZE are each of type ‘int’
+		// double buffering; XSIZE, YSIZE are each of type â€˜intâ€™
 		Graphics buffer = offImage.getGraphics();
 		// Creates a graphics context for drawing to an 
 		// off-screen image
@@ -196,23 +196,6 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 	}
 
 
-	public void updatePlayer(){
-		updatePlayerY();
-		updatePlayerX();
-
-		//Checks if the player should be throwing a fire flower
-		Player p = player;
-		if(p.canAttack()){
-			if(p.hasAttacked()){
-				//do nothing
-			}
-			else{//p has not attacked
-				Fireball fireball = new Fireball(p.getX()+Level.movePixels, p.getY(),
-						p.getDirection());
-				inGameObs.add(fireball);
-			}
-		}
-	}
 	/**
 	 * Updates the Player Location
 	 * 
@@ -292,7 +275,50 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 	}
 
 
-
+	private void updateEnemies(){
+		for (Entity e: inGameObs){
+			if (e instanceof Mushroom){
+				
+				Mushroom m = ((Mushroom)e);
+				int dir = m.getMoveDir();
+				
+				switch (dir){
+				
+				case 180: 
+					
+				Entity other = EntityHelper.getEntitytoLeft(e, inGameObs);
+					{
+						if (!EntityHelper.hasCollided(e, other)){
+							m.moveLeft();
+						}
+						
+						else {
+							
+							m.setMoveDir(0);
+						}
+					}
+					
+					break;
+					
+				case 0:
+					
+					other = EntityHelper.getEntitytoRight(e, inGameObs);
+					{
+						if (!EntityHelper.hasCollided(e, other)){
+							m.moveRight();
+						}
+						
+						else {
+							
+							m.setMoveDir(180);
+						}
+					}
+					
+					break;
+				}
+			}
+		}
+	}
 
 
 
@@ -491,9 +517,6 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 			// handle right
 			player.changeMovingStatus("right");
 			break;
-		case KeyEvent.VK_SPACE:
-			player.setAttacking(true);
-			player.setHasAttacked(false);
 		}
 		//System.out.println(keyCode);
 	}
@@ -539,15 +562,11 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 		//before repainting, we update all the Entities locations
 		if(!player.getStatus()){
 
+
 		}
 		else{
-			updatePlayer();		
-		}
-		
-		for(Entity e: inGameObs){
-			if(e instanceof Fireball){
-				((Fireball) e).move();
-			}
+			updatePlayerY();
+			updatePlayerX();
 		}
 		repaint();
 
