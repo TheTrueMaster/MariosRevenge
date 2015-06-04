@@ -25,14 +25,21 @@ public class EntityHelper {
 		if(a == null || b == null){
 			return false;
 		}
+		boolean collided = false;
 		Rectangle aBounds = a.getBounds();
 		Rectangle bBounds = b.getBounds();
 		// Check if the boundaries intersect
 		if (aBounds.intersects(bBounds)) {
-			return true;
+			collided = true;
 		}
 
-		return false;
+		if(aBounds.contains(bBounds)){
+			collided = true;
+		}
+		else{
+			collided = false;
+		}
+		return collided;
 	}
 
 	public static Entity getEnt(int row, int col, ArrayList<Entity> inGameObs) {

@@ -10,8 +10,7 @@ public class Mushroom extends Enemy {
 
 	private int imageNo;
 	private boolean readyToBeKilled;
-	private int timesMovedLeft;
-	private int timesMovedRight;
+	private int timesMoved;
 	public int moveDir;
 
 	/**
@@ -25,6 +24,7 @@ public class Mushroom extends Enemy {
 		imageNo = 0;
 		readyToBeKilled = false;
 		moveDir = 0;
+		timesMoved = 0;
 	}
 
 
@@ -57,13 +57,17 @@ public class Mushroom extends Enemy {
 
 	public void moveRight(){
 		if (moveDir == 0){
-			xLoc = xLoc += Level.movePixels;
+			xLoc = xLoc + Level.movePixels/2;
+			timesMoved++;
+			//xLoc = xLoc += Level.width;
 		}
 	}
 
 	public void moveLeft(){
 		if (moveDir == 180){
-			xLoc = xLoc -= Level.movePixels;
+			xLoc = xLoc - Level.movePixels/2;
+			timesMoved --;
+			//xLoc = xLoc -= Level.width;
 		}
 
 	}
@@ -105,6 +109,16 @@ public class Mushroom extends Enemy {
 		}
 		else return false;
 	}
+	
+	public int getTimesMoved(){
+		return timesMoved;
+	}
+	
+	public void resetTimesMoved(){
+		timesMoved = 0;
+	}
+	
+
 
 
 	/* @Override
