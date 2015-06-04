@@ -1,13 +1,12 @@
 10
 
- 
-              
-<<<<<<< HEAD
 
 
                  
                  
-G    G      MG         P   f         
+                 
+                 
+G    G      MG         Pf            
 GGGGGGGGGGGGGG   GGGGGGGGGGGGGG                      
 GGGGGGGGGGGGGG   GGGGGGGGGGGGGG
 0123456789012345678901234567890

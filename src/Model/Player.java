@@ -275,6 +275,7 @@ public class Player extends Entity {
 			falling = true;
 		}
 
+		
 	}
 
 	/**
@@ -300,6 +301,7 @@ public class Player extends Entity {
 	/**
 	 * Visually moves the player left and updates timesMoved
 	 */
+	
 	public void moveLeft() {
 		xLoc = xLoc -= Level.movePixels;
 		timesMoved --;
