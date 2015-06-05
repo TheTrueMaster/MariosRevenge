@@ -8,6 +8,7 @@
                        
 
 
+<<<<<<< HEAD
                          
                  GGGGGG
              GGG  
@@ -16,5 +17,15 @@
 G   GGGG   GGG              P   E                  
 GGGGGGGG   GGGGG      M     GGGGG 
 GGGGG      GGGGGGGGGGGGGGGGGGGGGG
+=======
+  
+                      GGGGGG    GGGGG
+                 GGGGGG 
+      G      GGG
+     G		
+G P G      GGG                                    E           
+GGGGG      GGGGGGGG   M  M     GGGGG     GGGGGGGGGG
+GGGGG      GGGGGGGGGGGGGGGGGGGGGGGGG     GGGGGGGGGG
+>>>>>>> origin/master
                                                   S
 
