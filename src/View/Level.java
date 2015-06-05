@@ -28,6 +28,7 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 	private JPanel contentPane;
 	public final static int movePixels = 8;
 	private char[][] level;//for interaction handling
+	private char[][] lvl1backup;//to avoid errors when restarting the text file
 	private ArrayList<Entity> inGameObs;//for visualization (more fluid)
 	//below are the individual array lists added to make tracersing more smooth
 	private ArrayList<Enemy> enemies;
@@ -53,12 +54,14 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 		addKeyListener(this);
 		init();
 		setBounds(0,0, width, height);
-
+		lvl1backup = level;
 
 	}
 	public void start(){
 		timer.start();
 		paintable = true;
+		level = lvl1backup;
+		endGame = false;
 	}
 
 	public void init(){
@@ -195,7 +198,7 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 
 			g.setColor(Color.white);
 			for(Entity e : inGameObs){
-
+				/*
 				if(e instanceof Fireball){
 					g.drawString("Row: " + e.getRow() + " Col: " + e.getCol() + " TimesMoved: " + ((Fireball) e).getTimesMoved(), e.getX(), e.getY());
 				}
@@ -207,7 +210,9 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 				if (e instanceof Player){
 					g.drawString("Health:" + ((Player)e).getHealth(), e.getX(), e.getY());
 				}
-
+				 DEBUGGING CODE ABOVE
+				 */
+				
 				if(!e.getStatus()){
 					if(e instanceof Player){
 						paintable = false;
@@ -526,7 +531,7 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 		}
 
 		catch(IndexOutOfBoundsException e){
-			e.printStackTrace();
+			//e.printStackTrace();
 			p.setHealth(0);
 		}
 	}
@@ -613,6 +618,15 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 	}
 
 	private void doAllChecks() {
+		if(!player.getStatus()){
+			//this.setFocusable(false);
+			inGameObs.clear();
+			enemies.clear();
+			fireballs.clear();
+			endGame = true;
+			repaint();
+
+		}
 		if(exit.isDone() == true){
 			levelNo++;
 			initializeLevel(levelNo);
@@ -623,19 +637,12 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 		}
 		else{
 			//before repainting, we update all the Entities locations
-			if(!player.getStatus()){
-				this.setFocusable(false);
-				inGameObs.clear();
-				enemies.clear();
-				fireballs.clear();
-				endGame = true;
 
-			}
-			else{
-				updatePlayer();
-				updateEnemies();
-				updateProjectiles();
-			}
+
+			updatePlayer();
+			updateEnemies();
+			updateProjectiles();
+
 			repaint();
 		}
 		updateBounds();
