@@ -1,14 +1,7 @@
-20
+15
 
 
-
-                 
-                 
-                                            G M     E          
-                                 GGGGGG     GGGGGGGGG
-                             GGGGG              G  
-                          GGGGG                      
-          GGGGGG     GGGGGG                        
+    E
    GGG                                           
      GGG                                       
          GGGG           GGG M        G        
@@ -16,7 +9,7 @@
                                          GGG
                                         GGGG
                                      GGGGGGG
-G  P              M             GGGGGGGGG  M    G                                        
+G  P              M             GGGGGGGGG      G                                        
 GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG
 GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG
                                                 S

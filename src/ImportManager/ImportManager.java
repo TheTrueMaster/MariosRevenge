@@ -48,7 +48,7 @@ public class ImportManager {
 			instructions = ImageIO.read(ImportManager.class.getResource("Instructions.png"));
 			startLogo = ImageIO.read(ImportManager.class.getResource("start.png"));
 			backToMain = ImageIO.read(ImportManager.class.getResource("mainmenuobj.png"));
-			lvl = new InputStream[8];
+			lvl = new InputStream[6];
 			for(int j = 1; j < lvl.length+1; j++){
 				lvl[j-1] = ImportManager.class.getResource("lvl"+ j+".txt").openStream();
 			}

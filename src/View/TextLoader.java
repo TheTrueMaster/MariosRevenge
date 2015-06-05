@@ -24,49 +24,53 @@ public class TextLoader
 		Scanner file = new Scanner(ImportManager.lvl[no -1]);
 		int height = file.nextInt();
 		file.nextLine();
-		
-		char[][] level = new char[height][Level.cols];
-		
 
-		
+		char[][] level = new char[height][Level.cols];
+
+
+
 		ArrayList<String> strings = new ArrayList<String>();
 
 
 		//try	//try-with-resources - new in Java 7
-		
-			while(file.hasNext())
-			{
-				String read = file.nextLine();
-				//code to use input ...here's a test:
-				//System.out.println("read in: " + read);
-				strings.add(read);
-			}
-			file.close();
-		
-		
-		//after getting the file, parsing through each string and adding it to the char array
-		
-		for(int r = 0; r < level.length; r++){
-			String str = strings.get(r);
-			for(int c = 0; c < level[r].length; c++){
-				try{
-					level[r][c] = str.charAt(c);
-				}
-				catch(StringIndexOutOfBoundsException e){
-					//in case the line in the text file has no text
-					break;//go to the next line
-				}
-			}
+
+		while(file.hasNext())
+		{
+			String read = file.nextLine();
+			//code to use input ...here's a test:
+			//System.out.println("read in: " + read);
+			strings.add(read);
 		}
-		
-//		for(int r = 0; r < level.length; r++){
-//			for(int c = 0; c < level[r].length; c++){
-//				System.out.print(level[r][c]);
-//			}
-//			System.out.println();
-//		}		
-		
-	
+		file.close();
+
+
+		//after getting the file, parsing through each string and adding it to the char array
+
+		try{
+			for(int r = 0; r < level.length; r++){
+				String str = strings.get(r);
+				for(int c = 0; c < level[r].length; c++){
+					try{
+						level[r][c] = str.charAt(c);
+					}
+					catch(StringIndexOutOfBoundsException e){
+						//in case the line in the text file has no text
+						break;//go to the next line
+					}
+				}
+			}
+		}catch(IndexOutOfBoundsException e){
+			//do nothing
+		}
+
+		//		for(int r = 0; r < level.length; r++){
+		//			for(int c = 0; c < level[r].length; c++){
+		//				System.out.print(level[r][c]);
+		//			}
+		//			System.out.println();
+		//		}		
+
+
 		return level;
 	}
 }

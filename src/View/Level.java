@@ -41,7 +41,7 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 	public final static int MAX_FALL_SPEED = gravity + 4;
 	public static final int cols = 57;
 	private int counter;
-	private int levelNo = 1;
+	private int levelNo = 2;
 	private boolean endGame = false;
 
 	/**
@@ -73,7 +73,7 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 		//contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(null);
 		//initializeLevel(int levelNo
-		initializeLevel(1);
+		initializeLevel(levelNo);
 		initArrayList();
 
 	}

@@ -1,18 +1,9 @@
-15
-
-
-
-                                  
-                                  
-                                   G    M     E
-                                   GGGGGGGGGGGG
-            GGGG   M    G         GGG   
-f        GGGG   GGGGGGGGGGGGGGG
-GG   GGGGGG                GGGGGGGGGGG   
-                                    GG
-                                       GG
-G  P         G   M   G                      GG                 
-GGGGGGGG     GGGGGGGGG     GGGGGGGGGGGGGGGGGGG
-GGGGGGGG     GGGGGGGGG     GGGGGGGGGGGGGGGGGGG
-                                             S 
+7
+                 
+                 
+                                            G M     E          
+                                 GGGGGG     GGGGGGGGG
+                             GGGGG              G  
+            P             GGGGG                      
+          GGGGGG     GGGGGG                        
 

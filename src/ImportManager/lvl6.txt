@@ -1,18 +1,13 @@
-15
-
-
-
-                 
-                 
-                 
-                       
-
-
-
-
-            
-P                                                      E       
-GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG
-GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG
-                                                       S
-
+12
+                                   G    M   P  
+                                   GGGGGGGGGGGG
+            GGGG   M    G         GGG   
+f        GGGG   GGGGGGGGGGGGGGG     
+GG               GGGGGGGGGGG
+                    G
+G     M   G         G
+GGGGGGGGGGG         G
+          G         G
+          G         G
+E M                 G    
+GGGGGGGGGGGGGGGGGGGGG

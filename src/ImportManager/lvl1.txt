@@ -11,7 +11,7 @@
 
 
             
-G         P                        E       
-GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG
-GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG
+G      P E                              
+GGGGGGGGGGGGG
+GGGGGGGGGGGGG
                                    S
