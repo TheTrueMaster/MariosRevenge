@@ -162,7 +162,7 @@ public class Player extends Entity {
 			if (other instanceof Enemy)
 			{
 				//if the player is jumping on the enemy
-				if (getX() == other.getX() && getY() == other.getY() && getVelY() < 0)
+				if (getRow()+1 == other.getRow() && getY() < other.getY() && getVelY() <= 0)
 				{
 					((Enemy)other).changeStatus();
 				}

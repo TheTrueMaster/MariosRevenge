@@ -21,7 +21,7 @@ public class TextLoader
 { 
 	public char[][] getFile(int no) throws IOException
 	{
-		Scanner file = new Scanner(ImportManager.lvl1);
+		Scanner file = new Scanner(ImportManager.lvl[no -1]);
 		int height = file.nextInt();
 		file.nextLine();
 		

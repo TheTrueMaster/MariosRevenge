@@ -70,7 +70,7 @@ public class Visual implements KeyListener {
 		instructions = new JPanel();
 		instructions.setLocation(0, 0);
 		instructions.setBackground(Color.black);
-		instructions.setSize(949, 513);
+		instructions.setSize(1352, 513);
 		//frame.getContentPane().add(instructions);
 		instructions.setVisible(false);
 		panelIsOn = false;
@@ -81,8 +81,12 @@ public class Visual implements KeyListener {
 		
 		
 		btnInstructions = new JButton("Instructions");
-		btnInstructions.setBounds(10, 526, 146, 30);
-		
+		btnInstructions.setBorder(null);
+		btnInstructions.setBorderPainted(false);
+		btnInstructions.setBackground(Color.BLACK);
+		btnInstructions.setFont(new Font("SWSimp", Font.PLAIN, 80));
+		btnInstructions.setBounds(10, 526, 1326, 168);
+		btnInstructions.setForeground(Color.white);
 		btnInstructions.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//System.out.println(panelIsOn);
@@ -115,7 +119,7 @@ public class Visual implements KeyListener {
 		
 		logoImage = new JLabel();
 		logoImage.setIcon(new ImageIcon(scaled));
-		logoImage.setBounds(77, 33, 818, 245);
+		logoImage.setBounds(265, 43, 818, 245);
 		splash.add(logoImage);
 
 		start = new JButton("");
@@ -137,11 +141,11 @@ public class Visual implements KeyListener {
 		icon = new ImageIcon(ImportManager.startLogo);
 		scaled = icon.getImage().getScaledInstance(320, 150, Image.SCALE_DEFAULT);
 		start.setIcon(new ImageIcon(scaled));
-		start.setBounds(307, 289, 320, 120);
+		start.setBounds(454, 282, 320, 120);
 		splash.add(start);
 		
 		//temp code
-		splash.setBounds(0, 0, 949, 513);
+		splash.setBounds(0, 0, 1352, 513);
 		frame.getContentPane().add(splash);
 		frame.getContentPane().add(instructions);
 

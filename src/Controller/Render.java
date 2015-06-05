@@ -13,6 +13,15 @@ import java.net.URL;
 import ImportManager.ImportManager;
 import Model.*;
 
+/**
+ * This is the Render class. The Render class contains all the 
+ * in game images and stores them in a HashMap. The Render class 
+ * is primarily used as a convenience class so it is easier to read
+ *  in images through a text file.
+ *  
+ * @author Ronak Shah, Ryan Wey
+ * @version 1.4 
+ */
 public class Render {
 
 	private Map<Character, BufferedImage> pics;
@@ -51,7 +60,7 @@ public class Render {
 		img = ImportManager.pwrBox;
 		pics.put(character, img);
 		//fireflower
-		character = 'f';//not to be confused with 'F' which is fireball
+		character = 'f';
 		img = ImportManager.flower;
 		pics.put(character, img);
 		//exit

@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import javax.swing.JPanel;
 
 import Controller.Render;
+import ImportManager.ImportManager;
 import Model.*;
 
 @SuppressWarnings("serial")
@@ -39,6 +40,8 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 	public final static int MAX_FALL_SPEED = gravity + 4;
 	public static final int cols = 57;
 	private int counter;
+	private int levelNo = 1;
+	private boolean endGame = false;
 
 	/**
 	 * Create the frame.
@@ -137,7 +140,7 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 					inGameObs.add(ent);
 					exit = (Exit)ent;
 				}
-				
+
 				if(ent != null){
 					bounds.setSize(ent.getImg().getWidth(this), ent.getImg().getHeight(this));
 					bounds.setLocation(ent.getX(), ent.getY());
@@ -164,18 +167,22 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 
 	@Override
 	public void paint(Graphics g){
+		if(!endGame){
+			Image offImage = createImage(this.getWidth(), this.getHeight());
 
-		Image offImage = createImage(this.getWidth(), this.getHeight());
+			// Creates an off-screen drawable image to be used for
+			// double buffering; XSIZE, YSIZE are each of type ‘int’
+			Graphics buffer = offImage.getGraphics();
+			// Creates a graphics context for drawing to an 
+			// off-screen image
+			paintOffScreen(buffer);     // your own method
+			g.drawImage(offImage, 0, 0, null);  
+			// draws the image with upper left corner at 0,0}
 
-		// Creates an off-screen drawable image to be used for
-		// double buffering; XSIZE, YSIZE are each of type ‘int’
-		Graphics buffer = offImage.getGraphics();
-		// Creates a graphics context for drawing to an 
-		// off-screen image
-		paintOffScreen(buffer);     // your own method
-		g.drawImage(offImage, 0, 0, null);  
-		// draws the image with upper left corner at 0,0}
-
+		}
+		else{
+			g.drawImage(ImportManager.endscreen, 0, 0, this);
+		}
 	}
 
 	public void paintOffScreen(Graphics g){
@@ -192,11 +199,11 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 				if(e instanceof Fireball){
 					g.drawString("Row: " + e.getRow() + " Col: " + e.getCol() + " TimesMoved: " + ((Fireball) e).getTimesMoved(), e.getX(), e.getY());
 				}
-				
+
 				else if (e instanceof Mushroom){
 					g.drawString(" Col:" + e.getCol() + " MoveDir: " + ((Mushroom)e).getMoveDir(), e.getX(), e.getY());
 				}
-				
+
 				if (e instanceof Player){
 					g.drawString("Health:" + ((Player)e).getHealth(), e.getX(), e.getY());
 				}
@@ -607,12 +614,21 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 
 	private void doAllChecks() {
 		if(exit.isDone() == true){
-			this.setVisible(false);
+			levelNo++;
+			initializeLevel(levelNo);
+			inGameObs.clear();
+			enemies.clear();
+			fireballs.clear();
+			initArrayList();
 		}
 		else{
 			//before repainting, we update all the Entities locations
 			if(!player.getStatus()){
-
+				this.setFocusable(false);
+				inGameObs.clear();
+				enemies.clear();
+				fireballs.clear();
+				endGame = true;
 
 			}
 			else{
@@ -631,7 +647,7 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 			bounds.setLocation(e.getX(), e.getY());
 			e.setBounds(bounds);
 		}
-		
+
 	}
 	private void updateProjectiles() {
 		for(Fireball f: fireballs){//TODO change to class (Also a TODO: create a class called projectile) projectile
@@ -664,7 +680,7 @@ public class Level extends JPanel implements KeyListener, ActionListener{
 				fireballs.add(ball);
 				player.setHasAttacked(true);
 			}
-			
+
 
 		}
 	}

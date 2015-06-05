@@ -18,6 +18,11 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
+/**
+ * Unimplemented class
+ * @author Ronak Shah
+ *
+ */
 public class Death extends JPanel {
 
 	private JLabel meme;
@@ -26,10 +31,11 @@ public class Death extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public Death() {
+	public Death(int width, int height) {
 		setBackground(Color.BLACK);
 		ImportManager.loadFiles();
 		setLayout(null);
+		this.setBounds(0, 0, width, height);
 		YouLose = new JLabel("You Lose. \r\n");
 		YouLose.setBounds(161, 57, 437, 119);
 		YouLose.setForeground(Color.WHITE);
@@ -47,15 +53,17 @@ public class Death extends JPanel {
 		meme.setIcon(new ImageIcon(ImportManager.meme));
 		this.setBounds(0, 0, 600, 600);
 		meme.setVisible(false);
+		this.setVisible(true);
+		this.setFocusable(true);
 
 	}
 
 	public static void main(String []args){
-		Death panel = new Death();
+		Death panel = new Death(1000, 1000);
 		JFrame frame = new JFrame();
 		frame.getContentPane().add(panel);
 		frame.setVisible(true);
-		panel.setBounds(0,0,1000,1000);
+		frame.setBounds(0,0,1000,1000);
 	}
 
 	private class TryAgainHandler implements ActionListener{

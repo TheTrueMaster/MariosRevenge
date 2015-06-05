@@ -5,13 +5,20 @@ import java.io.*;
 
 import javax.imageio.ImageIO;
 
+/**
+ * This is the ImportManager class. This class, at startup, reads in all the required
+ * files from its local directory. 
+ * 
+ * @author Ronak Shah
+ *
+ */
 public class ImportManager {
 
 	public static BufferedImage title;
 	public static BufferedImage instructions;
 	public static BufferedImage startLogo;
 	public static BufferedImage backToMain;
-	public static InputStream lvl1;
+	public static InputStream[] lvl;
 	public static BufferedImage player;
 	public static BufferedImage[] mario;
 	public static BufferedImage[] leftMario;
@@ -27,6 +34,7 @@ public class ImportManager {
 	public static BufferedImage flower;
 	public static BufferedImage fireball[];
 	
+	public static BufferedImage endscreen;
 	public static BufferedImage exit;
 	/**
 	 * Reads in all the files. MUST BE CALLED FIRST (Like absolutely first) in order to not 
@@ -40,9 +48,11 @@ public class ImportManager {
 			instructions = ImageIO.read(ImportManager.class.getResource("Instructions.png"));
 			startLogo = ImageIO.read(ImportManager.class.getResource("start.png"));
 			backToMain = ImageIO.read(ImportManager.class.getResource("mainmenuobj.png"));
-			lvl1 = ImportManager.class.getResource("lvl1.txt").openStream();
-			//InputStream in = ImportManager.class.getClassLoader().getResourceAsStream("/data.sav");
-			//initializing mario
+			lvl = new InputStream[3];
+			for(int j = 1; j < lvl.length+1; j++){
+				lvl[j-1] = ImportManager.class.getResource("lvl"+ j+".txt").openStream();
+			}
+			
 			mario = new BufferedImage[7];
 			mario[0] = ImageIO.read(ImportManager.class.getResource("sprite_Mario1.png"));
 			mario[1] = ImageIO.read(ImportManager.class.getResource("sprite_Mario2.png"));
@@ -63,11 +73,15 @@ public class ImportManager {
 			
 			box = ImageIO.read(ImportManager.class.getResource("box.png"));
 			pwrBox = ImageIO.read(ImportManager.class.getResource("pwrbox.png"));
+			
 			platform = ImageIO.read(ImportManager.class.getResource("platform1.png"));
+			
 			mush = new BufferedImage[2];
 			mush[0] = ImageIO.read(ImportManager.class.getResource("mushroom1.png"));
 			mush[1] = ImageIO.read(ImportManager.class.getResource("mushroom2.png"));
+			
 			meme = ImageIO.read(ImportManager.class.getResource("amazingmeme.jpg"));
+			//^^ For Death Screen ^^//
 			
 			fireMario = new BufferedImage[6];
 			fireMario[0] = ImageIO.read(ImportManager.class.getResource("fireMario1.png"));
@@ -88,7 +102,6 @@ public class ImportManager {
 			
 			
 			flower = ImageIO.read(ImportManager.class.getResource("Fireflower.gif"));
-			deadMush = ImageIO.read(ImportManager.class.getResource("deadMushroom.png"));
 			
 			fireball = new BufferedImage[4];
 			fireball[0] = ImageIO.read(ImportManager.class.getResource("fireball1.png"));
@@ -98,6 +111,7 @@ public class ImportManager {
 			
 			exit = ImageIO.read(ImportManager.class.getResource("Exit.gif"));
 			
+			endscreen = ImageIO.read(ImportManager.class.getResource("losescreen.png"));
 		}
 		catch(IOException e){
 			//do nothing
