@@ -4,20 +4,19 @@
 
                  
                  
-                                              G M     E          
-                                   GGGGGG     GGGGGGGGG
-                               GGGGG              G  
-                            GGGGG                      f
-          GGGGGGGG     GGGGGG                         GG
-   GGG                                             GG
-     GGG                                          G
-         GGGG           GGG M        G         G
-               GGGGGGG    GGGGGGGGGGGG      B
-                                          BBB
-                                        BBBBB
-                                      BBBBBBB
-P                 M                 BBBBBBBBB  M       G                                        
-GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG
-GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG
-                                                       S
-
+                                            G M     E          
+                                 GGGGGG     GGGGGGGGG
+                             GGGGG              G  
+                          GGGGG                      
+          GGGGGG     GGGGGG                        
+   GGG                                           
+     GGG                                       
+         GGGG           GGG M        G        
+               GGGGGGG    GGGGGGGGGGGG     B
+                                         BBB
+                                        BBBB
+                                     BBBBBBB
+G  P              M             BBBBBBBBB  M    G                                        
+GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG
+GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG
+                                                S

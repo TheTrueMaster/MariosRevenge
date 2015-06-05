@@ -13,8 +13,8 @@
              BBBB  
       B
      B		
-P   B      GGG                                         E          
-GGGGG      GGGGGGGGG      M     GGGGG     GGGGGGGGGGGGGG
-GGGGG      GGGGGGGGGGGGGGGGGGGGGGGGGG     GGGGGGGGGGGGGG
-                                                       S
+G P B      GGG                                     E          
+GGGGG      GGGGGGGG      M     GGGGG     GGGGGGGGGG
+GGGGG      GGGGGGGGGGGGGGGGGGGGGGGGG     GGGGGGGGGG
+                                                  S
 
