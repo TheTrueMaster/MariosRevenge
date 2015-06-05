@@ -12,11 +12,11 @@
    GGG                                           
      GGG                                       
          GGGG           GGG M        G        
-               GGGGGGG    GGGGGGGGGGGG     B
-                                         BBB
-                                        BBBB
-                                     BBBBBBB
-G  P              M             BBBBBBBBB  M    G                                        
+               GGGGGGG    GGGGGGGGGGGG     G
+                                         GGG
+                                        GGGG
+                                     GGGGGGG
+G  P              M             GGGGGGGGG  M    G                                        
 GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG
 GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG
                                                 S
